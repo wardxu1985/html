@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>曲阜+青岛+威海 8日亲子游 · 含孔庙</title>
+<style>
+:root {
+  --accent: #8B4513;
+  --accent-light: #F5EEE6;
+  --accent-dark: #5D2E0E;
+  --bg: #F8F9FA;
+  --surface: #FFFFFF;
+  --ink: #1A1A1A;
+  --ink-2: #444;
+  --muted: #888;
+  --line: #E8E8E8;
+  --red: #FF2442;
+  --orange: #FF9800;
+  --green: #4CAF50;
+  --blue: #2196F3;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  padding: 0 0 60px;
+}
+.hero {
+  background: linear-gradient(135deg, #5D2E0E 0%, #8B4513 25%, #C68642 55%, #DEB887 85%, #87CEEB 100%);
+  color: #fff;
+  padding: 40px 20px 30px;
+  text-align: center;
+  position: relative;
+}
+.hero h1 { font-size: 28px; font-weight: 700; margin-bottom: 6px; }
+.hero .sub { font-size: 15px; opacity: 0.9; margin-bottom: 12px; }
+.hero .badge-group {
+  display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 10px;
+}
+.hero .badge {
+  background: rgba(255,255,255,0.2); border-radius: 999px; padding: 4px 14px;
+  font-size: 12px; backdrop-filter: blur(4px);
+}
+.alert {
+  background: #FFF8E1; border-left: 4px solid #FF9800; margin: 16px;
+  padding: 14px 16px; border-radius: 12px; font-size: 14px; color: #5D4037;
+}
+.alert strong { color: #E65100; }
+.container { max-width: 700px; margin: 0 auto; padding: 0 16px; }
+.section {
+  background: var(--surface); border-radius: 16px; margin: 16px;
+  padding: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.section-title {
+  font-size: 18px; font-weight: 700; color: var(--accent-dark);
+  margin-bottom: 14px; padding-bottom: 10px;
+  border-bottom: 2px solid var(--accent-light);
+  display: flex; align-items: center; gap: 8px;
+}
+.overview-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.overview-table th {
+  background: var(--accent-light); color: var(--accent-dark);
+  padding: 8px 6px; text-align: left; font-weight: 600; font-size: 12px;
+}
+.overview-table td { padding: 8px 6px; border-bottom: 1px solid var(--line); }
+.overview-table tr:last-child td { border-bottom: none; }
+.overview-table .day-num { font-weight: 700; color: var(--accent); white-space: nowrap; }
+.overview-table .theme { white-space: nowrap; }
+.day-card {
+  background: var(--surface); border-radius: 16px; margin: 16px;
+  padding: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.06); overflow: hidden;
+}
+.day-header {
+  background: var(--accent); color: #fff; padding: 14px 20px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.day-header .day-label { font-size: 16px; font-weight: 700; }
+.day-header .day-date { font-size: 13px; opacity: 0.85; }
+.day-header .day-theme { font-size: 14px; opacity: 0.9; }
+.day-body { padding: 16px 20px; }
+.timeline-item {
+  display: flex; gap: 12px; margin-bottom: 14px; position: relative;
+}
+.timeline-item:last-child { margin-bottom: 0; }
+.timeline-item::before {
+  content: ''; position: absolute; left: 12px; top: 24px;
+  bottom: -14px; width: 2px; background: var(--line);
+}
+.timeline-item:last-child::before { display: none; }
+.timeline-dot {
+  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; color: #fff; position: relative; z-index: 1;
+}
+.dot-transport { background: var(--blue); }
+.dot-spot { background: var(--accent); }
+.dot-food { background: var(--orange); }
+.dot-rest { background: var(--muted); }
+.dot-hotel { background: var(--green); }
+.dot-warning { background: var(--red); }
+.timeline-content { flex: 1; min-width: 0; }
+.timeline-time { font-size: 12px; color: var(--muted); font-weight: 600; }
+.timeline-title { font-size: 15px; font-weight: 600; margin: 1px 0 2px; }
+.timeline-desc { font-size: 13px; color: var(--ink-2); }
+.timeline-desc .tag {
+  display: inline-block; background: var(--accent-light); color: var(--accent-dark);
+  font-size: 11px; padding: 1px 8px; border-radius: 999px; margin-right: 4px;
+}
+.tag-red { background: #FFEBEE !important; color: #C62828 !important; }
+.tag-green { background: #E8F5E9 !important; color: #2E7D32 !important; }
+.tag-orange { background: #FFF3E0 !important; color: #E65100 !important; }
+.budget-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.budget-table th {
+  background: var(--accent-light); color: var(--accent-dark);
+  padding: 8px 10px; text-align: left; font-weight: 600;
+}
+.budget-table td { padding: 7px 10px; border-bottom: 1px solid var(--line); }
+.budget-table .total-row { background: #FFF8E1; font-weight: 700; font-size: 15px; }
+.budget-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+.checklist-cat { margin-bottom: 12px; }
+.checklist-cat-title { font-size: 14px; font-weight: 600; color: var(--accent-dark); margin-bottom: 6px; }
+.checklist-item {
+  display: flex; align-items: flex-start; gap: 8px; padding: 3px 0; font-size: 13px; color: var(--ink-2);
+}
+.checklist-item .check {
+  width: 18px; height: 18px; border: 2px solid var(--line);
+  border-radius: 4px; flex-shrink: 0; margin-top: 2px;
+}
+.priority { font-size: 10px; padding: 1px 6px; border-radius: 999px; margin-left: 4px; flex-shrink: 0; }
+.pri-must { background: #FFEBEE; color: #C62828; }
+.pri-suggest { background: #E3F2FD; color: #1565C0; }
+.food-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px;
+}
+.food-item:last-child { border-bottom: none; }
+.food-name { font-weight: 600; }
+.food-price { color: var(--muted); font-size: 13px; }
+.food-detail { font-size: 13px; color: var(--ink-2); margin-top: 2px; }
+.tip-item { padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14px; display: flex; gap: 8px; }
+.tip-item:last-child { border-bottom: none; }
+.tip-icon { flex-shrink: 0; }
+.footer { text-align: center; padding: 30px 20px; color: var(--muted); font-size: 12px; }
+@media (max-width: 480px) {
+  .hero h1 { font-size: 22px; }
+  .section, .day-card { margin: 10px 8px; }
+  .day-body { padding: 12px 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <h1>🏛️ 曲阜+青岛+威海 8日亲子游</h1>
+  <div class="sub">上海出发 · 三口之家 · 10岁男孩 · 看三孔+玩海两不误</div>
+  <div class="badge-group">
+    <span class="badge">📅 8月1日-8月8日</span>
+    <span class="badge">👨‍👩‍👦 舒适亲子</span>
+    <span class="badge">🚄 全程高铁</span>
+    <span class="badge">🏛️ 新增曲阜孔庙</span>
+  </div>
+</div>
+
+<!-- ============ ALERT ============ -->
+<div class="alert">
+  <strong>⚠️ 重要提醒</strong><br>
+  • 崂山 → <strong>提前7天预约</strong>（公众号"崂山风景区"）<br>
+  • 刘公岛 → <strong>提前3-5天预约</strong>（"爱来刘公岛"公众号）<br>
+  • 海底世界/极地 → 提前1天网上购票<br>
+  • 曲阜三孔旺季人多，建议8:00开门即到
+</div>
+
+<!-- ============ OVERVIEW ============ -->
+<div class="section">
+  <div class="section-title">📋 行程总览（含曲阜孔庙）</div>
+  <table class="overview-table">
+    <thead>
+      <tr>
+        <th>天数</th>
+        <th>日期</th>
+        <th>主题</th>
+        <th>核心景点</th>
+        <th>住宿</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="day-num">Day1</td>
+        <td>8/1 六</td>
+        <td class="theme">🏛️ 上海→曲阜<br>拜谒孔庙</td>
+        <td>孔庙、孔府</td>
+        <td>曲阜</td>
+      </tr>
+      <tr>
+        <td class="day-num">Day2</td>
+        <td>8/2 日</td>
+        <td class="theme">🌳 曲阜→青岛<br>初探老城</td>
+        <td>孔林、栈桥、信号山</td>
+        <td>青岛中山路</td>
+      </tr>
+      <tr>
+        <td class="day-num">Day3</td>
+        <td>8/3 一</td>
+        <td class="theme">🎠 海洋探秘</td>
+        <td>海底世界、八大关</td>
+        <td>青岛中山路</td>
+      </tr>
+      <tr>
+        <td class="day-num">Day4</td>
+        <td>8/4 二</td>
+        <td class="theme">🐬 极地动物</td>
+        <td>极地海洋公园、小麦岛</td>
+        <td>青岛中山路</td>
+      </tr>
+      <tr>
+        <td class="day-num">Day5</td>
+        <td>8/5 三</td>
+        <td class="theme">⛰️ 崂山一日</td>
+        <td>崂山南线</td>
+        <td>青岛中山路</td>
+      </tr>
+      <tr>
+        <td class="day-num">Day6</td>
+        <td>8/6 四</td>
+        <td class="theme">🚄 转场威海</td>
+        <td>威海国际海水浴场</td>
+        <td>威海环翠区</td>
+      </tr>
+      <tr>
+        <td class="day-num">Day7</td>
+        <td>8/7 五</td>
+        <td class="theme">⚓ 海岛历史</td>
+        <td>刘公岛</td>
+        <td>威海环翠区</td>
+      </tr>
+      <tr>
+        <td class="day-num">Day8</td>
+        <td>8/8 六</td>
+        <td class="theme">🌅 海角收官<br>✈️返程</td>
+        <td>成山头→那香海→返沪</td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ============ DAY 1 ============ -->
+<div class="day-card">
+  <div class="day-header">
+    <div>
+      <div class="day-label">Day 1 · 拜谒孔庙</div>
+      <div class="day-date">8月1日（周六）</div>
+    </div>
+    <div class="day-theme">🏛️ 上海→曲阜·三孔朝圣</div>
+  </div>
+  <div class="day-body">
+    <div class="timeline-item">
+      <div class="timeline-dot dot-transport">🚄</div>
+      <div class="timeline-content">
+        <div class="timeline-time">07:00 - 09:30</div>
+        <div class="timeline-title">上海虹桥→曲阜东 高铁</div>
+        <div class="timeline-desc">
+          <span class="tag">约2-2.5h</span> 推荐G120/G122等车次，二等座约¥269/人<br>
+          一早出发，孩子车上补觉
+        </div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-hotel">🏨</div>
+      <div class="timeline-content">
+        <div class="timeline-time">09:30 - 10:00</div>
+        <div class="timeline-title">入住曲阜酒店</div>
+        <div class="timeline-desc">推荐住孔庙附近（步行可达），¥200-400/晚</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-spot">🏛️</div>
+      <div class="timeline-content">
+        <div class="timeline-time">10:00 - 12:30</div>
+        <div class="timeline-title">孔庙（世界文化遗产）</div>
+        <div class="timeline-desc">
+          <span class="tag tag-red">联票¥140</span>（含孔府孔林）<br>
+          中国最大的祭祀孔子庙宇，大成殿气势恢宏<br>
+          <span class="tag tag-orange">📖 10岁男孩必看</span> 碑刻、杏坛、龙柱<br>
+          建议请讲解或租讲解器，孩子能学到很多
+        </div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-food">🍜</div>
+      <div class="timeline-content">
+        <div class="timeline-time">12:30 - 13:30</div>
+        <div class="timeline-title">午餐：曲阜孔府菜</div>
+        <div class="timeline-desc">
+          推荐孔府家宴或附近餐馆，尝孔门豆腐、孔府糕点<br>
+          人均¥50-70
+        </div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-spot">🏛️</div>
+      <div class="timeline-content">
+        <div class="timeline-time">13:30 - 15:30</div>
+        <div class="timeline-title">孔府（衍圣公府）</div>
+        <div class="timeline-desc">
+          孔子嫡系后代居住的府邸，九进院落<br>
+          后花园很大，孩子可以跑一跑
+        </div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-rest">😴</div>
+      <div class="timeline-content">
+        <div class="timeline-time">16:00 - 18:00</div>
+        <div class="timeline-title">自由活动/休息</div>
+        <div class="timeline-desc">回酒店休息，或在曲阜古城逛逛</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-food">🍜</div>
+      <div class="timeline-content">
+        <div class="timeline-time">18:00 - 19:00</div>
+        <div class="timeline-title">晚餐：曲阜特色</div>
+        <div class="timeline-desc">甏肉干饭、孔府熏豆腐，人均¥40-60</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-hotel">🏨</div>
+      <div class="timeline-content">
+        <div class="timeline-time">20:00</div>
+        <div class="timeline-title">回酒店休息</div>
+        <div class="timeline-desc"><span class="tag tag-red">明日7:30出发</span> 上午游孔林→转青岛</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ DAY 2 ============ -->
+<div class="day-card">
+  <div class="day-header">
+    <div>
+      <div class="day-label">Day 2 · 转场青岛</div>
+      <div class="day-date">8月2日（周日）</div>
+    </div>
+    <div class="day-theme">🌳 孔林晨访→🚄→青岛老城初探</div>
+  </div>
+  <div class="day-body">
+    <div class="timeline-item">
+      <div class="timeline-dot dot-spot">🌳</div>
+      <div class="timeline-content">
+        <div class="timeline-time">07:30 - 09:00</div>
+        <div class="timeline-title">孔林（孔子家族墓地）</div>
+        <div class="timeline-desc">
+          <span class="tag tag-green">含在联票内</span> 世界最大的家族墓地<br>
+          古木参天，早晨散步非常舒服<br>
+          坐电瓶车（¥20）不累
+        </div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-transport">🚄</div>
+      <div class="timeline-content">
+        <div class="timeline-time">10:00 - 12:30</div>
+        <div class="timeline-title">曲阜东→青岛 高铁</div>
+        <div class="timeline-desc">
+          <span class="tag">约2.5h</span> 二等座¥180-200/人<br>
+          孩子可以车上补觉
+        </div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-hotel">🏨</div>
+      <div class="timeline-content">
+        <div class="timeline-time">12:30 - 13:30</div>
+        <div class="timeline-title">青岛中山路入住+午餐</div>
+        <div class="timeline-desc">船歌鱼水饺（人均¥80）鲅鱼水饺孩子爱吃</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-spot">🏖️</div>
+      <div class="timeline-content">
+        <div class="timeline-time">14:30 - 16:00</div>
+        <div class="timeline-title">栈桥</div>
+        <div class="timeline-desc"><span class="tag tag-green">免费</span> 吹海风看海鸥</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-spot">🏔️</div>
+      <div class="timeline-content">
+        <div class="timeline-time">16:00 - 17:00</div>
+        <div class="timeline-title">信号山公园</div>
+        <div class="timeline-desc"><span class="tag tag-green">¥10</span> 登顶看老城全景</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-food">🍜</div>
+      <div class="timeline-content">
+        <div class="timeline-time">17:30 - 18:30</div>
+        <div class="timeline-title">晚餐：九龙餐厅</div>
+        <div class="timeline-desc">老字号海鲜，辣炒蛤蜊，人均¥60</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-hotel">🏨</div>
+      <div class="timeline-content">
+        <div class="timeline-time">19:00</div>
+        <div class="timeline-title">回酒店休息</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ DAY 3 ============ -->
+<div class="day-card">
+  <div class="day-header">
+    <div>
+      <div class="day-label">Day 3 · 海洋探秘</div>
+      <div class="day-date">8月3日（周一）</div>
+    </div>
+    <div class="day-theme">🎠 海底世界+八大关</div>
+  </div>
+  <div class="day-body">
+    <div class="timeline-item">
+      <div class="timeline-dot dot-warning">⚠️</div>
+      <div class="timeline-content">
+        <div class="timeline-desc"><span class="tag tag-red">提前1天网上购票</span></div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-spot">🐟</div>
+      <div class="timeline-content">
+        <div class="timeline-time">08:45 - 11:30</div>
+        <div class="timeline-title">青岛海底世界 ⭐孩子最爱</div>
+        <div class="timeline-desc">
+          <span class="tag tag-red">¥139</span> 儿童半价<br>
+          海底隧道、人鲨共舞、水母宫
+        </div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-food">🍜</div>
+      <div class="timeline-content">
+        <div class="timeline-time">11:30 - 13:00</div>
+        <div class="timeline-title">午餐：前海沿</div>
+        <div class="timeline-desc">人均¥70，本地人推荐</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-spot">🌳</div>
+      <div class="timeline-content">
+        <div class="timeline-time">13:15 - 16:30</div>
+        <div class="timeline-title">八大关+第二海水浴场挖沙</div>
+        <div class="timeline-desc">
+          <span class="tag tag-green">免费</span> 租亲子自行车<br>
+          <span class="tag tag-orange">🏖️ 挖沙玩水</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ DAY 4 ============ -->
+<div class="day-card">
+  <div class="day-header">
+    <div>
+      <div class="day-label">Day 4 · 极地动物</div>
+      <div class="day-date">8月4日（周二）</div>
+    </div>
+    <div class="day-theme">🐬 极地公园+小麦岛日落</div>
+  </div>
+  <div class="day-body">
+    <div class="timeline-item">
+      <div class="timeline-dot dot-spot">🐬</div>
+      <div class="timeline-content">
+        <div class="timeline-time">09:20 - 12:30</div>
+        <div class="timeline-title">青岛极地海洋公园 ⭐重头戏</div>
+        <div class="timeline-desc">
+          <span class="tag tag-red">¥239起</span> 含球幕影院<br>
+          白鲸/海豚表演10:00-15:00
+        </div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-rest">😴</div>
+      <div class="timeline-content">
+        <div class="timeline-time">13:30 - 16:00</div>
+        <div class="timeline-title">午休</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-spot">🌅</div>
+      <div class="timeline-content">
+        <div class="timeline-time">16:20 - 18:30</div>
+        <div class="timeline-title">小麦岛公园看日落</div>
+        <div class="timeline-desc"><span class="tag tag-green">免费</span> 草坪奔跑+日落美拍</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ DAY 5 ============ -->
+<div class="day-card">
+  <div class="day-header">
+    <div>
+      <div class="day-label">Day 5 · 崂山一日</div>
+      <div class="day-date">8月5日（周三）</div>
+    </div>
+    <div class="day-theme">⛰️ 坐观光车不累</div>
+  </div>
+  <div class="day-body">
+    <div class="timeline-item">
+      <div class="timeline-dot dot-warning">⚠️</div>
+      <div class="timeline-content">
+        <div class="timeline-desc"><span class="tag tag-red">提前7天预约！</span></div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-spot">⛰️</div>
+      <div class="timeline-content">
+        <div class="timeline-time">08:30 - 15:00</div>
+        <div class="timeline-title">崂山南线（太清宫+八水河）</div>
+        <div class="timeline-desc">
+          <span class="tag tag-red">¥150</span> 联票含观光车<br>
+          全程坐车不爬山，中午农家宴
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ DAY 6 ============ -->
+<div class="day-card">
+  <div class="day-header">
+    <div>
+      <div class="day-label">Day 6 · 转场威海</div>
+      <div class="day-date">8月6日（周四）</div>
+    </div>
+    <div class="day-theme">🚄 青岛→威海+玩水</div>
+  </div>
+  <div class="day-body">
+    <div class="timeline-item">
+      <div class="timeline-dot dot-transport">🚄</div>
+      <div class="timeline-content">
+        <div class="timeline-time">08:30 - 10:00</div>
+        <div class="timeline-title">青岛→威海 动车</div>
+        <div class="timeline-desc"><span class="tag">约2h</span> ¥93/人</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-hotel">🏨</div>
+      <div class="timeline-content">
+        <div class="timeline-time">10:00 - 11:00</div>
+        <div class="timeline-title">威海环翠区入住</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-spot">🏖️</div>
+      <div class="timeline-content">
+        <div class="timeline-time">13:00 - 17:30</div>
+        <div class="timeline-title">威海国际海水浴场</div>
+        <div class="timeline-desc"><span class="tag tag-green">免费</span> 带上泳圈水枪</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ DAY 7 ============ -->
+<div class="day-card">
+  <div class="day-header">
+    <div>
+      <div class="day-label">Day 7 · 海岛历史</div>
+      <div class="day-date">8月7日（周五）</div>
+    </div>
+    <div class="day-theme">⚓ 刘公岛</div>
+  </div>
+  <div class="day-body">
+    <div class="timeline-item">
+      <div class="timeline-dot dot-warning">⚠️</div>
+      <div class="timeline-content">
+        <div class="timeline-desc"><span class="tag tag-red">提前3-5天预约</span> "爱来刘公岛"公众号</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-spot">⚓</div>
+      <div class="timeline-content">
+        <div class="timeline-time">07:30 - 15:00</div>
+        <div class="timeline-title">刘公岛一日游</div>
+        <div class="timeline-desc">
+          <span class="tag tag-red">¥122</span> 儿童¥15（含船票）<br>
+          甲午战争博物馆、旗顶山炮台、大熊猫馆<br>
+          <span class="tag tag-orange">⭐10岁男孩最爱</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ DAY 8 ============ -->
+<div class="day-card">
+  <div class="day-header">
+    <div>
+      <div class="day-label">Day 8 · 海角收官</div>
+      <div class="day-date">8月8日（周六）</div>
+    </div>
+    <div class="day-theme">🌅 成山头→那香海→✈️返程</div>
+  </div>
+  <div class="day-body">
+    <div class="timeline-item">
+      <div class="timeline-dot dot-spot">🌅</div>
+      <div class="timeline-content">
+        <div class="timeline-time">08:00 - 10:30</div>
+        <div class="timeline-title">成山头</div>
+        <div class="timeline-desc"><span class="tag tag-red">¥148</span> 中国海岸最东端</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-spot">🎡</div>
+      <div class="timeline-content">
+        <div class="timeline-time">11:00 - 13:30</div>
+        <div class="timeline-title">那香海挖沙+午餐</div>
+        <div class="timeline-desc"><span class="tag tag-green">沙滩免费</span> 最后再玩一次水</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot dot-transport">✈️</div>
+      <div class="timeline-content">
+        <div class="timeline-time">15:00 - 16:30</div>
+        <div class="timeline-title">威海→上海 飞机</div>
+        <div class="timeline-desc"><span class="tag tag-red">¥400-800/人</span> 约1.5h</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ BUDGET ============ -->
+<div class="section">
+  <div class="section-title">💰 预算估算（舒适型·一家三口）</div>
+  <table class="budget-table">
+    <thead>
+      <tr>
+        <th>项目</th>
+        <th>明细</th>
+        <th class="num">金额</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>🚄 上海→曲阜高铁</td>
+        <td>¥269/人×3人</td>
+        <td class="num">¥807</td>
+      </tr>
+      <tr>
+        <td>🚄 曲阜→青岛高铁</td>
+        <td>¥190/人×3人</td>
+        <td class="num">¥570</td>
+      </tr>
+      <tr>
+        <td>🚄 青岛→威海动车</td>
+        <td>¥93/人×3人</td>
+        <td class="num">¥279</td>
+      </tr>
+      <tr>
+        <td>✈️ 威海→上海机票</td>
+        <td>¥600/人×3人预估</td>
+        <td class="num">¥1,800</td>
+      </tr>
+      <tr>
+        <td>🏨 住宿7晚</td>
+        <td>曲阜¥300 + 青岛¥350×4 + 威海¥350×2</td>
+        <td class="num">¥2,400</td>
+      </tr>
+      <tr>
+        <td>🍜 餐饮8天</td>
+        <td>¥250/天×8</td>
+        <td class="num">¥2,000</td>
+      </tr>
+      <tr>
+        <td>🎫 门票</td>
+        <td>三孔¥140+海底世界¥209+极地¥239+崂山¥150+刘公岛¥137+成山头¥222</td>
+        <td class="num">¥1,097</td>
+      </tr>
+      <tr>
+        <td>🚕 市内交通</td>
+        <td>打车/公交8天</td>
+        <td class="num">¥1,200</td>
+      </tr>
+      <tr>
+        <td>🎁 购物其他</td>
+        <td>零食、纪念品、干货</td>
+        <td class="num">¥500</td>
+      </tr>
+      <tr class="total-row">
+        <td colspan="2"><strong>总计</strong></td>
+        <td class="num"><strong>约¥10,653</strong></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ============ PACKING ============ -->
+<div class="section">
+  <div class="section-title">🎒 行李清单</div>
+  <div class="checklist-cat">
+    <div class="checklist-cat-title">👕 衣物类</div>
+    <div class="checklist-item"><div class="check"></div> T恤/短袖 每人5-6件 <span class="priority pri-must">必带</span></div>
+    <div class="checklist-item"><div class="check"></div> 泳衣每人2套（替换） <span class="priority pri-must">必带</span></div>
+    <div class="checklist-item"><div class="check"></div> 薄外套/防晒衣每人1件 <span class="priority pri-must">必带</span></div>
+    <div class="checklist-item"><div class="check"></div> 舒适步行鞋+凉鞋 <span class="priority pri-must">必带</span></div>
+  </div>
+  <div class="checklist-cat">
+    <div class="checklist-cat-title">🧴 日用品</div>
+    <div class="checklist-item"><div class="check"></div> 高倍防晒霜SPF50+ <span class="priority pri-must">必带</span></div>
+    <div class="checklist-item"><div class="check"></div> 驱蚊液（曲阜/海边都需要） <span class="priority pri-must">必带</span></div>
+    <div class="checklist-item"><div class="check"></div> 防水手机袋 <span class="priority pri-must">必带</span></div>
+    <div class="checklist-item"><div class="check"></div> 儿童退烧药/止泻药/防水创可贴 <span class="priority pri-must">必带</span></div>
+  </div>
+  <div class="checklist-cat">
+    <div class="checklist-cat-title">🧸 孩子专属</div>
+    <div class="checklist-item"><div class="check"></div> 泳圈/浮板 + 挖沙玩具 + 水枪 <span class="priority pri-must">必带</span></div>
+    <div class="checklist-item"><div class="check"></div> iPad/绘本（高铁上消遣） <span class="priority pri-suggest">建议带</span></div>
+    <div class="checklist-item"><div class="check"></div> 小笔记本+笔（孔庙可以记录学到的历史知识） <span class="priority pri-suggest">建议带</span></div>
+  </div>
+</div>
+
+<!-- ============ FOOD ============ -->
+<div class="section">
+  <div class="section-title">🍽️ 三城美食推荐</div>
+  <div style="font-weight:600;color:var(--accent-dark);">曲阜</div>
+  <div class="food-item">
+    <div><div class="food-name">孔府菜（孔门豆腐、诗礼银杏）</div><div class="food-detail">孔府家宴</div></div>
+    <div class="food-price">¥50-70/人</div>
+  </div>
+  <div class="food-item">
+    <div><div class="food-name">甏肉干饭</div><div class="food-detail">曲阜街头特色</div></div>
+    <div class="food-price">¥15-25/份</div>
+  </div>
+  <div style="font-weight:600;color:var(--accent-dark);margin-top:10px;">青岛</div>
+  <div class="food-item">
+    <div><div class="food-name">鲅鱼水饺</div><div class="food-detail">船歌鱼水饺</div></div>
+    <div class="food-price">¥80/人</div>
+  </div>
+  <div class="food-item">
+    <div><div class="food-name">辣炒蛤蜊</div><div class="food-detail">九龙餐厅·老字号</div></div>
+    <div class="food-price">¥60/人</div>
+  </div>
+  <div class="food-item">
+    <div><div class="food-name">烤鱿鱼</div><div class="food-detail">王姐烧烤</div></div>
+    <div class="food-price">¥50/人</div>
+  </div>
+  <div style="font-weight:600;color:var(--accent-dark);margin-top:10px;">威海</div>
+  <div class="food-item">
+    <div><div class="food-name">韩式烤肉+海鲜饼</div><div class="food-detail">韩乐坊美食街</div></div>
+    <div class="food-price">¥50/人</div>
+  </div>
+  <div class="food-item">
+    <div><div class="food-name">海鲜自助</div><div class="food-detail">威高广场</div></div>
+    <div class="food-price">¥80/人</div>
+  </div>
+</div>
+
+<!-- ============ TIPS ============ -->
+<div class="section">
+  <div class="section-title">💡 旅行贴士</div>
+  <div class="tip-item"><div class="tip-icon">🏛️</div><div><strong>曲阜三孔：</strong>联票¥140，请讲解员效果更好，8月天热注意防暑</div></div>
+  <div class="tip-item"><div class="tip-icon">🚄</div><div><strong>路线逻辑：</strong>上海→曲阜→青岛→威海，顺路不走回头路</div></div>
+  <div class="tip-item"><div class="tip-icon">👦</div><div><strong>亲子节奏：</strong>每天最多2个大景点，预留午休，换城市日只安排轻量活动</div></div>
+  <div class="tip-item"><div class="tip-icon">⚠️</div><div><strong>预约提醒：</strong>崂山提前7天、刘公岛提前3-5天、海底世界/极地提前1天</div></div>
+  <div class="tip-item"><div class="tip-icon">🌡️</div><div><strong>8月天气：</strong>曲阜很热（30-35°C），青岛25-30°C，威海26-30°C，注意防暑防晒</div></div>
+</div>
+
+<div class="footer">
+  生成于 Hermes Agent · smart-traveler skill<br>
+  价格为参考值，以实际为准
+</div>
+
+</body>
+</html>
