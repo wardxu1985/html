@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>齐鲁环线自驾 · 盐城日照青岛威海淄博泰山曲阜连云港</title>
+<style>
+:root {
+  --primary: #E65100;
+  --primary-light: #FF8F00;
+  --primary-bg: #FFF3E0;
+  --accent: #1565C0;
+  --success: #2E7D32;
+  --danger: #C62828;
+  --warning: #F57F17;
+  --bg: #F5F7FA;
+  --card: #FFFFFF;
+  --text: #1A1A2E;
+  --text-secondary: #5A5A7A;
+  --radius: 16px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --font: -apple-system, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding-bottom: 60px;
+}
+.hero {
+  background: linear-gradient(135deg, #BF360C 0%, #E65100 30%, #FF8F00 60%, #FFB300 100%);
+  color: white;
+  padding: 40px 20px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: var(--bg);
+  border-radius: 50% 50% 0 0;
+}
+.hero h1 { font-size: 26px; font-weight: 700; margin-bottom: 6px; letter-spacing: 1px; }
+.hero .subtitle { font-size: 14px; opacity: 0.9; }
+.hero .route-line {
+  margin: 12px 0 8px;
+  font-size: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+}
+.hero .route-line span {
+  background: rgba(255,255,255,0.2);
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+}
+.hero .tags {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.hero .tag {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(4px);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+.container { max-width: 800px; margin: 0 auto; padding: 0 16px; }
+.alert {
+  background: #FFF8E1;
+  border-left: 4px solid var(--warning);
+  padding: 14px 18px;
+  border-radius: 10px;
+  margin: 20px 0;
+  font-size: 14px;
+  color: #6D4C00;
+}
+.alert strong { color: var(--danger); }
+.overview-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  margin: 20px 0;
+}
+.overview-card h2 {
+  font-size: 18px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 16px 0;
+}
+.summary-table th {
+  background: var(--primary);
+  color: white;
+  padding: 10px 8px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 12px;
+}
+.summary-table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #EEE;
+  text-align: center;
+  vertical-align: top;
+}
+.summary-table tr:nth-child(even) td { background: #FFF8F0; }
+.summary-table .day-theme { font-weight: 600; color: var(--primary); }
+.summary-table .day-spots { font-size: 12px; color: var(--text-secondary); }
+.day-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin: 16px 0;
+  overflow: hidden;
+}
+.day-header {
+  background: var(--primary);
+  color: white;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.day-header .day-title { font-size: 17px; font-weight: 700; }
+.day-header .day-date { font-size: 13px; opacity: 0.9; }
+.day-body { padding: 16px 20px; }
+.day-drive {
+  display: inline-block;
+  background: var(--primary-bg);
+  color: var(--primary);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.day-hotel {
+  background: #E8F5E9;
+  color: #1B5E20;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 12px;
+  display: block;
+  line-height: 1.5;
+}
+.timeline { position: relative; padding-left: 28px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 4px;
+  bottom: 4px;
+  width: 2px;
+  background: #DDD;
+}
+.timeline-item {
+  position: relative;
+  padding: 6px 0 12px 12px;
+  border-bottom: 1px dashed #F0F0F0;
+}
+.timeline-item:last-child { border-bottom: none; }
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -24px;
+  top: 10px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  background: white;
+}
+.timeline-item.drive::before { border-color: #FF8F00; background: #FFF8E1; }
+.timeline-item.spot::before { border-color: #1565C0; background: #E3F2FD; }
+.timeline-item.food::before { border-color: #E65100; background: #FFF3E0; }
+.timeline-item.sleep::before { border-color: #6A1B9A; background: #F3E5F5; }
+.timeline-item.warn::before { border-color: #C62828; background: #FFEBEE; }
+.timeline-item .tl-time {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+  display: inline-block;
+  min-width: 70px;
+}
+.timeline-item .tl-content { font-size: 14px; margin-top: 2px; }
+.timeline-item .tl-detail { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+.timeline-item .tl-tip {
+  font-size: 12px;
+  background: #FFF8E1;
+  padding: 2px 8px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 4px;
+}
+.budget-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin: 16px 0;
+}
+.budget-table th {
+  background: var(--primary);
+  color: white;
+  padding: 10px 8px;
+  text-align: left;
+  font-weight: 600;
+}
+.budget-table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #EEE;
+}
+.budget-table tr.total td {
+  background: #FFF3E0;
+  font-weight: 700;
+  font-size: 15px;
+  border-top: 2px solid var(--primary);
+}
+.budget-table .amount { text-align: right; font-weight: 600; }
+.tips-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 12px 0;
+}
+.tip-item {
+  background: #F8FAFF;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 13px;
+  border-left: 3px solid var(--accent);
+}
+.tip-item.warn { border-left-color: var(--warning); background: #FFFDE7; }
+.tip-item.danger { border-left-color: var(--danger); background: #FFEBEE; }
+.tip-item .tip-icon { margin-right: 6px; }
+@media (max-width: 600px) {
+  .hero h1 { font-size: 22px; }
+  .summary-table { font-size: 11px; }
+  .summary-table th, .summary-table td { padding: 6px 4px; }
+  .day-body { padding: 12px 14px; }
+  .tips-grid { grid-template-columns: 1fr; }
+}
+@media print {
+  .hero { padding: 30px 20px; }
+  .hero::after { display: none; }
+  body { background: white; }
+  .day-card { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>🚗 齐鲁环线自驾</h1>
+  <div class="subtitle">上海→盐城→日照→青岛→威海→淄博→泰山→曲阜→连云港→上海</div>
+  <div class="route-line">
+    <span>上海</span>→<span>盐城</span>→<span>日照</span>→<span>青岛</span>→<span>威海</span>→<span>淄博</span>→<span>泰山</span>→<span>曲阜</span>→<span>连云港</span>→<span>上海</span>
+  </div>
+  <div class="subtitle" style="margin-top:6px;font-size:16px;font-weight:600;">8月1日(六) → 8月9日(日) · 全程自驾</div>
+  <div class="tags">
+    <span class="tag">👨‍👩‍👦 一家三口</span>
+    <span class="tag">🚗 全程约2,400km</span>
+    <span class="tag">🏡 亲子轻松游</span>
+    <span class="tag">📅 9天8晚</span>
+  </div>
+</div>
+
+<div class="container">
+
+<div class="alert">
+  <strong>⚠️ 重要提醒：</strong>全程约2,400km，单人驾驶量大！8/7威海→淄博500km、8/9曲阜→上海750km是两大长途日。泰山需提前预约，暑期注意防暑。
+</div>
+
+<!-- QUICK SUMMARY -->
+<div class="overview-card">
+  <h2>📋 行程速览</h2>
+  <table class="summary-table">
+    <thead>
+      <tr><th>天数</th><th>日期</th><th>驾驶</th><th>主题</th><th>核心景点</th><th>住宿</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>D1</td><td>8/1(六)</td><td>🚗300km/3.5h</td><td class="day-theme">上海→盐城</td><td class="day-spots">大纵湖/水街</td><td>盐城</td></tr>
+      <tr><td>D2</td><td>8/2(日)</td><td>🚗250km/3h</td><td class="day-theme">盐城→日照</td><td class="day-spots">丹顶鹤保护区→万平口海滨</td><td>日照</td></tr>
+      <tr><td>D3</td><td>8/3(一)</td><td>🚗150km/2h</td><td class="day-theme">日照→青岛</td><td class="day-spots">栈桥·信号山·青岛啤酒</td><td>青岛</td></tr>
+      <tr><td>D4</td><td>8/4(二)</td><td>🚶步行</td><td class="day-theme">青岛一日</td><td class="day-spots">八大关·海底世界·浴场</td><td>青岛</td></tr>
+      <tr><td>D5</td><td>8/5(三)</td><td>🚗280km/3.5h</td><td class="day-theme">青岛→威海</td><td class="day-spots">小麦岛→国际海水浴场</td><td>威海</td></tr>
+      <tr><td>D6</td><td>8/6(四)</td><td>🚶步行</td><td class="day-theme">威海慢游</td><td class="day-spots">刘公岛·那香海</td><td>威海</td></tr>
+      <tr><td>D7</td><td>8/7(五)</td><td>🚗500km/5.5h</td><td class="day-theme">威海→淄博</td><td class="day-spots">海岱楼·八大局·淄博烧烤🔥</td><td>淄博</td></tr>
+      <tr><td>D8</td><td>8/8(六)</td><td>🚗230km/3h</td><td class="day-theme">泰山·曲阜</td><td class="day-spots">登泰山→孔庙</td><td>曲阜</td></tr>
+      <tr><td>D9</td><td>8/9(日)</td><td>🚗750km/8.5h</td><td class="day-theme">曲阜→上海</td><td class="day-spots">连云港午餐→回上海</td><td>—</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- DAY 1 - 8/1 -->
+<div class="day-card">
+  <div class="day-header" style="background:#4CAF50;">
+    <span class="day-title">D1 · 上海→盐城</span>
+    <span class="day-date">8月1日（周六）</span>
+  </div>
+  <div class="day-body">
+    <span class="day-drive">🚗 上海 → 盐城（300km，约3.5h）G15沈海高速</span>
+    <div class="day-hotel">🏨 住：盐城市区（推荐宝龙广场/水街附近）</div>
+    <div class="timeline">
+      <div class="timeline-item drive">
+        <span class="tl-time">08:00-11:30</span>
+        <span class="tl-content">🚗 上海出发，沿G15沈海高速北上</span>
+        <div class="tl-detail">中途停1个服务区休息</div>
+      </div>
+      <div class="timeline-item food">
+        <span class="tl-time">11:30-13:00</span>
+        <span class="tl-content">🍜 盐城午餐：东台鱼汤面/盐城鸡蛋饼</span>
+      </div>
+      <div class="timeline-item spot">
+        <span class="tl-time">13:30-16:00</span>
+        <span class="tl-content">🌿 二选一：</span>
+        <div class="tl-detail"><strong>A) 大纵湖旅游景区</strong>（门票¥100）— 芦荡迷宫·水乡风光</div>
+        <div class="tl-detail"><strong>B) 盐城水街</strong>（免费）— 仿古街区·地方小吃</div>
+        <div class="tl-tip">👶 带小孩推荐B，轻松不累</div>
+      </div>
+      <div class="timeline-item sleep">
+        <span class="tl-time">16:00</span>
+        <span class="tl-content">🏨 入住酒店·休整</span>
+      </div>
+      <div class="timeline-item food">
+        <span class="tl-time">17:30</span>
+        <span class="tl-content">🍜 晚餐：盐城特色（盐城海鲜/东台臭干）</span>
+      </div>
+      <div class="timeline-item spot">
+        <span class="tl-time">19:00</span>
+        <span class="tl-content">🌃 水街夜景散步</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 2 - 8/2 -->
+<div class="day-card">
+  <div class="day-header" style="background:#00897B;">
+    <span class="day-title">D2 · 盐城→日照</span>
+    <span class="day-date">8月2日（周日）</span>
+  </div>
+  <div class="day-body">
+    <span class="day-drive">🚗 盐城 → 日照（250km，约3h）G15沈海高速</span>
+    <div class="day-hotel">🏨 住：日照万平口/灯塔附近</div>
+    <div class="timeline">
+      <div class="timeline-item spot">
+        <span class="tl-time">08:30-10:30</span>
+        <span class="tl-content">🦌 中华麋鹿园（大丰·门票¥50）</span>
+        <div class="tl-detail">世界最大的麋鹿自然保护区！👶小孩超爱看麋鹿</div>
+      </div>
+      <div class="timeline-item drive">
+        <span class="tl-time">10:30-14:00</span>
+        <span class="tl-content">🚗 盐城→日照（含服务区午餐）</span>
+      </div>
+      <div class="timeline-item sleep">
+        <span class="tl-time">14:00-15:00</span>
+        <span class="tl-content">🏨 入住日照酒店</span>
+      </div>
+      <div class="timeline-item spot">
+        <span class="tl-time">15:30-18:00</span>
+        <span class="tl-content">🏖️ 万平口海滨风景区（免费）</span>
+        <div class="tl-detail">日照"城市会客厅"·沙滩细腻·孩子挖沙玩水</div>
+        <div class="tl-tip">📸 灯塔景区看日落很美</div>
+      </div>
+      <div class="timeline-item food">
+        <span class="tl-time">18:30</span>
+        <span class="tl-content">🍜 晚餐：日照海鲜（大竹蛏·对虾·海鲜面）</span>
+        <div class="tl-detail">推荐：万平口附近海鲜大排档</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 3 - 8/3 -->
+<div class="day-card">
+  <div class="day-header">
+    <span class="day-title">D3 · 日照→青岛 🌊</span>
+    <span class="day-date">8月3日（周一）</span>
+  </div>
+  <div class="day-body">
+    <span class="day-drive">🚗 日照 → 青岛（150km，约2h）G15沈海高速</span>
+    <div class="day-hotel">🏨 住：青岛中山路/栈桥或五四广场附近</div>
+    <div class="timeline">
+      <div class="timeline-item spot">
+        <span class="tl-time">08:30-10:30</span>
+        <span class="tl-content">🏖️ 日照海滨国家森林公园（免费或¥50）</span>
+        <div class="tl-detail">森林+沙滩结合，天然氧吧</div>
+      </div>
+      <div class="timeline-item drive">
+        <span class="tl-time">10:30-12:30</span>
+        <span class="tl-content">🚗 日照→青岛</span>
+      </div>
+      <div class="timeline-item food">
+        <span class="tl-time">12:30-13:30</span>
+        <span class="tl-content">🍜 青岛午餐：船歌鱼水饺</span>
+      </div>
+      <div class="timeline-item sleep">
+        <span class="tl-time">13:30-14:30</span>
+        <span class="tl-content">🏨 入住青岛酒店</span>
+      </div>
+      <div class="timeline-item spot">
+        <span class="tl-time">14:30-16:00</span>
+        <span class="tl-content">🌊 栈桥（免费）</span>
+        <div class="tl-detail">青岛地标！吹海风看海鸥</div>
+      </div>
+      <div class="timeline-item spot">
+        <span class="tl-time">16:00-17:00</span>
+        <span class="tl-content">⛰️ 信号山公园（¥10）俯瞰老城全貌</span>
+      </div>
+      <div class="timeline-item food">
+        <span class="tl-time">18:00</span>
+        <span class="tl-content">🍜 晚餐：营口路海鲜市场/云霄路</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 4 - 8/4 -->
+<div class="day-card">
+  <div class="day-header">
+    <span class="day-title">D4 · 青岛一日</span>
+    <span class="day-date">8月4日（周二）</span>
+  </div>
+  <div class="day-body">
+    <span class="day-drive">🚶 市内活动（车停酒店）</span>
+    <div class="day-hotel">🏨 续住：青岛</div>
+    <div class="timeline">
+      <div class="timeline-item spot">
+        <span class="tl-time">09:00-11:30</span>
+        <span class="tl-content">🌳 八大关（免费）+ 第二海水浴场</span>
+        <div class="tl-detail">万国建筑·👶 浴场挖沙踩水</div>
+      </div>
+      <div class="timeline-item food">
+        <span class="tl-time">11:30-13:00</span>
+        <span class="tl-content">🍜 午餐</span>
+      </div>
+      <div class="timeline-item spot">
+        <span class="tl-time">13:00-16:00</span>
+        <span class="tl-content">🐠 青岛海底世界（¥139/成人）</span>
+        <div class="tl-detail">👶 孩子最爱！海底隧道·人鲨共舞</div>
+        <div class="tl-tip">⚠️ 提前1天网上购票</div>
+      </div>
+      <div class="timeline-item sleep">
+        <span class="tl-time">16:00-18:00</span>
+        <span class="tl-content">🏨 回酒店休息</span>
+      </div>
+      <div class="timeline-item food">
+        <span class="tl-time">18:30</span>
+        <span class="tl-content">🍜 晚餐</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 5 - 8/5 -->
+<div class="day-card">
+  <div class="day-header" style="background:#00695C;">
+    <span class="day-title">D5 · 青岛→威海</span>
+    <span class="day-date">8月5日（周三）</span>
+  </div>
+  <div class="day-body">
+    <span class="day-drive">🚗 青岛 → 威海（280km，约3.5h）</span>
+    <div class="day-hotel">🏨 住：威海国际海水浴场/市中心</div>
+    <div class="timeline">
+      <div class="timeline-item spot">
+        <span class="tl-time">08:30-10:30</span>
+        <span class="tl-content">🌿 小麦岛公园（免费）</span>
+        <div class="tl-detail">海景步道·轻松悠闲</div>
+      </div>
+      <div class="timeline-item drive">
+        <span class="tl-time">11:00-14:30</span>
+        <span class="tl-content">🚗 青岛→威海（服务区午餐）</span>
+      </div>
+      <div class="timeline-item sleep">
+        <span class="tl-time">14:30-15:30</span>
+        <span class="tl-content">🏨 入住威海酒店</span>
+      </div>
+      <div class="timeline-item spot">
+        <span class="tl-time">15:30-18:00</span>
+        <span class="tl-content">🏖️ 威海国际海水浴场（免费）</span>
+        <div class="tl-detail">沙细坡缓·👶 挖沙玩水天堂</div>
+      </div>
+      <div class="timeline-item food">
+        <span class="tl-time">18:30</span>
+        <span class="tl-content">🍜 晚餐：韩乐坊美食街</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 6 - 8/6 -->
+<div class="day-card">
+  <div class="day-header" style="background:#00695C;">
+    <span class="day-title">D6 · 威海慢游</span>
+    <span class="day-date">8月6日（周四）</span>
+  </div>
+  <div class="day-body">
+    <span class="day-drive">🚶 市内活动</span>
+    <div class="day-hotel">🏨 续住：威海</div>
+    <div class="timeline">
+      <div class="timeline-item warn">
+        <span class="tl-time">⚠️</span>
+        <span class="tl-content"><strong>刘公岛提前3-5天预约</strong></span>
+      </div>
+      <div class="timeline-item spot">
+        <span class="tl-time">08:00-13:00</span>
+        <span class="tl-content">🏝️ 刘公岛（¥122含船票，儿童¥15）</span>
+        <div class="tl-detail">甲午战争博物馆·旗顶山炮台</div>
+        <div class="tl-tip">💡 岛上观光车¥60省力</div>
+      </div>
+      <div class="timeline-item food">
+        <span class="tl-time">13:00-14:00</span>
+        <span class="tl-content">🍜 午餐</span>
+      </div>
+      <div class="timeline-item spot">
+        <span class="tl-time">15:00-17:30</span>
+        <span class="tl-content">🏖️ 那香海度假区（免费）</span>
+        <div class="tl-detail">沙滩·风车·儿童乐园·👶 尽情挖沙</div>
+      </div>
+      <div class="timeline-item food">
+        <span class="tl-time">18:00</span>
+        <span class="tl-content">🍜 晚餐</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 7 - 8/7 -->
+<div class="day-card">
+  <div class="day-header" style="background:#E91E63;">
+    <span class="day-title">D7 · 威海→淄博 🔥</span>
+    <span class="day-date">8月7日（周五）</span>
+  </div>
+  <div class="day-body">
+    <span class="day-drive">🚗 威海 → 淄博（500km，约5.5h）长途日</span>
+    <div class="day-hotel">🏨 住：淄博张店区（万象汇/海岱楼附近）</div>
+    <div class="timeline">
+      <div class="timeline-item drive">
+        <span class="tl-time">07:30-13:00</span>
+        <span class="tl-content">🚗 威海→淄博（G18荣乌→G25长深高速）</span>
+        <div class="tl-detail">中途停2个服务区休息，含午餐</div>
+        <div class="tl-tip">💡 今天最长驾驶，早点出发！备好零食</div>
+      </div>
+      <div class="timeline-item sleep">
+        <span class="tl-time">13:00-14:00</span>
+        <span class="tl-content">🏨 入住淄博酒店·休整</span>
+      </div>
+      <div class="timeline-item spot">
+        <span class="tl-time">14:30-16:30</span>
+        <span class="tl-content">🏛️ 海岱楼·齐盛湖公园（免费）</span>
+        <div class="tl-detail">淄博新地标，钟书阁最美书店也在里面</div>
+      </div>
+      <div class="timeline-item spot">
+        <span class="tl-time">16:30-17:30</span>
+        <span class="tl-content">🛍️ 八大局便民市场</span>
+        <div class="tl-detail">网红市场！紫米饼·炒锅饼·周村烧饼</div>
+      </div>
+      <div class="timeline-item food">
+        <span class="tl-time">18:00-20:00</span>
+        <span class="tl-content">🔥🔥 <strong>淄博烧烤！！</strong></span>
+        <div class="tl-detail">小饼卷肉+小葱+蘸料！推荐：牧羊村/万家乐</div>
+        <div class="tl-tip">👶 小孩也能吃，不辣，氛围超好</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 8 - 8/8 -->
+<div class="day-card">
+  <div class="day-header">
+    <span class="day-title">D8 · 泰山→曲阜 ⛰️</span>
+    <span class="day-date">8月8日（周六）</span>
+  </div>
+  <div class="day-body">
+    <span class="day-drive">🚗 淄博 → 泰安（150km/2h）→ 曲阜（80km/1h）</span>
+    <div class="day-hotel">🏨 住：曲阜孔庙附近</div>
+    <div class="timeline">
+      <div class="timeline-item warn">
+        <span class="tl-time">⚠️</span>
+        <span class="tl-content"><strong>泰山提前预约！</strong>公众号"泰山景区"</span>
+      </div>
+      <div class="timeline-item drive">
+        <span class="tl-time">07:00-09:00</span>
+        <span class="tl-content">🚗 淄博→泰安</span>
+      </div>
+      <div class="timeline-item spot">
+        <span class="tl-time">09:00-09:30</span>
+        <span class="tl-content">🚌 天外村大巴→中天门（¥35/人）</span>
+      </div>
+      <div class="timeline-item spot">
+        <span class="tl-time">09:30-09:45</span>
+        <span class="tl-content">🚡 中天门缆车→南天门（¥100/人）</span>
+      </div>
+      <div class="timeline-item spot">
+        <span class="tl-time">09:45-12:00</span>
+        <span class="tl-content">🏔️ 山顶：天街→碧霞祠→玉皇顶（1545m）</span>
+        <div class="tl-tip">🌡️ 山顶比山下低10°C，带外套</div>
+      </div>
+      <div class="timeline-item spot">
+        <span class="tl-time">12:00-13:00</span>
+        <span class="tl-content">🚡 缆车+大巴下山</span>
+      </div>
+      <div class="timeline-item food">
+        <span class="tl-time">13:00-14:00</span>
+        <span class="tl-content">🍜 泰安午餐</span>
+      </div>
+      <div class="timeline-item drive">
+        <span class="tl-time">14:00-15:00</span>
+        <span class="tl-content">🚗 泰安→曲阜（80km，1h）</span>
+      </div>
+      <div class="timeline-item spot">
+        <span class="tl-time">15:00-17:00</span>
+        <span class="tl-content">🏛️ 孔庙+孔府（联票¥140）</span>
+        <div class="tl-detail">大成殿·杏坛·孔府九进院落</div>
+        <div class="tl-tip">💡 17:30停止入场，抓紧时间</div>
+      </div>
+      <div class="timeline-item food">
+        <span class="tl-time">18:00</span>
+        <span class="tl-content">🍜 曲阜晚餐：孔府菜</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DAY 9 - 8/9 -->
+<div class="day-card">
+  <div class="day-header" style="background:#4CAF50;">
+    <span class="day-title">D9 · 曲阜→上海 🏡</span>
+    <span class="day-date">8月9日（周日）</span>
+  </div>
+  <div class="day-body">
+    <span class="day-drive">🚗 曲阜→连云港（300km/3.5h）→上海（450km/5h）</span>
+    <div class="timeline">
+      <div class="timeline-item spot">
+        <span class="tl-time">08:00-10:00</span>
+        <span class="tl-content">🏛️ 孔林（免费/¥10电瓶车）</span>
+        <div class="tl-detail">孔子墓·上午凉爽好走</div>
+      </div>
+      <div class="timeline-item drive">
+        <span class="tl-time">10:00-13:30</span>
+        <span class="tl-content">🚗 曲阜→连云港（G2/G25高速）</span>
+      </div>
+      <div class="timeline-item food">
+        <span class="tl-time">13:30-15:00</span>
+        <span class="tl-content">🍜 连云港午餐</span>
+        <div class="tl-detail">海鲜面/凉粉/花果山风鹅</div>
+        <div class="tl-detail">顺路可去<strong>连岛</strong>海边看一眼（时间紧就跳过）</div>
+      </div>
+      <div class="timeline-item drive">
+        <span class="tl-time">15:00-20:00</span>
+        <span class="tl-content">🚗 连云港→上海（G15沈海高速，5h）</span>
+        <div class="tl-detail">中途停1-2个服务区休息</div>
+        <div class="tl-tip">🏡 晚上8点左右到家，完美收官！🎉</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ROUTE MAP TEXT -->
+<div class="overview-card">
+  <h2>🗺️ 路线示意</h2>
+  <div style="font-size:14px;line-height:2;">
+    <strong>上海</strong> 🚗3.5h(300km) →
+    <strong>盐城</strong> 🚗3h(250km) →
+    <strong>日照</strong> 🚗2h(150km) →
+    <strong>青岛</strong> 🚗3.5h(280km) →
+    <strong>威海</strong> 🚗5.5h(500km) →
+    <strong>淄博</strong> 🚗2h(150km) →
+    <strong>泰山</strong> 🚗1h(80km) →
+    <strong>曲阜</strong> 🚗3.5h(300km) →
+    <strong>连云港</strong> 🚗5h(450km) →
+    <strong>上海</strong>
+  </div>
+  <div style="margin-top:10px;font-size:13px;color:var(--text-secondary);">
+    总里程约2,400km · 两个长途日（D7威海→淄博500km / D9曲阜→上海750km）
+  </div>
+</div>
+
+<!-- BUDGET -->
+<div class="overview-card">
+  <h2>💰 预算估算（一家三口）</h2>
+  <table class="budget-table">
+    <tr><td>🚗 油费+过路费</td><td class="amount">¥2,800</td><td>约2,400km</td></tr>
+    <tr><td>🏨 住宿（8晚）</td><td class="amount">¥3,200</td><td>经济连锁/舒适型约¥400/晚</td></tr>
+    <tr><td>🎫 门票</td><td class="amount">¥1,500</td><td>海底世界¥350 + 泰山¥345 + 刘公岛¥260 + 三孔¥280 + 其他</td></tr>
+    <tr><td>🍜 餐饮（9天）</td><td class="amount">¥2,700</td><td>日均¥300</td></tr>
+    <tr><td>🚡 索道+景区交通</td><td class="amount">¥500</td><td>泰山索道+大巴</td></tr>
+    <tr><td>🅿️ 停车+杂费</td><td class="amount">¥300</td><td></td></tr>
+    <tr class="total"><td>💰 总计</td><td class="amount">≈ ¥11,000</td><td>丰俭由人</td></tr>
+  </table>
+</div>
+
+<!-- TIPS -->
+<div class="overview-card">
+  <h2>📌 自驾提醒</h2>
+  <div class="tips-grid">
+    <div class="tip-item warn">
+      <span class="tip-icon">🚗</span> <strong>长途驾驶</strong><br>
+      两个长途日：<br>
+      D7 威海→淄博 500km<br>
+      D9 曲阜→上海 750km<br>
+      <strong>备好咖啡红牛！</strong>
+    </div>
+    <div class="tip-item">
+      <span class="tip-icon">⏰</span> <strong>每日开车</strong><br>
+      平均每天约270km<br>
+      每2h服务区休息15min<br>
+      切勿疲劳驾驶
+    </div>
+    <div class="tip-item warn">
+      <span class="tip-icon">🎫</span> <strong>预约提醒</strong><br>
+      泰山公众号"泰山景区"预约<br>
+      刘公岛"爱来刘公岛"提前3-5天<br>
+      海底世界提前1天购票
+    </div>
+    <div class="tip-item">
+      <span class="tip-icon">🌡️</span> <strong>天气</strong><br>
+      山东8月25-33°C<br>
+      泰山顶15-20°C<br>
+      必带薄外套+防晒
+    </div>
+    <div class="tip-item">
+      <span class="tip-icon">👶</span> <strong>亲子</strong><br>
+      泳衣·挖沙工具必带<br>
+      儿童防晒霜SPF50+<br>
+      车上备足零食和水
+    </div>
+    <div class="tip-item">
+      <span class="tip-icon">🔌</span> <strong>车上必备</strong><br>
+      车载充电器·手机支架<br>
+      遮阳帘（小孩睡觉用）<br>
+      垃圾袋·湿巾·纸巾
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;padding:30px 0 10px;font-size:13px;color:var(--text-secondary);">
+  <p>🚗 齐鲁环线自驾 · 上海→盐城→日照→青岛→威海→淄博→泰山→曲阜→连云港→上海</p>
+  <p style="margin-top:4px;">全程约2,400km · 祝旅途愉快，一路平安！🎉</p>
+</div>
+
+</div>
+</body>
+</html>
