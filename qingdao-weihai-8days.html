@@ -2,2945 +2,573 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<title id="pageTitle"></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌊 青岛+威海 8日亲子自驾游方案</title>
 <style>
-/* ================================================================
-   Design Token System — travel-app-ui.md compliant
-   ================================================================ */
 :root {
-  /* --- Background & Surface --- */
-  --bg: #FFF8F6;
-  --surface: #FFFFFF;
-  --surface-soft: #FFF1EE;
-  --surface-hover: #FFE8E3;
-  --line-light: #F5EFEB;
-  --line: #F0E8E4;
-
-  /* --- Ink --- */
-  --ink: #1A1A1A;
-  --ink-secondary: #333333;
-  --muted: #8C8C8C;
-  --faint: #B8B8B8;
-
-  /* --- Global Accent (Xiaohongshu Red, fixed) --- */
-  --accent: #FF2442;
-  --accent-dark: #E01D38;
-  --accent-soft: #FFF0F2;
-  --accent-glow: rgba(255,36,66,0.15);
-
-  /* --- Auxiliary Palette --- */
-  --coral: #FF6B6B;
-  --peach: #FFAB76;
-  --lavender: #B088F9;
-  --mint: #4ECDC4;
-  --gold: #F0A030;
-  --warn: #E67E22;
-  --jade: #2ECC71;
-  --danger: #FF2442;
-  --blue: #5B8DEF;
-
-  /* --- Soft backgrounds for auxiliary --- */
-  --coral-soft: #FFF0F0;
-  --peach-soft: #FFF3E8;
-  --lavender-soft: #F3EDFF;
-  --mint-soft: #E8FBF9;
-  --gold-soft: #FFF8EC;
-  --warn-soft: #FFF5EB;
-  --jade-soft: #EEFBF4;
-  --blue-soft: #EDF3FF;
-
-  /* --- City Accent (overridden per city via JS) --- */
-  --city-accent: #FF2442;
-  --city-accent-soft: #FFF0F2;
-
-  /* --- Hero Gradient (overridden per city) --- */
-  --hero-gradient: linear-gradient(135deg, #FF2442 0%, #FF6B8A 35%, #FF9A76 65%, #FFB88C 100%);
-  --hero-shadow: 0 8px 40px rgba(255,36,66,0.18);
-
-  /* --- Shadows --- */
-  --shadow-xs: 0 1px 3px rgba(0,0,0,0.04);
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
-  --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
-  --shadow-lg: 0 8px 40px rgba(0,0,0,0.10);
-  --shadow-accent: 0 4px 16px rgba(255,36,66,0.20);
-
-  /* --- Radii --- */
-  --radius-xs: 8px;
-  --radius-sm: 12px;
-  --radius-md: 16px;
-  --radius-lg: 20px;
-  --radius-xl: 24px;
-  --radius-pill: 999px;
-
-  /* --- Font Scale --- */
-  --fs-xs: 11px;
-  --fs-sm: 12px;
-  --fs-base: 14px;
-  --fs-md: 15px;
-  --fs-lg: 17px;
-  --fs-xl: 22px;
-  --fs-2xl: 30px;
-  --fs-3xl: 38px;
-
-  /* --- Timing --- */
-  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --duration-fast: 160ms;
-  --duration-base: 220ms;
-  --duration-slow: 300ms;
-
-  /* --- Layout --- */
-  --max-width: 1080px;
-  --content-font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+  --primary: #1565C0;
+  --primary-light: #42A5F5;
+  --primary-bg: #E3F2FD;
+  --accent: #FF7043;
+  --gold: #FFA726;
+  --green: #66BB6A;
+  --red: #EF5350;
+  --text: #263238;
+  --text-secondary: #546E7A;
+  --bg: #F5F7FA;
+  --card: #FFFFFF;
+  --border: #E0E0E0;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --radius: 16px;
 }
-
-/* ================================================================
-   Reset
-   ================================================================ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+* { margin: 0; padding: 0; box-sizing: border-box; }
 body {
-  font-family: var(--content-font);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
   background: var(--bg);
-  color: var(--ink);
-  line-height: 1.6;
-  font-size: var(--fs-base);
-  -webkit-font-smoothing: antialiased;
+  color: var(--text);
+  line-height: 1.7;
+  padding-bottom: 60px;
 }
-
-/* ================================================================
-   Container
-   ================================================================ */
-.container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 20px 16px 60px;
-}
-
-/* ================================================================
-   Hero — Gradient Cover
-   ================================================================ */
 .hero {
+  background: linear-gradient(135deg, #0D47A1 0%, #1565C0 40%, #42A5F5 100%);
+  color: white;
+  padding: 48px 20px 36px;
+  text-align: center;
   position: relative;
-  background: var(--hero-gradient);
-  border-radius: var(--radius-xl);
-  padding: 36px 32px;
-  color: #fff;
   overflow: hidden;
-  box-shadow: var(--hero-shadow);
-  margin-bottom: 14px;
 }
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.12) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 70%, rgba(255,255,255,0.06) 0%, transparent 50%);
-  pointer-events: none;
-}
-
 .hero::after {
-  content: "";
+  content: '';
   position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
-  background-size: 48px 48px;
-  opacity: 0.5;
-  pointer-events: none;
+  bottom: -40px;
+  left: -10%;
+  width: 120%;
+  height: 80px;
+  background: var(--bg);
+  border-radius: 50% 50% 0 0;
 }
-
-.hero-eyebrow {
-  display: inline-block;
-  background: rgba(255,255,255,0.20);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: 5px 14px;
-  border-radius: var(--radius-pill);
-  font-size: var(--fs-sm);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  margin-bottom: 12px;
-  position: relative;
-  z-index: 1;
+.hero h1 { font-size: 28px; font-weight: 700; letter-spacing: 1px; }
+.hero .subtitle { font-size: 14px; opacity: 0.85; margin-top: 8px; }
+.hero .tags {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+  margin-top: 16px;
 }
-
-.hero h1 {
-  font-size: var(--fs-3xl);
-  font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 8px;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.10);
-  position: relative;
-  z-index: 1;
+.hero .tags span {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(4px);
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 12px;
 }
-
-.hero .subtitle {
-  font-size: var(--fs-md);
-  opacity: 0.88;
-  position: relative;
-  z-index: 1;
+.container { max-width: 800px; margin: -10px auto 0; padding: 0 16px; position: relative; z-index: 1; }
+.alert {
+  background: #FFF8E1; border-left: 4px solid #FFA000; border-radius: 8px;
+  padding: 12px 16px; margin-bottom: 20px; font-size: 13px;
 }
-
-.hero-stats {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 20px;
-  position: relative;
-  z-index: 1;
-}
-
-.hero-stat-card {
-  background: rgba(255,255,255,0.18);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 10px 18px;
-  border-radius: var(--radius-md);
-  text-align: center;
-  transition: transform var(--duration-fast) var(--ease-out);
-}
-
-.hero-stat-card:hover { transform: translateY(-2px); }
-
-.hero-stat-card .num {
-  font-size: var(--fs-xl);
-  font-weight: 800;
-  display: block;
-}
-
-.hero-stat-card .label {
-  font-size: var(--fs-xs);
-  opacity: 0.80;
-}
-
-/* ================================================================
-   Season Alert
-   ================================================================ */
-.season-alert {
-  background: #FFF8EC;
-  border: 1px solid #F0E0C0;
-  border-radius: var(--radius-md);
-  padding: 14px 18px;
-  margin-bottom: 14px;
-  font-size: var(--fs-sm);
-  color: #8B6914;
-  line-height: 1.6;
-}
-
-.season-alert strong { color: #6B4F10; }
-
-/* ================================================================
-   Control Area
-   ================================================================ */
-.controls {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 14px;
-  margin-bottom: 14px;
-}
-
-.control-card {
-  background: var(--surface);
-  border-radius: var(--radius-md);
-  padding: 16px;
-  box-shadow: var(--shadow-xs);
-  border: 1px solid var(--line-light);
-}
-
-.control-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.control-card-title {
-  font-size: var(--fs-sm);
-  font-weight: 700;
-  color: var(--ink);
-}
-
-.control-card-hint {
-  font-size: var(--fs-xs);
-  color: var(--muted);
-}
-
-/* --- Group Selector (Pill Segmented) --- */
-.group-selector {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-}
-
-.group-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  border: none;
-  border-radius: var(--radius-pill);
-  background: var(--surface-soft);
-  font-size: var(--fs-sm);
-  font-weight: 600;
-  color: var(--muted);
-  cursor: pointer;
-  transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
-  position: relative;
-  overflow: hidden;
-  padding: 0 10px;
-}
-
-.group-btn::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, var(--accent), var(--coral));
-  border-radius: var(--radius-pill);
-  opacity: 0;
-  transition: opacity 250ms var(--ease-out);
-}
-
-.group-btn span { position: relative; z-index: 1; }
-
-.group-btn:active { transform: scale(0.96); }
-
-.group-btn.active {
-  color: #fff;
-  box-shadow: var(--shadow-accent);
-}
-
-.group-btn.active::before { opacity: 1; }
-
-/* --- Hotel Picker (Group Sheet) --- */
-.hotel-picker { position: relative; }
-
-.hotel-trigger {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  min-height: 44px;
-  border: none;
-  border-radius: var(--radius-sm);
-  background: var(--surface-soft);
-  padding: 0 14px;
-  font-size: var(--fs-sm);
-  font-weight: 500;
-  color: var(--ink);
-  cursor: pointer;
-  transition: background var(--duration-fast) var(--ease-out);
-}
-
-.hotel-trigger:active { transform: scale(0.97); }
-
-.hotel-trigger .hotel-name { font-weight: 700; }
-
-.hotel-trigger .hotel-switch {
-  background: var(--accent-soft);
-  color: var(--accent-dark);
-  font-size: var(--fs-xs);
-  padding: 3px 10px;
-  border-radius: var(--radius-pill);
-  font-weight: 600;
-}
-
-.hotel-trigger .arrow {
-  display: inline-block;
-  margin-left: 6px;
-  font-size: 10px;
-  color: var(--muted);
-  transition: transform var(--duration-fast) var(--ease-out);
-}
-
-.hotel-picker.open .hotel-trigger .arrow { transform: rotate(180deg); }
-
-.hotel-panel {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
-  right: 0;
-  background: var(--surface);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--line-light);
-  max-height: 340px;
-  overflow-y: auto;
-  padding: 12px;
-  z-index: 100;
-  opacity: 0;
-  transform: translateY(-8px);
-  pointer-events: none;
-  transition: opacity var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out);
-}
-
-.hotel-picker.open .hotel-panel {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.hotel-group-label {
-  font-size: var(--fs-xs);
-  font-weight: 600;
-  color: var(--muted);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding: 8px 4px 6px;
-}
-
-.hotel-group-options {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  padding-bottom: 8px;
-}
-
-.hotel-option {
-  padding: 10px 12px;
-  border: 1px solid var(--line-light);
-  border-radius: var(--radius-xs);
-  background: var(--surface);
-  font-size: var(--fs-sm);
-  color: var(--ink-secondary);
-  cursor: pointer;
-  text-align: left;
-  transition: background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
-}
-
-.hotel-option:active { transform: scale(0.97); }
-
-.hotel-option.active {
-  background: var(--accent-soft);
-  border-color: var(--accent);
-  color: var(--accent-dark);
-  font-weight: 600;
-}
-
-/* ================================================================
-   Day Tabs Card
-   ================================================================ */
-.day-tabs-card {
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-xs);
-  padding: 6px;
-  margin-bottom: 14px;
-  position: relative;
-}
-
-.day-tabs {
-  display: flex;
-  gap: 6px;
-  position: relative;
-}
-
-.day-tab {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 12px 8px 10px;
-  border: none;
-  border-radius: var(--radius-sm);
-  background: transparent;
-  font-size: var(--fs-sm);
-  font-weight: 600;
-  color: var(--muted);
-  cursor: pointer;
-  transition: background var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
-  position: relative;
-}
-
-.day-tab:active { transform: scale(0.97); }
-
-.day-tab.active {
-  background: var(--accent-soft);
-  color: var(--accent);
-}
-
-.day-tab-indicator {
-  position: absolute;
-  bottom: 0;
-  height: 3px;
-  border-radius: 3px;
-  background: linear-gradient(90deg, var(--accent), var(--coral));
-  transition: left var(--duration-base) var(--ease-spring), width var(--duration-base) var(--ease-spring);
-}
-
-.day-tab .badge {
-  display: inline-block;
-  margin-top: 4px;
-  font-size: var(--fs-xs);
-  font-weight: 600;
-  padding: 1px 8px;
-  border-radius: var(--radius-pill);
-  background: var(--surface-soft);
-  color: var(--muted);
-}
-
-.day-tab.active .badge {
-  background: var(--peach-soft);
-  color: var(--peach);
-}
-
-/* ================================================================
-   Day Panels
-   ================================================================ */
-.day-panel {
-  display: none;
-  opacity: 0;
-  transform: translateY(8px);
-}
-
-.day-panel.active {
-  display: block;
-  animation: xhsFadeIn var(--duration-slow) var(--ease-out) forwards;
-}
-
-@keyframes xhsFadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes xhsStaggerIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ================================================================
-   Cards (Xiaohongshu Card Flow)
-   ================================================================ */
-.card {
-  background: var(--surface);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-xs);
-  margin-bottom: 14px;
-  padding: 16px;
-  border: 1px solid var(--line-light);
-  animation: xhsStaggerIn var(--duration-slow) var(--ease-out) both;
-}
-
-/* ================================================================
-   Summary Card
-   ================================================================ */
-.summary-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 14px;
-}
-
-.summary-head-left {
-  font-size: var(--fs-sm);
-  color: var(--ink-secondary);
-}
-
-.summary-head-left strong { color: var(--ink); }
-
-.summary-divider {
-  height: 1px;
-  background: var(--line-light);
-  margin: 0 -16px 14px;
-}
-
-.summary-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: var(--line-light);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  margin-bottom: 14px;
-}
-
-.summary-item {
-  background: var(--surface);
-  text-align: center;
-  padding: 14px 8px;
-}
-
-.summary-item .value {
-  font-size: var(--fs-lg);
-  font-weight: 800;
-  color: var(--ink);
-}
-
-.summary-item .value.accent { color: var(--accent); }
-
-.summary-item .label {
-  font-size: var(--fs-xs);
-  color: var(--muted);
-  margin-top: 2px;
-}
-
-.summary-extra {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  font-size: var(--fs-sm);
-  color: var(--ink-secondary);
-}
-
-.summary-extra strong { color: var(--ink); }
-
-/* ================================================================
-   Energy Badge
-   ================================================================ */
-.energy-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px 12px;
-  border-radius: var(--radius-sm);
-  font-size: var(--fs-xs);
-  font-weight: 700;
-}
-
-.energy-badge.high {
-  background: var(--accent-soft);
-  color: var(--danger);
-  box-shadow: 0 2px 6px rgba(255,36,66,0.10);
-}
-
-.energy-badge.medium {
-  background: var(--gold-soft);
-  color: var(--warn);
-  box-shadow: 0 2px 6px rgba(240,160,48,0.10);
-}
-
-.energy-badge.low {
-  background: var(--jade-soft);
-  color: var(--jade);
-  box-shadow: 0 2px 6px rgba(46,204,113,0.10);
-}
-
-/* ================================================================
-   Alert Cards
-   ================================================================ */
-.alert-card {
-  margin-top: 14px;
-  padding: 12px 14px;
-  border-radius: var(--radius-xs);
-  font-size: var(--fs-sm);
-  line-height: 1.6;
-}
-
-.alert-card.info {
-  background: var(--blue-soft);
-  border-left: 3px solid var(--blue);
-  color: #1a4d8a;
-}
-
-.alert-card.warn {
-  background: var(--warn-soft);
-  border-left: 3px solid var(--warn);
-  color: #8B5E00;
-}
-
-.alert-card.danger {
-  background: var(--accent-soft);
-  border-left: 3px solid var(--accent);
-  color: var(--accent-dark);
-}
-
-.alert-card strong { font-weight: 700; }
-
-/* ================================================================
-   Route Map
-   ================================================================ */
-.route-map-card h3 {
-  font-size: var(--fs-md);
-  font-weight: 700;
-  margin-bottom: 14px;
-  color: var(--ink);
-}
-
-.route-map-card svg {
-  display: block;
-  width: 100%;
-  max-width: 480px;
-  margin: 0 auto;
-}
-
-/* ================================================================
-   Timeline
-   ================================================================ */
-.timeline-card h3 {
-  font-size: var(--fs-md);
-  font-weight: 700;
+.alert strong { color: #E65100; }
+.alert.info { background: var(--primary-bg); border-left-color: var(--primary); }
+.alert.info strong { color: var(--primary); }
+.alert.danger { background: #FFEBEE; border-left-color: var(--red); }
+.alert.danger strong { color: #C62828; }
+.section {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 20px;
   margin-bottom: 16px;
-  color: var(--ink);
+  box-shadow: var(--shadow);
 }
-
-.timeline-list {
-  position: relative;
-  padding-left: 56px;
+.section h2 {
+  font-size: 18px; font-weight: 700; color: var(--primary);
+  padding-bottom: 12px; margin-bottom: 12px;
+  border-bottom: 2px solid var(--primary-bg);
+  display: flex; align-items: center; gap: 8px;
 }
-
-/* Vertical connector line */
-.timeline-list::before {
-  content: "";
-  position: absolute;
-  left: 8px;
-  top: 0;
-  bottom: 20px;
-  width: 2px;
-  background: linear-gradient(to bottom, var(--line), var(--line-light), transparent);
+.section h3 {
+  font-size: 15px; font-weight: 600; color: var(--text);
+  margin: 16px 0 8px;
 }
-
+.section h3:first-of-type { margin-top: 0; }
+.overview-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.overview-table th {
+  background: var(--primary-bg); color: var(--primary); font-weight: 600;
+  padding: 8px 6px; text-align: left; font-size: 12px;
+}
+.overview-table td {
+  padding: 10px 6px; border-bottom: 1px solid #F0F0F0; vertical-align: top;
+}
+.overview-table tr:last-child td { border-bottom: none; }
+.day-badge {
+  display: inline-block; background: var(--primary); color: white;
+  width: 24px; height: 24px; line-height: 24px; text-align: center;
+  border-radius: 50%; font-size: 11px; font-weight: 700;
+}
+.day-card {
+  border-left: 4px solid var(--primary-light); padding-left: 16px;
+  margin-bottom: 24px; position: relative;
+}
+.day-card:last-child { margin-bottom: 0; }
+.day-card .day-header {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap;
+}
+.day-card .day-header h3 {
+  font-size: 16px; font-weight: 700; color: var(--primary); margin: 0;
+}
+.day-card .day-header .date {
+  font-size: 12px; color: var(--text-secondary); background: var(--primary-bg);
+  padding: 2px 10px; border-radius: 12px;
+}
+.day-card .day-header .theme {
+  font-size: 12px; background: #FFF3E0; color: #E65100;
+  padding: 2px 10px; border-radius: 12px;
+}
+.timeline { position: relative; padding-left: 24px; }
+.timeline::before {
+  content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px;
+  width: 2px; background: #E0E0E0;
+}
 .timeline-item {
-  position: relative;
-  padding-bottom: 16px;
-  animation: xhsStaggerIn var(--duration-slow) var(--ease-out) both;
+  position: relative; margin-bottom: 12px; padding-bottom: 4px;
 }
-
-.timeline-item:last-child { padding-bottom: 0; }
-
-/* Timeline Dot */
-.timeline-dot {
-  position: absolute;
-  left: -56px;
-  top: 2px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  border: 3px solid var(--surface);
-  z-index: 1;
+.timeline-item:last-child { margin-bottom: 0; }
+.timeline-item .dot {
+  position: absolute; left: -21px; top: 6px;
+  width: 14px; height: 14px; border-radius: 50%; border: 2px solid white;
+  box-shadow: 0 0 0 2px var(--primary-light);
+  background: var(--primary);
 }
-
-.timeline-dot::after {
-  content: "";
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  opacity: 0.25;
+.timeline-item .dot.transport { background: #78909C; box-shadow: 0 0 0 2px #B0BEC5; }
+.timeline-item .dot.food { background: var(--accent); box-shadow: 0 0 0 2px #FFAB91; }
+.timeline-item .dot.play { background: var(--green); box-shadow: 0 0 0 2px #A5D6A7; }
+.timeline-item .dot.hotel { background: var(--gold); box-shadow: 0 0 0 2px #FFE082; }
+.timeline-item .time {
+  font-size: 12px; font-weight: 700; color: var(--primary); display: inline-block;
+  min-width: 80px;
 }
-
-.timeline-dot.start {
-  background: linear-gradient(135deg, var(--mint), #3DD5C8);
+.timeline-item .content { font-size: 14px; margin-top: 2px; }
+.timeline-item .content .note {
+  font-size: 12px; color: var(--text-secondary); margin-top: 4px;
 }
-.timeline-dot.start::after { background: var(--mint); box-shadow: 0 0 8px var(--mint); }
-
-.timeline-dot.spot {
-  background: linear-gradient(135deg, var(--accent), var(--coral));
-}
-.timeline-dot.spot::after { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
-
-.timeline-dot.food {
-  background: linear-gradient(135deg, var(--gold), #F5B041);
-}
-.timeline-dot.food::after { background: var(--gold); box-shadow: 0 0 8px var(--gold); }
-
-.timeline-dot.transport {
-  background: linear-gradient(135deg, var(--lavender), #C49BFF);
-}
-.timeline-dot.transport::after { background: var(--lavender); box-shadow: 0 0 8px var(--lavender); }
-
-.timeline-dot.hotel {
-  background: linear-gradient(135deg, var(--jade), #58D68D);
-}
-.timeline-dot.hotel::after { background: var(--jade); box-shadow: 0 0 8px var(--jade); }
-
-/* Time column */
-.timeline-time {
-  font-size: var(--fs-xs);
-  color: var(--muted);
-  font-family: "SF Mono", "Menlo", "Consolas", monospace;
-  margin-bottom: 2px;
-}
-
-/* Content card */
-.timeline-content {
-  background: var(--surface);
-  border-radius: var(--radius-sm);
-  padding: 12px 14px;
-  box-shadow: var(--shadow-xs);
-  border: 1px solid var(--line-light);
-  transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
-}
-
-.timeline-title {
-  font-size: var(--fs-base);
-  font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 2px;
-}
-
-.timeline-desc {
-  font-size: var(--fs-sm);
-  color: var(--ink-secondary);
-  margin-bottom: 6px;
-  line-height: 1.5;
-}
-
-/* ================================================================
-   Tags
-   ================================================================ */
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin-top: 6px;
-}
-
-.tag {
-  display: inline-flex;
-  align-items: center;
-  min-height: 22px;
-  padding: 2px 10px;
-  border-radius: var(--radius-pill);
-  font-size: var(--fs-xs);
-  font-weight: 600;
-}
-
-.tag-play { background: var(--mint-soft); color: #1A9A8F; }
-.tag-price { background: var(--gold-soft); color: #B07A18; }
-.tag-queue { background: var(--warn-soft); color: #A85D0A; }
-.tag-booking { background: var(--accent-soft); color: var(--accent-dark); }
-.tag-info { background: var(--lavender-soft); color: #7C4DDB; }
-.tag-free { background: var(--jade-soft); color: var(--jade); }
-.tag-warn { background: var(--warn-soft); color: #A85D0A; }
-
-/* Grade tags */
-.tag-s { background: var(--accent-soft); color: var(--accent-dark); }
-.tag-a { background: var(--peach-soft); color: #C06800; }
-.tag-b { background: var(--blue-soft); color: #3A6BC5; }
-.tag-c { background: var(--lavender-soft); color: #7C4DDB; }
-
-/* ================================================================
-   Food Card
-   ================================================================ */
-.food-section h3 {
-  font-size: var(--fs-md);
-  font-weight: 700;
-  margin-bottom: 14px;
-  color: var(--ink);
-}
-
-.food-item {
-  padding: 14px;
-  border: 1px solid var(--line-light);
-  border-radius: var(--radius-sm);
-  background: var(--surface);
-  margin-bottom: 10px;
-  position: relative;
-  transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
-}
-
-.food-item::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: var(--gold);
-  border-radius: 3px 0 0 3px;
-  opacity: 0;
-  transition: opacity var(--duration-fast) var(--ease-out);
-}
-
-.food-item:hover::before { opacity: 1; }
-
-.food-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 4px;
-}
-
-.food-name {
-  font-size: var(--fs-base);
-  font-weight: 700;
-  color: var(--ink);
-}
-
-.food-price {
-  font-size: var(--fs-sm);
-  font-weight: 700;
-  color: var(--gold);
-  white-space: nowrap;
-}
-
-.food-meta {
-  font-size: var(--fs-xs);
-  color: var(--muted);
-  margin-bottom: 4px;
-}
-
-.food-reason {
-  font-size: var(--fs-sm);
-  color: var(--ink-secondary);
-  font-style: italic;
-}
-
-.food-dish {
+.timeline-item .content .tip {
+  font-size: 12px; background: #FFF8E1; color: #E65100;
+  padding: 6px 10px; border-radius: 6px; margin-top: 4px;
   display: inline-block;
-  margin-top: 8px;
-  padding: 3px 10px;
-  background: var(--gold-soft);
-  border-radius: var(--radius-pill);
-  font-size: var(--fs-xs);
-  font-weight: 600;
-  color: #8B6914;
 }
-
-/* ================================================================
-   Two-Column Layout (Desktop)
-   ================================================================ */
-.main-layout {
-  display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: 18px;
-  align-items: start;
+.info-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.info-table th {
+  background: var(--primary-bg); color: var(--primary); font-weight: 600;
+  padding: 8px 10px; text-align: left; font-size: 12px;
 }
-
-.sidebar {
-  position: sticky;
-  top: 18px;
+.info-table td {
+  padding: 8px 10px; border-bottom: 1px solid #F0F0F0;
 }
-
-.sidebar-card {
-  background: var(--surface);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-xs);
-  border: 1px solid var(--line-light);
-  padding: 16px;
-  margin-bottom: 14px;
+.info-table tr:last-child td { border-bottom: none; }
+.stars { color: var(--gold); letter-spacing: 1px; }
+.tag {
+  display: inline-block; font-size: 11px; padding: 2px 8px;
+  border-radius: 10px; margin-right: 4px;
 }
-
-.sidebar-card h3 {
-  font-size: var(--fs-md);
-  font-weight: 700;
-  margin-bottom: 12px;
-  color: var(--ink);
+.tag.green { background: #E8F5E9; color: #2E7D32; }
+.tag.orange { background: #FFF3E0; color: #E65100; }
+.tag.red { background: #FFEBEE; color: #C62828; }
+.tag.blue { background: var(--primary-bg); color: var(--primary); }
+.budget-total {
+  background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+  border-radius: 12px; padding: 16px; text-align: center; margin-top: 12px;
 }
-
-.action-card {
-  background: var(--surface-soft);
-  border-radius: var(--radius-sm);
-  padding: 14px;
-  margin-bottom: 10px;
-  border: 1px solid var(--line-light);
-  transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+.budget-total .amount { font-size: 28px; font-weight: 800; color: #2E7D32; }
+.budget-total .label { font-size: 12px; color: #558B2F; }
+.checklist { list-style: none; padding: 0; }
+.checklist li {
+  padding: 6px 0 6px 28px; position: relative; font-size: 13px;
+  border-bottom: 1px solid #F5F5F5;
 }
-
-.action-card .action-title {
-  font-size: var(--fs-sm);
-  font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 4px;
+.checklist li:last-child { border-bottom: none; }
+.checklist li::before {
+  content: '☐'; position: absolute; left: 0; top: 6px;
+  font-size: 16px; color: var(--primary);
 }
-
-.action-card .action-desc {
-  font-size: var(--fs-xs);
-  color: var(--muted);
-  line-height: 1.5;
+.checklist li .prio {
+  font-size: 10px; padding: 1px 6px; border-radius: 8px; margin-left: 6px;
 }
-
-.action-card .action-channel {
-  font-size: var(--fs-xs);
-  color: var(--faint);
-  margin-top: 4px;
+.checklist li .prio.must { background: var(--red); color: white; }
+.checklist li .prio.suggest { background: var(--gold); color: white; }
+.checklist li .prio.optional { background: #BDBDBD; color: white; }
+.food-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
 }
-
-/* ================================================================
-   Footer
-   ================================================================ */
+.food-item {
+  background: #FAFAFA; border-radius: 10px; padding: 12px;
+  border: 1px solid #F0F0F0;
+}
+.food-item .name { font-weight: 600; font-size: 14px; }
+.food-item .price { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+.food-item .who { font-size: 11px; margin-top: 4px; }
+.risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.risk-item {
+  padding: 10px 12px; border-radius: 10px; font-size: 12px;
+}
+.risk-item.danger { background: #FFEBEE; }
+.risk-item.warn { background: #FFF8E1; }
+.risk-item.info { background: var(--primary-bg); }
+.risk-item .r-icon { font-size: 16px; display: block; margin-bottom: 4px; }
 .footer {
-  background: var(--surface);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--line-light);
-  padding: 16px 20px;
-  text-align: center;
-  color: var(--faint);
-  font-size: var(--fs-xs);
-  line-height: 1.6;
-  margin-top: 24px;
+  text-align: center; padding: 32px 20px; font-size: 12px; color: var(--text-secondary);
 }
-
-/* ================================================================
-   Desktop Hover (only on pointer devices)
-   ================================================================ */
-@media (hover: hover) and (pointer: fine) {
-  .group-btn:not(.active):hover {
-    background: var(--surface-hover);
-    color: var(--accent);
-  }
-
-  .timeline-content:hover {
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .food-item:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-sm);
-    border-color: var(--gold);
-  }
-
-  .card:hover {
-    box-shadow: var(--shadow-sm);
-  }
-
-  .hotel-option:not(.active):hover {
-    background: var(--surface-soft);
-    border-color: var(--muted);
-  }
-
-  .action-card:hover {
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-sm);
-  }
-}
-
-/* ================================================================
-   Active press feedback for ALL buttons
-   ================================================================ */
-button:active, .hotel-trigger:active, .day-tab:active, .hotel-option:active {
-  transform: scale(0.97);
-  transition-duration: 160ms;
-  transition-timing-function: var(--ease-out);
-}
-
-/* ================================================================
-   Responsive — Tablet (<=920px)
-   ================================================================ */
-@media (max-width: 920px) {
-  .controls { grid-template-columns: 1fr; }
-  .main-layout { grid-template-columns: 1fr; }
-  .sidebar { position: static; }
-}
-
-/* ================================================================
-   Responsive — Mobile (<=768px)
-   ================================================================ */
-@media (max-width: 768px) {
-  .container { max-width: 640px; }
-  .hero { padding: 28px 22px; }
-  .hero h1 { font-size: var(--fs-2xl); }
-  .group-selector { grid-template-columns: repeat(2, 1fr); }
-  .summary-grid { grid-template-columns: repeat(2, 1fr); }
-  .timeline-list { padding-left: 44px; }
-}
-
-/* ================================================================
-   Responsive — Small Mobile (<=480px)
-   ================================================================ */
 @media (max-width: 480px) {
-  .hero { padding: 22px 18px; border-radius: var(--radius-lg); }
-  .hero h1 { font-size: var(--fs-xl); }
-  .hero-stats { gap: 10px; }
-  .hero-stat-card { padding: 8px 12px; }
-  .hero-stat-card .num { font-size: var(--fs-lg); }
-  .summary-head { flex-direction: column; align-items: flex-start; }
-  .day-tab { padding: 10px 6px 8px; font-size: var(--fs-xs); }
-  .hotel-group-options { grid-template-columns: 1fr; }
-  .hotel-panel { max-height: 260px; }
-  .container { padding: 0 12px 40px; }
+  .hero h1 { font-size: 22px; }
+  .food-grid { grid-template-columns: 1fr; }
+  .risk-grid { grid-template-columns: 1fr; }
 }
-
-/* ================================================================
-   Reduced Motion
-   ================================================================ */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-  }
+@media print {
+  .hero { background: #1565C0 !important; -webkit-print-color-adjust: exact; }
+  .section { break-inside: avoid; }
 }
 </style>
 </head>
 <body>
+<div class="hero">
+  <h1>🌊 青岛 + 威海</h1>
+  <div class="subtitle">8日亲子自驾游 · 完整方案</div>
+  <div class="tags">
+    <span>👨‍👩‍👦 一家三口</span>
+    <span>📅 8/1 — 8/8</span>
+    <span>🚗 全程自驾</span>
+    <span>💰 舒适型</span>
+    <span>🏖️ 不游泳·沙滩玩</span>
+  </div>
+</div>
+
 <div class="container">
 
-  <!-- ========== HERO ========== -->
-  <div class="hero" id="heroSection">
-    <div class="hero-eyebrow" id="heroEyebrow"></div>
-    <h1 id="heroTitle"></h1>
-    <p class="subtitle" id="heroSubtitle"></p>
-    <div class="hero-stats" id="heroStats"></div>
-  </div>
-
-  <!-- ========== SEASON ALERT ========== -->
-  <div class="season-alert" id="seasonAlert">
-  <strong>☀️ 上海出发 亲子8日游</strong>：8月1日(周六)→8月8日(周六)。去程推荐上海→青岛高铁D2146（08:41-13:36，¥316）或D2152/2906。青岛→威海动车约2h（¥93起）。返程推荐威海→上海飞机（约1.5h，暑期¥400-800）或高铁D2154（15:02-22:33，¥446）。崂山提前7天预约，刘公岛提前3-5天预约！
+<div class="alert danger">
+  <strong>⚠️ 重要预约提醒</strong><br>
+  🚢 <strong>刘公岛</strong>船票提前3天购票 · 🏔️ <strong>崂山</strong>提前1-2天预约 · 🛫 <strong>返程订下午航班</strong>
 </div>
 
-  <!-- ========== CONTROLS ========== -->
-  <div class="controls">
-    <!-- Group Selector -->
-    <div class="control-card">
-      <div class="control-card-header">
-        <span class="control-card-title">出行风格</span>
-        <span class="control-card-hint">切换路线方案</span>
-      </div>
-      <div class="group-selector" id="groupSelector">
-        <button class="group-btn active" data-group="family"><span>家庭亲子</span></button>
-        <button class="group-btn" data-group="photo"><span>拍照打卡</span></button>
-        <button class="group-btn" data-group="explore"><span>文化探索</span></button>
-        <button class="group-btn" data-group="soldier"><span>特种兵</span></button>
-      </div>
-    </div>
-    <!-- Hotel Picker -->
-    <div class="control-card">
-      <div class="control-card-header">
-        <span class="control-card-title">住宿片区</span>
-        <span class="control-card-hint">影响出发时间与通勤</span>
-      </div>
-      <div class="hotel-picker" id="hotelPicker">
-        <button class="hotel-trigger" type="button" id="hotelTrigger">
-          <span class="hotel-name" id="hotelName">--</span>
-          <span>
-            <span class="hotel-switch">切换片区</span>
-            <span class="arrow">&#9660;</span>
-          </span>
-        </button>
-        <div class="hotel-panel" id="hotelPanel"></div>
-      </div>
-    </div>
+<div class="section">
+  <h2>📋 行程总览</h2>
+  <div style="overflow-x:auto;">
+  <table class="overview-table">
+    <thead><tr><th>天</th><th>日期</th><th>城市</th><th>主题</th><th>⭐ 亮点</th></tr></thead>
+    <tbody>
+      <tr><td><span class="day-badge">1</span></td><td>8/1 六</td><td>威海</td><td>抵达·初探</td><td>✈️取车 → 🍢韩乐坊夜市</td></tr>
+      <tr><td><span class="day-badge">2</span></td><td>8/2 日</td><td>威海</td><td>海岛历史</td><td>🚢刘公岛+🐼熊猫 → 🏖️国际海水浴场</td></tr>
+      <tr><td><span class="day-badge">3</span></td><td>8/3 一</td><td>荣成</td><td>东端海岸</td><td>🏔️成山头🚡 → 🏖️那香海钻石沙滩⭐</td></tr>
+      <tr><td><span class="day-badge">4</span></td><td>8/4 二</td><td>→青岛</td><td>网红+转场</td><td>📸火炬八街 → 🚗沿海自驾养马岛</td></tr>
+      <tr><td><span class="day-badge">5</span></td><td>8/5 三</td><td>青岛</td><td>老城漫步</td><td>🗼栈桥→🏔️信号山→📸大学路→🍢台东</td></tr>
+      <tr><td><span class="day-badge">6</span></td><td>8/6 四</td><td>青岛</td><td>万国+夜景</td><td>🏛️八大关→⛵奥帆→🌃灯光秀</td></tr>
+      <tr><td><span class="day-badge">7</span></td><td>8/7 五</td><td>青岛</td><td>山海奇观</td><td>🏔️崂山太清线（大巴+索道，轻松不累）</td></tr>
+      <tr><td><span class="day-badge">8</span></td><td>8/8 六</td><td>青岛</td><td>海洋+返程</td><td>🏖️石老人→🐬极地海洋世界→✈️回上海</td></tr>
+    </tbody>
+  </table>
   </div>
-
-  <!-- ========== MAIN LAYOUT ========== -->
-  <div class="main-layout">
-    <div class="main-content">
-
-      <!-- Day Tabs Card -->
-      <div class="day-tabs-card">
-        <div class="day-tabs" id="dayTabs">
-          <button class="day-tab active" data-day="0">Day 1<span class="badge">--</span></button>
-        </div>
-        <div class="day-tab-indicator" id="dayTabIndicator"></div>
-      </div>
-
-      <!-- Day Panels (rendered by JS) -->
-      <div class="day-panel active" id="panel0" data-day="0"></div>
-    </div>
-
-    <!-- Sidebar (Desktop) -->
-    <div class="sidebar" id="sidebar">
-      <div class="sidebar-card">
-        <h3>准备清单</h3>
-        <div id="checklistContent">
-          <p style="font-size:var(--fs-sm);color:var(--muted);text-align:center;padding:20px 0;">选择风格和日期后显示</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ========== FOOTER ========== -->
-  <div class="footer">
-    以上行程仅供参考，实际出行请以景区官方公告为准。景点开放时间、票价和预约政策可能随时调整，建议出发前再次确认。
-  </div>
-
 </div>
 
-<script>
-/* ================================================================
-   DATA INJECTION SLOTS
-   render.js replaces SLOT placeholders (format: {{SLOT_NAME}}) with JS data.
-   ================================================================ */
-
-const METADATA = {
-  "city": "青岛+威海",
-  "days": 8,
-  "subtitle": "两城联游 · 家庭亲子 · 不赶路慢慢玩",
-  "stats": {
-    "days": 8,
-    "spots": 13,
-    "groups": 4,
-    "hotels": 4
-  },
-  "heroGradient": "linear-gradient(135deg, #1565C0 0%, #1E88E5 30%, #42A5F5 60%, #80DEEA 100%)"
-};
-
-// Season alert injected into HTML above
-
-const GROUP_CONFIG = {
-  "family": {
-    "label": "家庭亲子",
-    "lunchMin": 60,
-    "queueMul": 1,
-    "playMul": 1,
-    "restMin": 15
-  },
-  "photo": {
-    "label": "拍照打卡",
-    "lunchMin": 30,
-    "queueMul": 1,
-    "playMul": 1.3,
-    "restMin": 5
-  },
-  "explore": {
-    "label": "文化探索",
-    "lunchMin": 45,
-    "queueMul": 1,
-    "playMul": 1,
-    "restMin": 10
-  },
-  "soldier": {
-    "label": "特种兵",
-    "lunchMin": 20,
-    "queueMul": 0.8,
-    "playMul": 0.7,
-    "restMin": 0
-  }
-};
-
-const SPOTS = {
-  "zhanqiao": {
-    "name": "栈桥",
-    "n": "栈桥",
-    "price": 0,
-    "p": 0,
-    "play": 60,
-    "pl": 60,
-    "basePlay": 60,
-    "queue": 15,
-    "q": 15,
-    "level": "A",
-    "L": "A",
-    "mustSee": true,
-    "popularityScore": 95,
-    "signatureRank": 1,
-    "queueNote": "暑期游客较多，建议上午前往",
-    "qn": "暑期游客较多，建议上午前往",
-    "priceNote": "免费开放",
-    "earlyNote": "全天开放，清晨人少体验更好",
-    "en": "全天开放，清晨人少体验更好",
-    "walkKm": 1,
-    "w": 1,
-    "playTiers": {
-      "essence": 30,
-      "standard": 60,
-      "deep": 90
-    },
-    "closingTime": null,
-    "areaKey": "shinan"
-  },
-  "badaguan": {
-    "name": "八大关",
-    "n": "八大关",
-    "price": 0,
-    "p": 0,
-    "play": 120,
-    "pl": 120,
-    "basePlay": 120,
-    "queue": 0,
-    "q": 0,
-    "level": "A",
-    "L": "A",
-    "mustSee": true,
-    "popularityScore": 92,
-    "signatureRank": 2,
-    "queueNote": "开放式景区，无需排队",
-    "qn": "开放式景区，无需排队",
-    "priceNote": "免费，花石楼/公主楼通票50元",
-    "earlyNote": "建议租自行车游览，花石楼17:00停止入场",
-    "en": "建议租自行车游览，花石楼17:00停止入场",
-    "walkKm": 3,
-    "w": 3,
-    "playTiers": {
-      "essence": 60,
-      "standard": 120,
-      "deep": 180
-    },
-    "closingTime": null,
-    "areaKey": "shinan"
-  },
-  "hddworld": {
-    "name": "青岛海底世界",
-    "n": "青岛海底世界",
-    "price": 139,
-    "p": 139,
-    "play": 150,
-    "pl": 150,
-    "basePlay": 150,
-    "queue": 30,
-    "q": 30,
-    "level": "S",
-    "L": "S",
-    "mustSee": true,
-    "popularityScore": 93,
-    "signatureRank": 3,
-    "queueNote": "暑期旺季排队约30-45分钟",
-    "qn": "暑期旺季排队约30-45分钟",
-    "priceNote": "成人¥139起，儿童半价",
-    "earlyNote": "建议8:30开门即到，避开旅行团高峰",
-    "en": "建议8:30开门即到，避开旅行团高峰",
-    "walkKm": 2,
-    "w": 2,
-    "playTiers": {
-      "essence": 90,
-      "standard": 150,
-      "deep": 180
-    },
-    "closingTime": {
-      "h": 16,
-      "m": 30
-    },
-    "booking": {
-      "required": true,
-      "r": true,
-      "note": "建议提前1-2天网上购票",
-      "items": "携程/美团/官方公众号"
-    },
-    "areaKey": "shinan"
-  },
-  "jidi": {
-    "name": "青岛极地海洋公园",
-    "n": "青岛极地海洋公园",
-    "price": 239,
-    "p": 239,
-    "play": 180,
-    "pl": 180,
-    "basePlay": 180,
-    "queue": 30,
-    "q": 30,
-    "level": "S",
-    "L": "S",
-    "mustSee": false,
-    "popularityScore": 88,
-    "signatureRank": 4,
-    "queueNote": "暑期需排队入场，建议网上提前购票",
-    "qn": "暑期需排队入场，建议网上提前购票",
-    "priceNote": "通票¥239起（含球幕影院+冰雪馆）",
-    "earlyNote": "开门08:30，表演集中在10:00-15:00，亲子必去",
-    "en": "开门08:30，表演集中在10:00-15:00，亲子必去",
-    "walkKm": 3,
-    "w": 3,
-    "playTiers": {
-      "essence": 120,
-      "standard": 180,
-      "deep": 240
-    },
-    "closingTime": {
-      "h": 17,
-      "m": 0
-    },
-    "booking": {
-      "required": true,
-      "r": true,
-      "note": "建议提前1天购票",
-      "items": "携程/美团/官方公众号"
-    },
-    "areaKey": "laoshan"
-  },
-  "laoshan": {
-    "name": "崂山风景区",
-    "n": "崂山风景区",
-    "price": 150,
-    "p": 150,
-    "play": 300,
-    "pl": 300,
-    "basePlay": 300,
-    "queue": 20,
-    "q": 20,
-    "level": "S",
-    "L": "S",
-    "mustSee": true,
-    "popularityScore": 95,
-    "signatureRank": 5,
-    "queueNote": "旺季需预约，早到避免排队",
-    "qn": "旺季需预约，早到避免排队",
-    "priceNote": "南线联票¥150（含观光车）",
-    "earlyNote": "必须提前预约！7-8月营业时间6:00-19:00",
-    "en": "必须提前预约！7-8月营业时间6:00-19:00",
-    "walkKm": 5,
-    "w": 5,
-    "playTiers": {
-      "essence": 180,
-      "standard": 300,
-      "deep": 360
-    },
-    "closingTime": {
-      "h": 19,
-      "m": 0
-    },
-    "booking": {
-      "required": true,
-      "r": true,
-      "note": "提前7天开放预约，公众号'崂山风景区'",
-      "items": "崂山风景区公众号/携程/美团"
-    },
-    "areaKey": "laoshan"
-  },
-  "xiaomaidao": {
-    "name": "小麦岛公园",
-    "n": "小麦岛公园",
-    "price": 0,
-    "p": 0,
-    "play": 90,
-    "pl": 90,
-    "basePlay": 90,
-    "queue": 0,
-    "q": 0,
-    "level": "A",
-    "L": "A",
-    "mustSee": true,
-    "popularityScore": 88,
-    "signatureRank": 6,
-    "queueNote": "免费开放式公园，无需排队",
-    "qn": "免费开放式公园，无需排队",
-    "priceNote": "免费，傍晚看日落绝美",
-    "earlyNote": "傍晚看日落最佳，拍照出片胜地",
-    "en": "傍晚看日落最佳，拍照出片胜地",
-    "walkKm": 2,
-    "w": 2,
-    "playTiers": {
-      "essence": 45,
-      "standard": 90,
-      "deep": 120
-    },
-    "closingTime": null,
-    "areaKey": "laoshan"
-  },
-  "xinhaoshan": {
-    "name": "信号山公园",
-    "n": "信号山公园",
-    "price": 10,
-    "p": 10,
-    "play": 60,
-    "pl": 60,
-    "basePlay": 60,
-    "queue": 5,
-    "q": 5,
-    "level": "B",
-    "L": "B",
-    "mustSee": false,
-    "popularityScore": 78,
-    "signatureRank": 7,
-    "queueNote": "基本无需排队",
-    "qn": "基本无需排队",
-    "priceNote": "门票¥10，旋转观景楼另收费",
-    "earlyNote": "登顶俯瞰青岛老城全景，4-10月开放至20:30",
-    "en": "登顶俯瞰青岛老城全景",
-    "walkKm": 0.8,
-    "w": 0.8,
-    "playTiers": {
-      "essence": 30,
-      "standard": 60,
-      "deep": 90
-    },
-    "closingTime": {
-      "h": 20,
-      "m": 30
-    },
-    "areaKey": "shinan"
-  },
-  "liugongdao": {
-    "name": "刘公岛",
-    "n": "刘公岛",
-    "price": 122,
-    "p": 122,
-    "play": 300,
-    "pl": 300,
-    "basePlay": 300,
-    "queue": 40,
-    "q": 40,
-    "level": "S",
-    "L": "S",
-    "mustSee": true,
-    "popularityScore": 94,
-    "signatureRank": 9,
-    "queueNote": "暑期排队登船需1-2小时，建议早船",
-    "qn": "暑期排队登船需1-2小时，建议早船",
-    "priceNote": "成人¥122（含往返船票），儿童15元",
-    "earlyNote": "必须提前预约！首班船7:10，建议7:30前到码头",
-    "en": "必须提前预约！首班船7:10，建议7:30前到码头",
-    "walkKm": 4,
-    "w": 4,
-    "playTiers": {
-      "essence": 180,
-      "standard": 300,
-      "deep": 360
-    },
-    "closingTime": null,
-    "booking": {
-      "required": true,
-      "r": true,
-      "note": "提前3-5天预约，'爱来刘公岛'公众号",
-      "items": "爱来刘公岛公众号/携程/美团"
-    },
-    "areaKey": "weihai"
-  },
-  "chengshantou": {
-    "name": "成山头",
-    "n": "成山头",
-    "price": 148,
-    "p": 148,
-    "play": 180,
-    "pl": 180,
-    "basePlay": 180,
-    "queue": 15,
-    "q": 15,
-    "level": "A",
-    "L": "A",
-    "mustSee": true,
-    "popularityScore": 88,
-    "signatureRank": 10,
-    "queueNote": "排队情况较少",
-    "qn": "排队情况较少",
-    "priceNote": "成人¥148，儿童半价",
-    "earlyNote": "开放时间07:30-18:00，中国海岸最东端",
-    "en": "中国海岸最东端，海景壮阔",
-    "walkKm": 3.5,
-    "w": 3.5,
-    "playTiers": {
-      "essence": 90,
-      "standard": 180,
-      "deep": 240
-    },
-    "closingTime": {
-      "h": 18,
-      "m": 0
-    },
-    "areaKey": "weihai"
-  },
-  "naxianghai": {
-    "name": "那香海",
-    "n": "那香海",
-    "price": 0,
-    "p": 0,
-    "play": 180,
-    "pl": 180,
-    "basePlay": 180,
-    "queue": 0,
-    "q": 0,
-    "level": "A",
-    "L": "A",
-    "mustSee": true,
-    "popularityScore": 85,
-    "signatureRank": 11,
-    "queueNote": "免费开放式度假区",
-    "qn": "免费开放式度假区",
-    "priceNote": "免费，温泉等项目另收费",
-    "earlyNote": "适合亲子挖沙、游泳，有儿童乐园",
-    "en": "适合亲子挖沙、游泳，有儿童乐园",
-    "walkKm": 2,
-    "w": 2,
-    "playTiers": {
-      "essence": 90,
-      "standard": 180,
-      "deep": 240
-    },
-    "closingTime": null,
-    "areaKey": "weihai"
-  },
-  "weihai_beach": {
-    "name": "威海国际海水浴场",
-    "n": "威海国际海水浴场",
-    "price": 0,
-    "p": 0,
-    "play": 180,
-    "pl": 180,
-    "basePlay": 180,
-    "queue": 0,
-    "q": 0,
-    "level": "B",
-    "L": "B",
-    "mustSee": true,
-    "popularityScore": 85,
-    "signatureRank": 12,
-    "queueNote": "免费浴场",
-    "qn": "免费浴场",
-    "priceNote": "免费开放",
-    "earlyNote": "7-9月泳区开放9:00-18:00，沙质细腻",
-    "en": "7-9月泳区开放9:00-18:00，沙质细腻",
-    "walkKm": 1,
-    "w": 1,
-    "playTiers": {
-      "essence": 90,
-      "standard": 180,
-      "deep": 240
-    },
-    "closingTime": null,
-    "areaKey": "weihai"
-  },
-  "xingfumen": {
-    "name": "幸福门广场",
-    "n": "幸福门广场",
-    "price": 0,
-    "p": 0,
-    "play": 45,
-    "pl": 45,
-    "basePlay": 45,
-    "queue": 0,
-    "q": 0,
-    "level": "B",
-    "L": "B",
-    "mustSee": false,
-    "popularityScore": 72,
-    "signatureRank": 13,
-    "queueNote": "免费开放",
-    "qn": "免费开放",
-    "priceNote": "广场免费，登顶¥50",
-    "earlyNote": "威海标志性建筑，适合拍照打卡",
-    "en": "威海标志性建筑，适合拍照打卡",
-    "walkKm": 0.5,
-    "w": 0.5,
-    "playTiers": {
-      "essence": 20,
-      "standard": 45,
-      "deep": 60
-    },
-    "closingTime": {
-      "h": 19,
-      "m": 0
-    },
-    "areaKey": "weihai"
-  }
-};
-
-const HOTELS = {
-  "qingdao_zhongshanlu": {
-    "name": "青岛中山路/栈桥片区",
-    "n": "青岛中山路/栈桥片区",
-    "dist": 0,
-    "cost": 0,
-    "commute": {
-      "zhanqiao": 5,
-      "badaguan": 15,
-      "hddworld": 10,
-      "xinhaoshan": 10,
-      "xiaomaidao": 20,
-      "laoshan": 60,
-      "jidi": 25
-    },
-    "group": "青岛住宿"
-  },
-  "qingdao_wusi": {
-    "name": "青岛五四广场/奥帆中心",
-    "n": "青岛五四广场/奥帆中心",
-    "dist": 0,
-    "cost": 0,
-    "commute": {
-      "zhanqiao": 15,
-      "badaguan": 10,
-      "hddworld": 12,
-      "xinhaoshan": 18,
-      "xiaomaidao": 10,
-      "laoshan": 50,
-      "jidi": 15
-    },
-    "group": "青岛住宿"
-  },
-  "weihai_huanculi": {
-    "name": "威海环翠区/市中心",
-    "n": "威海环翠区/市中心",
-    "dist": 0,
-    "cost": 0,
-    "commute": {
-      "liugongdao": 15,
-      "xingfumen": 5,
-      "weihai_beach": 20,
-      "naxianghai": 40,
-      "chengshantou": 60
-    },
-    "group": "威海住宿"
-  },
-  "weihai_naxianghai": {
-    "name": "威海那香海度假区",
-    "n": "威海那香海度假区",
-    "dist": 0,
-    "cost": 0,
-    "commute": {
-      "liugongdao": 50,
-      "xingfumen": 40,
-      "weihai_beach": 35,
-      "naxianghai": 5,
-      "chengshantou": 20
-    },
-    "group": "威海住宿"
-  }
-};
-
-const DISTANCES = {
-  "zhanqiao-badaguan": {
-    "dist": 3,
-    "time": 15
-  },
-  "badaguan-zhanqiao": {
-    "dist": 3,
-    "time": 15
-  },
-  "badaguan-hddworld": {
-    "dist": 2,
-    "time": 12
-  },
-  "hddworld-badaguan": {
-    "dist": 2,
-    "time": 12
-  },
-  "hddworld-xiaomaidao": {
-    "dist": 8,
-    "time": 25
-  },
-  "xiaomaidao-hddworld": {
-    "dist": 8,
-    "time": 25
-  },
-  "zhanqiao-xinhaoshan": {
-    "dist": 2,
-    "time": 10
-  },
-  "xinhaoshan-zhanqiao": {
-    "dist": 2,
-    "time": 10
-  },
-  "zhanqiao-hddworld": {
-    "dist": 1,
-    "time": 8
-  },
-  "hddworld-zhanqiao": {
-    "dist": 1,
-    "time": 8
-  },
-  "xiaomaidao-jidi": {
-    "dist": 3,
-    "time": 10
-  },
-  "jidi-xiaomaidao": {
-    "dist": 3,
-    "time": 10
-  },
-  "xiaomaidao-laoshan": {
-    "dist": 20,
-    "time": 40
-  },
-  "laoshan-xiaomaidao": {
-    "dist": 20,
-    "time": 40
-  },
-  "weihai_beach-liugongdao": {
-    "dist": 10,
-    "time": 25
-  },
-  "liugongdao-weihai_beach": {
-    "dist": 10,
-    "time": 25
-  },
-  "xingfumen-liugongdao": {
-    "dist": 5,
-    "time": 15
-  },
-  "liugongdao-xingfumen": {
-    "dist": 5,
-    "time": 15
-  },
-  "naxianghai-chengshantou": {
-    "dist": 15,
-    "time": 20
-  },
-  "chengshantou-naxianghai": {
-    "dist": 15,
-    "time": 20
-  }
-};
-
-const ROUTES = {
-  "family": [
-    {
-      "spots": [
-        "zhanqiao",
-        "xinhaoshan"
-      ],
-      "sp": [
-        "zhanqiao",
-        "xinhaoshan"
-      ],
-      "foodDay": "day1",
-      "fd": "day1",
-      "note": "抵达青岛，下午游览栈桥吹海风，傍晚登信号山俯瞰老城红瓦绿树",
-      "remote": false,
-      "startTime": 540,
-      "st": 540
-    },
-    {
-      "spots": [
-        "badaguan",
-        "hddworld"
-      ],
-      "sp": [
-        "badaguan",
-        "hddworld"
-      ],
-      "foodDay": "day2",
-      "fd": "day2",
-      "note": "上午八大关漫步+第二海水浴场玩沙，下午海底世界看人鲨共舞（孩子超爱）",
-      "remote": false,
-      "startTime": 540,
-      "st": 540
-    },
-    {
-      "spots": [
-        "jidi",
-        "xiaomaidao"
-      ],
-      "sp": [
-        "jidi",
-        "xiaomaidao"
-      ],
-      "foodDay": "day3",
-      "fd": "day3",
-      "note": "上午极地海洋公园看白鲸海豚表演，傍晚小麦岛看海上日落",
-      "remote": false,
-      "startTime": 540,
-      "st": 540
-    },
-    {
-      "spots": [
-        "laoshan"
-      ],
-      "sp": [
-        "laoshan"
-      ],
-      "foodDay": "day4",
-      "fd": "day4",
-      "note": "崂山南线一日游（太清宫+八水河），坐观光车不累，需提前预约",
-      "remote": true,
-      "startTime": 480,
-      "st": 480
-    },
-    {
-      "spots": [
-        "weihai_beach"
-      ],
-      "sp": [
-        "weihai_beach"
-      ],
-      "foodDay": "day5",
-      "fd": "day5",
-      "note": "青岛→威海（高铁约2h，¥93起），下午威海国际海水浴场尽情玩水",
-      "remote": false,
-      "startTime": 540,
-      "st": 540
-    },
-    {
-      "spots": [
-        "liugongdao"
-      ],
-      "sp": [
-        "liugongdao"
-      ],
-      "foodDay": "day6",
-      "fd": "day6",
-      "note": "刘公岛一日游——甲午战争博物馆、旗顶山炮台，历史教育+海岛风光",
-      "remote": false,
-      "startTime": 420,
-      "st": 420
-    },
-    {
-      "spots": [
-        "chengshantou",
-        "naxianghai"
-      ],
-      "sp": [
-        "chengshantou",
-        "naxianghai"
-      ],
-      "foodDay": "day7",
-      "fd": "day7",
-      "note": "上午成山头打卡中国海岸最东端，下午那香海挖沙游泳泡温泉",
-      "remote": true,
-      "startTime": 480,
-      "st": 480
-    },
-    {
-      "spots": [
-        "xingfumen"
-      ],
-      "sp": [
-        "xingfumen"
-      ],
-      "foodDay": "day8",
-      "fd": "day8",
-      "note": "上午幸福门广场打卡、威海公园散步，买点海产干货，下午返程",
-      "remote": false,
-      "startTime": 540,
-      "st": 540
-    }
-  ],
-  "photo": [
-    {
-      "spots": [
-        "zhanqiao",
-        "xinhaoshan"
-      ],
-      "sp": [
-        "zhanqiao",
-        "xinhaoshan"
-      ],
-      "foodDay": "day1",
-      "fd": "day1",
-      "note": "栈桥拍海景→信号山拍老城全景",
-      "remote": false,
-      "startTime": 540,
-      "st": 540
-    },
-    {
-      "spots": [
-        "badaguan",
-        "xiaomaidao"
-      ],
-      "sp": [
-        "badaguan",
-        "xiaomaidao"
-      ],
-      "foodDay": "day2",
-      "remote": false,
-      "startTime": 540,
-      "st": 540
-    },
-    {
-      "spots": [
-        "hddworld",
-        "jidi"
-      ],
-      "sp": [
-        "hddworld",
-        "jidi"
-      ],
-      "foodDay": "day3",
-      "remote": false,
-      "startTime": 540,
-      "st": 540
-    },
-    {
-      "spots": [
-        "laoshan"
-      ],
-      "sp": [
-        "laoshan"
-      ],
-      "foodDay": "day4",
-      "remote": true,
-      "startTime": 480,
-      "st": 480
-    },
-    {
-      "spots": [
-        "weihai_beach"
-      ],
-      "sp": [
-        "weihai_beach"
-      ],
-      "foodDay": "day5",
-      "remote": false,
-      "startTime": 540,
-      "st": 540
-    },
-    {
-      "spots": [
-        "liugongdao"
-      ],
-      "sp": [
-        "liugongdao"
-      ],
-      "foodDay": "day6",
-      "remote": false,
-      "startTime": 420,
-      "st": 420
-    },
-    {
-      "spots": [
-        "chengshantou",
-        "naxianghai"
-      ],
-      "sp": [
-        "chengshantou",
-        "naxianghai"
-      ],
-      "foodDay": "day7",
-      "remote": true,
-      "startTime": 480,
-      "st": 480
-    },
-    {
-      "spots": [
-        "xingfumen"
-      ],
-      "sp": [
-        "xingfumen"
-      ],
-      "foodDay": "day8",
-      "remote": false,
-      "startTime": 540,
-      "st": 540
-    }
-  ],
-  "explore": [
-    {
-      "spots": [
-        "zhanqiao",
-        "xinhaoshan",
-        "badaguan"
-      ],
-      "sp": [
-        "zhanqiao",
-        "xinhaoshan",
-        "badaguan"
-      ],
-      "foodDay": "day1",
-      "remote": false,
-      "startTime": 480,
-      "st": 480
-    },
-    {
-      "spots": [
-        "hddworld",
-        "jidi"
-      ],
-      "sp": [
-        "hddworld",
-        "jidi"
-      ],
-      "foodDay": "day2",
-      "remote": false,
-      "startTime": 480,
-      "st": 480
-    },
-    {
-      "spots": [
-        "laoshan"
-      ],
-      "sp": [
-        "laoshan"
-      ],
-      "foodDay": "day3",
-      "remote": true,
-      "startTime": 420,
-      "st": 420
-    },
-    {
-      "spots": [
-        "xiaomaidao"
-      ],
-      "sp": [
-        "xiaomaidao"
-      ],
-      "foodDay": "day4",
-      "remote": false,
-      "startTime": 540,
-      "st": 540
-    },
-    {
-      "spots": [
-        "weihai_beach"
-      ],
-      "sp": [
-        "weihai_beach"
-      ],
-      "foodDay": "day5",
-      "remote": false,
-      "startTime": 540,
-      "st": 540
-    },
-    {
-      "spots": [
-        "liugongdao"
-      ],
-      "sp": [
-        "liugongdao"
-      ],
-      "foodDay": "day6",
-      "remote": false,
-      "startTime": 420,
-      "st": 420
-    },
-    {
-      "spots": [
-        "chengshantou",
-        "naxianghai"
-      ],
-      "sp": [
-        "chengshantou",
-        "naxianghai"
-      ],
-      "foodDay": "day7",
-      "remote": true,
-      "startTime": 480,
-      "st": 480
-    },
-    {
-      "spots": [
-        "xingfumen"
-      ],
-      "sp": [
-        "xingfumen"
-      ],
-      "foodDay": "day8",
-      "remote": false,
-      "startTime": 540,
-      "st": 540
-    }
-  ],
-  "soldier": [
-    {
-      "spots": [
-        "zhanqiao",
-        "xinhaoshan",
-        "badaguan",
-        "hddworld"
-      ],
-      "sp": [
-        "zhanqiao",
-        "xinhaoshan",
-        "badaguan",
-        "hddworld"
-      ],
-      "foodDay": "day1",
-      "remote": false,
-      "startTime": 480,
-      "st": 480
-    },
-    {
-      "spots": [
-        "jidi",
-        "xiaomaidao",
-        "piJiu"
-      ],
-      "sp": [
-        "jidi",
-        "xiaomaidao",
-        "piJiu"
-      ],
-      "foodDay": "day2",
-      "remote": false,
-      "startTime": 480,
-      "st": 480
-    },
-    {
-      "spots": [
-        "laoshan"
-      ],
-      "sp": [
-        "laoshan"
-      ],
-      "foodDay": "day3",
-      "remote": true,
-      "startTime": 420,
-      "st": 420
-    },
-    {
-      "spots": [
-        "weihai_beach",
-        "chengshantou"
-      ],
-      "sp": [
-        "weihai_beach",
-        "chengshantou"
-      ],
-      "foodDay": "day4",
-      "remote": false,
-      "startTime": 420,
-      "st": 420
-    },
-    {
-      "spots": [
-        "liugongdao"
-      ],
-      "sp": [
-        "liugongdao"
-      ],
-      "foodDay": "day5",
-      "remote": false,
-      "startTime": 420,
-      "st": 420
-    },
-    {
-      "spots": [
-        "naxianghai",
-        "xingfumen"
-      ],
-      "sp": [
-        "naxianghai",
-        "xingfumen"
-      ],
-      "foodDay": "day6",
-      "remote": false,
-      "startTime": 480,
-      "st": 480
-    }
-  ]
-};
-
-const FOOD = {
-  "day1": [
-    {
-      "name": "九龙餐厅",
-      "n": "九龙餐厅",
-      "price": 60,
-      "pr": 60,
-      "location": "市南区河南路76号",
-      "loc": "市南区河南路76号",
-      "reason": "青岛老字号，近栈桥，海鲜地道",
-      "rsn": "青岛老字号，近栈桥，海鲜地道",
-      "dish": "辣炒蛤蜊、海鲜水饺"
-    },
-    {
-      "name": "船歌鱼水饺",
-      "n": "船歌鱼水饺",
-      "price": 80,
-      "pr": 80,
-      "location": "市南区中山路",
-      "loc": "市南区中山路",
-      "reason": "青岛特色鱼水饺，孩子爱吃",
-      "rsn": "青岛特色鱼水饺，孩子爱吃",
-      "dish": "鲅鱼水饺、墨鱼水饺"
-    }
-  ],
-  "day2": [
-    {
-      "name": "前海沿",
-      "n": "前海沿",
-      "price": 70,
-      "pr": 70,
-      "location": "市南区山东路",
-      "loc": "市南区山东路",
-      "reason": "本地人推荐的家常海鲜馆",
-      "rsn": "本地人推荐",
-      "dish": "蒜蓉粉丝蒸扇贝、香辣蟹"
-    },
-    {
-      "name": "开海红岛海鲜",
-      "n": "开海红岛海鲜",
-      "price": 100,
-      "pr": 100,
-      "location": "市南区江西路",
-      "loc": "市南区江西路",
-      "reason": "适合家庭聚餐，海鲜新鲜",
-      "rsn": "适合家庭聚餐",
-      "dish": "椒盐皮皮虾、海鲜大咖"
-    }
-  ],
-  "day5": [
-    {
-      "name": "韩乐坊美食街",
-      "n": "韩乐坊美食街",
-      "price": 50,
-      "pr": 50,
-      "location": "威海站附近",
-      "loc": "威海站附近",
-      "reason": "威海特色韩餐+海鲜，选择丰富",
-      "rsn": "威海特色韩餐+海鲜",
-      "dish": "海鲜饼、韩式烤肉"
-    },
-    {
-      "name": "威高广场美食",
-      "n": "威高广场美食",
-      "price": 80,
-      "pr": 80,
-      "location": "环翠区新威路",
-      "loc": "环翠区新威路",
-      "reason": "市中心商圈，选择多样",
-      "rsn": "市中心商圈",
-      "dish": "海鲜自助"
-    }
-  ]
-};
-
-const CITY_ACCENT = "#1565C0";
-
-/* ================================================================
-   Utility Functions
-   ================================================================ */
-function esc(s) {
-  return String(s || "").replace(/[&<>"']/g, function(c) {
-    return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" })[c];
-  });
-}
-
-function formatTime(min) {
-  var h = Math.floor(min / 60);
-  return h + ":" + String(min % 60).padStart(2, "0");
-}
-
-function formatDuration(min) {
-  var h = Math.floor(min / 60);
-  if (h > 0 && min % 60 > 0) return h + "h" + (min % 60) + "min";
-  if (h > 0) return h + "h";
-  return min + "min";
-}
-
-function gradeTagClass(L) {
-  if (L === "S") return "tag-s";
-  if (L === "A") return "tag-a";
-  if (L === "B") return "tag-b";
-  return "tag-c";
-}
-
-/* ================================================================
-   Queue Multiplier (Time-based)
-   ================================================================ */
-function getQueueMul(hour) {
-  if (hour < 8) return 0.4;
-  if (hour < 10) return 1.0;
-  if (hour < 14) return 1.3;
-  if (hour < 16) return 0.8;
-  return 0.5;
-}
-
-/* ================================================================
-   Energy Level
-   ================================================================ */
-function getEnergyLevel(route) {
-  var tw = 0, tp = 0;
-  (route.spots || []).forEach(function(k) {
-    var s = SPOTS[k];
-    if (s) {
-      tw += s.walkKm || s.w || 0;
-      tp += s.play || s.pl || 60;
-    }
-  });
-  var load = tw * 10 + (tp / 60) * 5;
-  if (route.remote || load >= 50 || (route.spots || []).length >= 4)
-    return { level: "高", cls: "high" };
-  if (load >= 30 || (route.spots || []).length >= 3)
-    return { level: "中", cls: "medium" };
-  return { level: "低", cls: "low" };
-}
-
-/* ================================================================
-   Build Timeline
-   ================================================================ */
-function buildTimeline(group, dayIdx, hotelKey) {
-  var routeList = ROUTES[group];
-  if (!routeList || !routeList[dayIdx]) return { items: [], stats: {}, route: {}, hotel: {} };
-
-  var route = routeList[dayIdx];
-  var hotel = HOTELS[hotelKey];
-  var cfg = GROUP_CONFIG[group] || GROUP_CONFIG.family;
-
-  var spots = route.spots || route.sp || [];
-  var startTime = route.startTime || route.st || 510;
-  var curTime = startTime;
-  var totalPlay = 0, totalQueue = 0, totalMove = 0, totalPrice = 0;
-  var items = [];
-
-  // Hotel departure
-  var firstSpot = spots[0];
-  var hotelToFirst = hotel && hotel.commute ? (hotel.commute[firstSpot] || 25) : 25;
-  hotelToFirst = Math.round(hotelToFirst * (startTime < 480 ? 0.85 : startTime >= 480 && startTime < 540 ? 1.6 : 1.0));
-  totalMove += hotelToFirst;
-  items.push({
-    time: formatTime(curTime),
-    title: "从" + (hotel ? hotel.name : "酒店") + "出发",
-    desc: "前往今日首站 — " + (SPOTS[firstSpot] ? SPOTS[firstSpot].name || SPOTS[firstSpot].n : firstSpot) + "，交通约" + hotelToFirst + "分钟",
-    tags: [{ text: "约" + hotelToFirst + "min", cls: "tag-play" }],
-    dot: "start"
-  });
-  curTime += hotelToFirst;
-
-  for (var i = 0; i < spots.length; i++) {
-    var spotKey = spots[i];
-    var spot = SPOTS[spotKey];
-    if (!spot) continue;
-
-    var hour = Math.floor(curTime / 60);
-    var qMul = getQueueMul(hour);
-    var queueTime = Math.round(((spot.queue || spot.q || 0) * (cfg.queueMul || cfg.qm || 1.0)) * qMul);
-    var playTime = Math.round(((spot.play || spot.pl || 60) * (cfg.playMul || cfg.pm || 1.0)));
-
-    // Booking reminder
-    if (spot.booking && (spot.booking.required || spot.booking.r)) {
-      items.push({
-        time: formatTime(curTime),
-        title: "预约提醒：" + (spot.name || spot.n),
-        desc: (spot.booking.note || "") + (spot.booking.items ? " · " + spot.booking.items : ""),
-        tags: [{ text: "需预约", cls: "tag-booking" }],
-        dot: "transport",
-        booking: spot.booking
-      });
-    }
-
-    // Queue entry
-    if (queueTime > 0) {
-      var queueTags = [
-        { text: "排队约" + queueTime + "min", cls: gradeTagClass(spot.level || spot.L || "C") },
-        { text: spot.price || spot.p > 0 ? (spot.price || spot.p) + "元" : "免费", cls: (spot.price || spot.p) > 0 ? "tag-price" : "tag-free" }
-      ];
-      items.push({
-        time: formatTime(curTime),
-        title: (spot.name || spot.n) + " · 排队入场",
-        desc: spot.queueNote || spot.qn || "",
-        tags: queueTags,
-        dot: "transport",
-        tip: spot.earlyNote || spot.en || null,
-        fastTrack: (spot.level === "S" || spot.L === "S") ? "S级景区，早到可大幅缩短排队时间" : null
-      });
-      curTime += queueTime;
-      totalQueue += queueTime;
-    }
-
-    // Play
-    var playDesc = "建议游玩" + playTime + "分钟";
-    if (spot.highlightRoute || spot.hr) playDesc += " · 精华路线：" + (spot.highlightRoute || spot.hr);
-    if (spot.walkKm || spot.w) {
-      var km = spot.walkKm || spot.w;
-      if (km >= 3) playDesc += " · 较长步行路线，注意体力";
-    }
-    var playTags = [
-      { text: "游玩" + playTime + "min", cls: "tag-play" },
-      { text: (spot.price || spot.p) > 0 ? (spot.price || spot.p) + "元" : "免费", cls: (spot.price || spot.p) > 0 ? "tag-price" : "tag-free" }
-    ];
-    items.push({
-      time: formatTime(curTime),
-      title: spot.name || spot.n,
-      desc: playDesc,
-      tags: playTags,
-      dot: "spot",
-      tip: spot.earlyNote || spot.en || null,
-      transport: spot.innerTransport || spot.tr || null,
-      booking: (spot.booking && (spot.booking.required || spot.booking.r)) ? spot.booking : null
-    });
-    curTime += playTime;
-    totalPlay += playTime;
-    totalPrice += spot.price || spot.p || 0;
-
-    // Movement to next spot
-    if (i < spots.length - 1) {
-      var nextKey = spots[i + 1];
-      var distKey1 = spotKey + "-" + nextKey;
-      var distKey2 = nextKey + "-" + spotKey;
-      var dist = (DISTANCES && (DISTANCES[distKey1] || DISTANCES[distKey2])) || { dist: 2, time: 15 };
-      var moveTime = dist.time || dist.t || 15;
-      totalMove += moveTime;
-
-      // Lunch insertion
-      if ((group === "family" || group === "explore") && curTime >= 720 && curTime <= 810) {
-        var lunchMin = cfg.lunchMin || cfg.ln || 60;
-        items.push({
-          time: formatTime(curTime),
-          title: "午餐",
-          desc: "预留" + lunchMin + "分钟用餐时间，建议选择离下一站近的餐厅",
-          tags: [{ text: formatDuration(lunchMin), cls: "tag-play" }],
-          dot: "food"
-        });
-        curTime += lunchMin;
-      }
-
-      items.push({
-        time: formatTime(curTime),
-        title: "前往 " + (SPOTS[nextKey] ? SPOTS[nextKey].name || SPOTS[nextKey].n : nextKey),
-        desc: "移动距离约" + (dist.dist || dist.d || 2) + "km，建议公交/打车",
-        tags: [{ text: "约" + moveTime + "min", cls: "tag-play" }],
-        dot: "transport"
-      });
-      curTime += moveTime;
-    }
-  }
-
-  // Return to hotel
-  var lastSpot = spots[spots.length - 1];
-  var returnTime = hotel && hotel.commute ? (hotel.commute[lastSpot] || 30) : 30;
-  returnTime = Math.round(returnTime * (curTime >= 1020 ? 0.85 : 1.0));
-  totalMove += returnTime;
-  items.push({
-    time: formatTime(curTime),
-    title: "返回酒店",
-    desc: "预计 " + formatTime(curTime + returnTime) + " 回到酒店",
-    tags: [{ text: "约" + returnTime + "min", cls: "tag-play" }],
-    dot: "hotel"
-  });
-
-  var energy = getEnergyLevel(route);
-  var totalMin = totalPlay + totalQueue + totalMove;
-
-  return {
-    items: items,
-    stats: {
-      totalPlay: totalPlay,
-      totalQueue: totalQueue,
-      totalMove: totalMove,
-      totalPrice: totalPrice,
-      totalMin: totalMin,
-      endTime: curTime + returnTime,
-      energy: energy,
-      spotCount: spots.length
-    },
-    route: route,
-    hotel: hotel
-  };
-}
-
-/* ================================================================
-   Build Route Map SVG
-   ================================================================ */
-function buildRouteMap(timelineResult) {
-  var route = timelineResult.route;
-  var spots = route.spots || route.sp || [];
-  var count = spots.length;
-  if (count === 0) return "";
-
-  var nodeH = 65;
-  var topPad = 35;
-  var bottomPad = 20;
-  var totalH = topPad + count * nodeH + bottomPad;
-  var nodeX = 30;
-  var labelX = 50;
-  var svgW = 440;
-
-  var cityColor = CITY_ACCENT || "#FF2442";
-  var colors = [cityColor, "#1d4ed8", "#2d6a4f", "#b35900", "#7c3aed", "#c5a059", "#5B8DEF"];
-
-  var svg = '<svg viewBox="0 0 ' + (svgW + 20) + ' ' + totalH + '" xmlns="http://www.w3.org/2000/svg">';
-  svg += '<rect x="0" y="0" width="' + (svgW + 20) + '" height="' + totalH + '" rx="12" fill="var(--bg)" stroke="var(--line-light)" stroke-width="1"/>';
-
-  // Connector lines
-  for (var i = 0; i < count - 1; i++) {
-    var y1 = topPad + i * nodeH + 12;
-    var y2 = topPad + (i + 1) * nodeH + 12;
-    svg += '<line x1="' + nodeX + '" y1="' + y1 + '" x2="' + nodeX + '" y2="' + y2 + '" stroke="var(--line)" stroke-width="2" stroke-dasharray="4,4"/>';
-  }
-
-  // Start node
-  svg += '<circle cx="' + nodeX + '" cy="' + (topPad - 20) + '" r="6" fill="var(--jade)"/>';
-  svg += '<text x="' + labelX + '" y="' + (topPad - 16) + '" fill="var(--jade)" font-size="10" font-weight="600">酒店出发</text>';
-
-  // Spot nodes
-  for (var i = 0; i < count; i++) {
-    var key = spots[i];
-    var spot = SPOTS[key];
-    if (!spot) continue;
-    var y = topPad + i * nodeH + 12;
-    var c = colors[i % colors.length];
-    var isCore = (spot.play || spot.pl || 0) >= 180;
-    var r = isCore ? 16 : 14;
-
-    svg += '<circle cx="' + nodeX + '" cy="' + y + '" r="' + r + '" fill="' + c + '" stroke="' + (isCore ? '#E67E22' : '#fff') + '" stroke-width="' + (isCore ? 3 : 2) + '"/>';
-    svg += '<text x="' + nodeX + '" y="' + (y + 5) + '" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">' + (i + 1) + '</text>';
-    svg += '<text x="' + labelX + '" y="' + (y - 2) + '" fill="var(--ink)" font-size="13" font-weight="600">' + esc(spot.name || spot.n) + '</text>';
-
-    var pText = (spot.price || spot.p) > 0 ? (spot.price || spot.p) + "元" : "免费";
-    var wText = (spot.walkKm || spot.w) > 0 ? "步行约" + (spot.walkKm || spot.w) + "km" : "";
-    var coreMark = isCore ? " 核心景点" : "";
-    svg += '<text x="' + labelX + '" y="' + (y + 18) + '" fill="' + (isCore ? '#E67E22' : 'var(--muted)') + '" font-size="10" font-weight="' + (isCore ? 600 : 400) + '">游玩' + (spot.play || spot.pl || 60) + 'min · ' + pText + (wText ? " · " + wText : "") + coreMark + '</text>';
-  }
-
-  svg += "</svg>";
-  return svg;
-}
-
-/* ================================================================
-   Render Day Panel
-   ================================================================ */
-function renderDayPanel(group, dayIdx, hotelKey) {
-  var result = buildTimeline(group, dayIdx, hotelKey);
-  if (!result || !result.items || result.items.length === 0) {
-    return '<div class="card" style="text-align:center;padding:40px 20px;color:var(--muted);">暂无当日路线数据</div>';
-  }
-
-  var items = result.items;
-  var stats = result.stats;
-  var route = result.route;
-  var foodKey = route.foodDay || route.fd || ("day" + (dayIdx + 1));
-  var foodList = FOOD ? (FOOD[foodKey] || FOOD["day" + (dayIdx + 1)] || []) : [];
-  var totalHours = (stats.totalMin / 60).toFixed(1);
-  var playHours = (stats.totalPlay / 60).toFixed(1);
-  var moveHours = (stats.totalMove / 60).toFixed(1);
-  var energy = stats.energy;
-  var spots = route.spots || route.sp || [];
-
-  var html = "";
-
-  // --- Summary Card ---
-  html += '<div class="card" style="animation-delay:0ms">';
-  html += '<div class="summary-grid">';
-  html += '<div class="summary-item"><span class="value accent">' + totalHours + 'h</span><span class="label">总预估时长</span></div>';
-  html += '<div class="summary-item"><span class="value">' + playHours + 'h</span><span class="label">纯游玩</span></div>';
-  html += '<div class="summary-item"><span class="value">' + moveHours + 'h</span><span class="label">交通移动</span></div>';
-  html += '<div class="summary-item"><span class="value">' + spots.length + '个</span><span class="label">景点数量</span></div>';
-  html += '</div>';
-  html += '<div class="summary-divider"></div>';
-  html += '<div class="summary-extra">';
-  html += '<span>排队总计 <strong>' + formatDuration(stats.totalQueue) + '</strong> · 门票 <strong>¥' + stats.totalPrice + '</strong> · 预计 <strong>' + formatTime(stats.endTime) + '</strong> 回到酒店</span>';
-  html += '<span class="energy-badge ' + energy.cls + '">体力等级：' + energy.level + '</span>';
-  html += '</div>';
-
-  // Alert cards
-  if (route.remote) {
-    var firstSpotName = SPOTS[spots[0]] ? (SPOTS[spots[0]].name || SPOTS[spots[0]].n) : spots[0];
-    var commuteMin = result.hotel && result.hotel.commute ? (result.hotel.commute[spots[0]] || 60) : 60;
-    html += '<div class="alert-card info">远郊日提示：今日为' + esc(firstSpotName) + '深度游，距市区约' + Math.round(commuteMin) + '分钟，建议尽早出发。</div>';
-  }
-  if (energy.level === "高") {
-    html += '<div class="alert-card warn">高体力消耗日：今日路线强度较大，建议穿着舒适运动鞋。</div>';
-  }
-  html += '</div>';
-
-  // --- Route Map Card ---
-  html += '<div class="card route-map-card" style="animation-delay:40ms">';
-  html += '<h3>今日路线概览</h3>';
-  html += buildRouteMap(result);
-  html += '</div>';
-
-  // --- Timeline Card ---
-  html += '<div class="card timeline-card" style="animation-delay:80ms">';
-  html += '<h3>行程时间轴</h3>';
-  html += '<div class="timeline-list">';
-
-  var staggerDelay = 0;
-  items.forEach(function(item) {
-    var delay = Math.min(staggerDelay, 400);
-    html += '<div class="timeline-item" style="animation-delay:' + delay + 'ms">';
-    html += '<div class="timeline-dot ' + (item.dot || "spot") + '"></div>';
-    html += '<div class="timeline-time">' + esc(item.time) + '</div>';
-    html += '<div class="timeline-content">';
-    html += '<div class="timeline-title">' + esc(item.title) + '</div>';
-    html += '<div class="timeline-desc">' + esc(item.desc) + '</div>';
-    html += '<div class="tags">';
-    (item.tags || []).forEach(function(t) {
-      html += '<span class="tag ' + (t.cls || "tag-info") + '">' + esc(t.text) + '</span>';
-    });
-    html += '</div>';
-
-    if (item.tip) {
-      html += '<div class="alert-card info" style="margin-top:8px;padding:8px 12px;">' + esc(item.tip) + '</div>';
-    }
-    if (item.fastTrack) {
-      html += '<div class="alert-card info" style="margin-top:8px;padding:8px 12px;">' + esc(item.fastTrack) + '</div>';
-    }
-    if (item.transport) {
-      html += '<div class="alert-card info" style="margin-top:8px;padding:8px 12px;">' + esc(item.transport) + '</div>';
-    }
-    if (item.warn) {
-      html += '<div class="alert-card warn" style="margin-top:8px;padding:8px 12px;">' + esc(item.warn) + '</div>';
-    }
-    if (item.booking) {
-      html += '<div class="alert-card danger" style="margin-top:8px;padding:8px 12px;">需提前预约：' + esc(item.booking.note || "") + (item.booking.items ? " · " + esc(item.booking.items) : "") + '</div>';
-    }
-
-    html += '</div>'; // timeline-content
-    html += '</div>'; // timeline-item
-    staggerDelay += 40;
-  });
-
-  html += '</div></div>';
-
-  // --- Food Card ---
-  if (foodList.length > 0) {
-    html += '<div class="card food-section" style="animation-delay:120ms">';
-    html += '<h3>美食推荐</h3>';
-    foodList.forEach(function(f) {
-      html += '<div class="food-item">';
-      html += '<div class="food-header">';
-      html += '<span class="food-name">' + esc(f.name || f.n) + '</span>';
-      html += '<span class="food-price">人均 ¥' + (f.price || f.pr || 0) + '</span>';
-      html += '</div>';
-      html += '<div class="food-meta">' + esc(f.location || f.loc || "") + '</div>';
-      html += '<div class="food-reason">' + esc(f.reason || f.rsn || "") + '</div>';
-      if (f.dish) {
-        html += '<span class="food-dish">招牌：' + esc(f.dish) + '</span>';
-      }
-      html += '</div>';
-    });
-    html += '</div>';
-  }
-
-  return html;
-}
-
-/* ================================================================
-   Render Sidebar Checklist
-   ================================================================ */
-function renderChecklist(group, hotelKey) {
-  var routeList = ROUTES[group];
-  if (!routeList) return "";
-
-  var html = "";
-  var seen = {};
-
-  routeList.forEach(function(route, idx) {
-    var spots = route.spots || route.sp || [];
-    var dayLabel = "Day " + (idx + 1);
-
-    spots.forEach(function(key) {
-      if (seen[key]) return;
-      var spot = SPOTS[key];
-      if (!spot) return;
-      seen[key] = true;
-
-      if (spot.booking && (spot.booking.required || spot.booking.r)) {
-        html += '<div class="action-card">';
-        html += '<div class="action-title">Day ' + (idx + 1) + ' · 提前预约：' + esc(spot.name || spot.n) + '</div>';
-        html += '<div class="action-desc">' + esc(spot.booking.note || "需提前预约") + '</div>';
-        if (spot.booking.items) {
-          html += '<div class="action-channel">渠道：' + esc(spot.booking.items) + '</div>';
-        }
-        html += '</div>';
-      }
-    });
-
-    if (route.remote) {
-      html += '<div class="action-card">';
-      html += '<div class="action-title">Day ' + (idx + 1) + ' · 远郊出行</div>';
-      html += '<div class="action-desc">建议早起出发，提前查看交通和天气</div>';
-      html += '</div>';
-    }
-  });
-
-  if (!html) {
-    html = '<p style="font-size:var(--fs-sm);color:var(--muted);text-align:center;padding:10px 0;">暂无特殊准备事项</p>';
-  }
-
-  return html;
-}
-
-/* ================================================================
-   Render All Panels
-   ================================================================ */
-function renderAllPanels(group, hotelKey) {
-  var routeList = ROUTES[group];
-  var panelCount = routeList ? routeList.length : 0;
-
-  for (var i = 0; i < panelCount; i++) {
-    var panel = document.getElementById("panel" + i);
-    if (panel) {
-      panel.innerHTML = renderDayPanel(group, i, hotelKey);
-    }
-  }
-
-  // Sidebar checklist
-  var checklist = document.getElementById("checklistContent");
-  if (checklist) {
-    checklist.innerHTML = renderChecklist(group, hotelKey);
-  }
-}
-
-/* ================================================================
-   Initialize Hero
-   ================================================================ */
-function initHero() {
-  var eyebrow = document.getElementById("heroEyebrow");
-  var title = document.getElementById("heroTitle");
-  var subtitle = document.getElementById("heroSubtitle");
-  var statsContainer = document.getElementById("heroStats");
-
-  if (eyebrow) eyebrow.textContent = (METADATA.city || "").toUpperCase() + " · " + (METADATA.days || 3) + " DAYS";
-  if (title) title.textContent = (METADATA.city || "") + " " + (METADATA.days || 3) + "日攻略";
-  if (subtitle) subtitle.textContent = METADATA.subtitle || "";
-
-  if (statsContainer && METADATA.stats) {
-    var s = METADATA.stats;
-    var statsHtml = "";
-    statsHtml += '<div class="hero-stat-card"><span class="num">' + (s.days || 0) + '</span><span class="label">天数</span></div>';
-    statsHtml += '<div class="hero-stat-card"><span class="num">' + (s.spots || 0) + '+</span><span class="label">景点</span></div>';
-    statsHtml += '<div class="hero-stat-card"><span class="num">' + (s.groups || 4) + '</span><span class="label">种风格</span></div>';
-    if (s.hotels) {
-      statsHtml += '<div class="hero-stat-card"><span class="num">' + s.hotels + '</span><span class="label">住宿片区</span></div>';
-    }
-    statsContainer.innerHTML = statsHtml;
-  }
-
-  // Set page title
-  var pageTitle = document.getElementById("pageTitle");
-  if (pageTitle) pageTitle.textContent = (METADATA.city || "") + (METADATA.days || 3) + "日旅行规划";
-
-  // Apply city accent
-  if (CITY_ACCENT) {
-    document.documentElement.style.setProperty("--city-accent", CITY_ACCENT);
-    // Compute a soft version
-    var r = parseInt(CITY_ACCENT.slice(1, 3), 16);
-    var g = parseInt(CITY_ACCENT.slice(3, 5), 16);
-    var b = parseInt(CITY_ACCENT.slice(5, 7), 16);
-    var softColor = "rgba(" + r + "," + g + "," + b + ",0.10)";
-    document.documentElement.style.setProperty("--city-accent-soft", softColor);
-  }
-
-  // Apply city-specific hero gradient if provided
-  if (METADATA.heroGradient) {
-    document.documentElement.style.setProperty("--hero-gradient", METADATA.heroGradient);
-  }
-}
-
-/* ================================================================
-   Initialize Hotel Picker
-   ================================================================ */
-function initHotelPicker() {
-  var panel = document.getElementById("hotelPanel");
-  if (!panel || !HOTELS) return;
-
-  // Group hotels by area (simulate groups from data)
-  var html = "";
-  var groups = {};
-
-  Object.keys(HOTELS).forEach(function(key) {
-    var h = HOTELS[key];
-    var name = h.name || h.n || key;
-    // Use first hotel's key as default group, or try to extract a group
-    var groupLabel = h.group || h.area || "住宿片区";
-    if (!groups[groupLabel]) groups[groupLabel] = [];
-    groups[groupLabel].push({ key: key, name: name });
-  });
-
-  Object.keys(groups).forEach(function(label) {
-    html += '<div class="hotel-group-label">' + esc(label) + '</div>';
-    html += '<div class="hotel-group-options">';
-    groups[label].forEach(function(h) {
-      html += '<button class="hotel-option" data-hotel="' + h.key + '">' + esc(h.name) + '</button>';
-    });
-    html += '</div>';
-  });
-
-  panel.innerHTML = html;
-
-  // Set default
-  var defaultHotel = Object.keys(HOTELS)[0];
-  var hotelName = document.getElementById("hotelName");
-  if (hotelName && HOTELS[defaultHotel]) {
-    hotelName.textContent = HOTELS[defaultHotel].name || HOTELS[defaultHotel].n || defaultHotel;
-  }
-  currentHotel = defaultHotel;
-
-  // Mark default active
-  var firstOpt = panel.querySelector('.hotel-option[data-hotel="' + defaultHotel + '"]');
-  if (firstOpt) firstOpt.classList.add("active");
-}
-
-/* ================================================================
-   Initialize Day Tabs
-   ================================================================ */
-function initDayTabs() {
-  var routeList = ROUTES[currentGroup];
-  if (!routeList) return;
-
-  var dayTabs = document.getElementById("dayTabs");
-  var indicator = document.getElementById("dayTabIndicator");
-  var panelsContainer = document.querySelector(".main-content");
-
-  // Build tab HTML
-  var tabsHtml = "";
-  for (var i = 0; i < routeList.length; i++) {
-    var route = routeList[i];
-    var spots = route.spots || route.sp || [];
-    var activeClass = i === 0 ? " active" : "";
-    tabsHtml += '<button class="day-tab' + activeClass + '" data-day="' + i + '">Day ' + (i + 1) + '<span class="badge">' + spots.length + '站</span></button>';
-  }
-  dayTabs.innerHTML = tabsHtml;
-
-  // Build panel containers
-  // Remove existing panels
-  var existingPanels = panelsContainer.querySelectorAll(".day-panel");
-  existingPanels.forEach(function(p) { p.remove(); });
-
-  // Insert panels after day-tabs-card
-  var tabsCard = panelsContainer.querySelector(".day-tabs-card");
-  for (var i = 0; i < routeList.length; i++) {
-    var div = document.createElement("div");
-    div.className = "day-panel" + (i === 0 ? " active" : "");
-    div.id = "panel" + i;
-    div.dataset.day = i;
-    tabsCard.parentNode.insertBefore(div, tabsCard.nextSibling);
-  }
-
-  // Position indicator on first tab
-  updateIndicator(dayTabs.querySelector(".day-tab.active"));
-}
-
-function updateIndicator(tab) {
-  var indicator = document.getElementById("dayTabIndicator");
-  if (!indicator || !tab) return;
-  indicator.style.left = tab.offsetLeft + "px";
-  indicator.style.width = tab.offsetWidth + "px";
-}
-
-/* ================================================================
-   State
-   ================================================================ */
-var currentGroup = "family";
-var currentHotel = null;
-
-/* ================================================================
-   Event Bindings
-   ================================================================ */
-
-// Group selector
-document.getElementById("groupSelector").addEventListener("click", function(e) {
-  var btn = e.target.closest(".group-btn");
-  if (!btn) return;
-  document.querySelectorAll(".group-btn").forEach(function(b) { b.classList.remove("active"); });
-  btn.classList.add("active");
-  currentGroup = btn.dataset.group;
-  initDayTabs();
-  renderAllPanels(currentGroup, currentHotel);
-});
-
-// Hotel picker toggle
-document.getElementById("hotelTrigger").addEventListener("click", function() {
-  document.getElementById("hotelPicker").classList.toggle("open");
-});
-
-// Close hotel panel on outside click
-document.addEventListener("click", function(e) {
-  var picker = document.getElementById("hotelPicker");
-  if (!picker.classList.contains("open")) return;
-  if (picker.contains(e.target)) return;
-  picker.classList.remove("open");
-});
-
-// Hotel option selection
-document.getElementById("hotelPanel").addEventListener("click", function(e) {
-  var opt = e.target.closest(".hotel-option");
-  if (!opt) return;
-
-  document.querySelectorAll(".hotel-option").forEach(function(o) { o.classList.remove("active"); });
-  opt.classList.add("active");
-
-  currentHotel = opt.dataset.hotel;
-  var hotelName = document.getElementById("hotelName");
-  if (hotelName) hotelName.textContent = opt.textContent;
-
-  document.getElementById("hotelPicker").classList.remove("open");
-  renderAllPanels(currentGroup, currentHotel);
-});
-
-// Day tab switching
-document.getElementById("dayTabs").addEventListener("click", function(e) {
-  var btn = e.target.closest(".day-tab");
-  if (!btn) return;
-
-  document.querySelectorAll(".day-tab").forEach(function(t) { t.classList.remove("active"); });
-  btn.classList.add("active");
-
-  var day = parseInt(btn.dataset.day);
-
-  document.querySelectorAll(".day-panel").forEach(function(p) {
-    if (parseInt(p.dataset.day) === day) {
-      p.classList.add("active");
-      // Re-trigger animation
-      p.style.animation = "none";
-      p.offsetHeight;
-      p.style.animation = "";
-    } else {
-      p.classList.remove("active");
-    }
-  });
-
-  updateIndicator(btn);
-});
-
-// Recalculate indicator on resize
-window.addEventListener("resize", function() {
-  var activeTab = document.querySelector(".day-tab.active");
-  if (activeTab) updateIndicator(activeTab);
-});
-
-/* ================================================================
-   Bootstrap
-   ================================================================ */
-initHero();
-initHotelPicker();
-initDayTabs();
-renderAllPanels(currentGroup, currentHotel);
-
-</script>
+<div class="section">
+<h2>📅 分日详细行程</h2>
+
+<div class="day-card">
+  <div class="day-header">
+    <h3>D1 · 上海→威海</h3>
+    <span class="date">8/1（六）</span>
+    <span class="theme">抵达·初探</span>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item"><span class="dot transport"></span><span class="time">🛫 10:00-11:30</span><div class="content">上海 ✈️ 威海大水泊机场</div></div>
+    <div class="timeline-item"><span class="dot transport"></span><span class="time">🚗 11:30-12:00</span><div class="content">机场取车（神州/一嗨SUV）<br><span class="note">✅ 加租儿童安全座椅 ~50元/天</span></div></div>
+    <div class="timeline-item"><span class="dot food"></span><span class="time">🍜 12:00-13:00</span><div class="content">午餐·机场附近</div></div>
+    <div class="timeline-item"><span class="dot hotel"></span><span class="time">🏨 13:00-14:00</span><div class="content">入住韩乐坊附近酒店</div></div>
+    <div class="timeline-item"><span class="dot hotel"></span><span class="time">😴 14:00-15:30</span><div class="content">午休 · 全家补觉</div></div>
+    <div class="timeline-item"><span class="dot play"></span><span class="time">🚶 15:30-17:00</span><div class="content">威海公园·大相框打卡<br><span class="note">海边步道散步，🅿️有车位</span></div></div>
+    <div class="timeline-item"><span class="dot food"></span><span class="time">🍢 18:00-20:00</span><div class="content">韩乐坊夜市逛吃<br><span class="tip">💡 韩式烤肉+海鲜饼+炒酸奶</span></div></div>
+    <div class="timeline-item"><span class="dot hotel"></span><span class="time">🏨 20:00</span><div class="content">回酒店，早休息</div></div>
+  </div>
+  <div class="alert info" style="margin-top:10px;"><strong>💡 第一天贴士</strong>：先熟悉车况，威海路况好适合适应。韩乐坊停车方便。</div>
+</div>
+
+<div class="day-card">
+  <div class="day-header">
+    <h3>D2 · 刘公岛+海水浴场</h3>
+    <span class="date">8/2（日）</span>
+    <span class="theme">海岛历史</span>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item"><span class="dot transport"></span><span class="time">🚗 08:00-08:15</span><div class="content">自驾到旅游码头（🅿️~20元/天）</div></div>
+    <div class="timeline-item"><span class="dot transport"></span><span class="time">🚢 08:30-08:50</span><div class="content">上刘公岛<br><span class="note">🎫 122元/人，儿童半价</span><br><span class="tip">⚠️ 提前3天购票，暑期人多</span></div></div>
+    <div class="timeline-item"><span class="dot play"></span><span class="time">🏛️ 09:00-10:30</span><div class="content">甲午战争博物馆（军舰实物+历史场景）</div></div>
+    <div class="timeline-item"><span class="dot play"></span><span class="time">🐼 10:30-11:00</span><div class="content">看大熊猫「竹灵」「宁宁」⭐男孩最爱</div></div>
+    <div class="timeline-item"><span class="dot play"></span><span class="time">🚶 11:00-11:30</span><div class="content">旗顶山炮台（电瓶车上去）</div></div>
+    <div class="timeline-item"><span class="dot transport"></span><span class="time">🚢 11:30-12:00</span><div class="content">坐船返回市区</div></div>
+    <div class="timeline-item"><span class="dot food"></span><span class="time">🍜 12:00-13:00</span><div class="content">午餐·码头附近</div></div>
+    <div class="timeline-item"><span class="dot hotel"></span><span class="time">😴 13:00-14:30</span><div class="content">午休</div></div>
+    <div class="timeline-item"><span class="dot play"></span><span class="time">🏖️ 15:00-17:30</span><div class="content">国际海水浴场<br><span class="note">男孩挖沙踩浪🌊，妈妈拍照📸，爸爸看装备</span><br><span class="tip">💡 租遮阳伞~80元</span></div></div>
+    <div class="timeline-item"><span class="dot food"></span><span class="time">🦐 18:00-19:00</span><div class="content">晚餐·海鲜蒸锅</div></div>
+  </div>
+  <div class="alert info" style="margin-top:10px;"><strong>🔄 备选</strong>：如遇大风刘公岛停航，改去威海神游海洋世界</div>
+</div>
+
+<div class="day-card">
+  <div class="day-header">
+    <h3>D3 · 成山头+那香海 ⭐</h3>
+    <span class="date">8/3（一）</span>
+    <span class="theme">东端海岸</span>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item"><span class="dot transport"></span><span class="time">🚗 08:30-09:30</span><div class="content">自驾到成山头（50km，沿海公路风景好）</div></div>
+    <div class="timeline-item"><span class="dot play"></span><span class="time">🏔️ 09:30-11:30</span><div class="content">成山头风景区<br><span class="note">🎫 148元/人。必坐索道🚡看海！妈妈拍照超美</span></div></div>
+    <div class="timeline-item"><span class="dot food"></span><span class="time">🍜 12:00-13:00</span><div class="content">午餐·成山头附近</div></div>
+    <div class="timeline-item"><span class="dot play"></span><span class="time">🏖️ 13:30-17:00</span><div class="content"><strong>那香海钻石沙滩 ⭐ 全程亲子高光</strong><br><span class="note">沙质细腻，海水清澈！男孩挖沙踩浪捡贝壳，妈妈沙滩漫步拍照</span><br><span class="tip">💡 有冲洗间，给男孩多带一套干衣服</span></div></div>
+    <div class="timeline-item"><span class="dot transport"></span><span class="time">🚗 17:00-18:00</span><div class="content">自驾回威海市区</div></div>
+    <div class="timeline-item"><span class="dot food"></span><span class="time">🍢 18:30</span><div class="content">晚餐·韩国料理</div></div>
+  </div>
+  <div class="alert" style="margin-top:10px;"><strong>⭐ 今日重点</strong>：那香海是全程最棒的亲子沙滩，多留时间尽情玩！</div>
+</div>
+
+<div class="day-card">
+  <div class="day-header">
+    <h3>D4 · 威海→青岛（转场日）</h3>
+    <span class="date">8/4（二）</span>
+    <span class="theme">网红+自驾</span>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item"><span class="dot play"></span><span class="time">📸 08:30-09:30</span><div class="content">火炬八街·威海"小镰仓"<br><span class="note">彩色房子+通向大海的坡路，妈妈重点拍照点📸</span></div></div>
+    <div class="timeline-item"><span class="dot play"></span><span class="time">🚶 09:30-10:00</span><div class="content">猫头山观景台（环海路随手停）</div></div>
+    <div class="timeline-item"><span class="dot hotel"></span><span class="time">🏨 10:00-10:30</span><div class="content">退房</div></div>
+    <div class="timeline-item"><span class="dot transport"></span><span class="time">🚗 10:30-12:00</span><div class="content">威海→养马岛（G228沿海公路，120km/1.5h）</div></div>
+    <div class="timeline-item"><span class="dot food"></span><span class="time">🏝️ 12:00-13:00</span><div class="content">养马岛·停靠午餐+看海休息</div></div>
+    <div class="timeline-item"><span class="dot transport"></span><span class="time">🚗 13:00-16:30</span><div class="content">养马岛→青岛（160km/2.5-3h，服务区休息一次）</div></div>
+    <div class="timeline-item"><span class="dot hotel"></span><span class="time">🏨 16:30-17:00</span><div class="content">入住青岛酒店（五四广场附近）<br><span class="note">🅿️酒店停好车，后面逛老城打车</span></div></div>
+    <div class="timeline-item"><span class="dot hotel"></span><span class="time">😴 17:00-18:00</span><div class="content">休息</div></div>
+    <div class="timeline-item"><span class="dot play"></span><span class="time">🌃 19:40-20:30</span><div class="content">浮山湾灯光秀 🌟<br><span class="note">摩天大楼联动灯光+音乐喷泉</span></div></div>
+    <div class="timeline-item"><span class="dot food"></span><span class="time">🍜 20:30</span><div class="content">晚餐·五四广场附近</div></div>
+  </div>
+  <div class="alert info" style="margin-top:10px;"><strong>💡 转场策略</strong>：到青岛后酒店停好车，市区景点打车比自己找车位省心</div>
+</div>
+
+<div class="day-card">
+  <div class="day-header">
+    <h3>D5 · 青岛老城一日</h3>
+    <span class="date">8/5（三）</span>
+    <span class="theme">红瓦绿树</span>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item"><span class="dot transport"></span><span class="time">🚕 09:00</span><div class="content">打车到栈桥</div></div>
+    <div class="timeline-item"><span class="dot play"></span><span class="time">🗼 09:00-10:15</span><div class="content">栈桥→沿中山路→天主教堂<br><span class="note">路过邮电博物馆（可选进）</span></div></div>
+    <div class="timeline-item"><span class="dot play"></span><span class="time">📸 10:15-11:00</span><div class="content">大学路网红墙·妈妈拍照📸</div></div>
+    <div class="timeline-item"><span class="dot play"></span><span class="time">🏔️ 11:00-12:00</span><div class="content">信号山公园<br><span class="note">🎫 15元含旋转观景台，俯瞰老城全景！</span></div></div>
+    <div class="timeline-item"><span class="dot food"></span><span class="time">🥟 12:00-13:30</span><div class="content">午餐·开海/船歌海鲜水饺</div></div>
+    <div class="timeline-item"><span class="dot hotel"></span><span class="time">😴 13:30-15:00</span><div class="content">午休</div></div>
+    <div class="timeline-item"><span class="dot food"></span><span class="time">🍢 16:00-18:00</span><div class="content">台东步行街·逛吃<br><span class="note">烤鱿鱼、臭豆腐、炒酸奶，一家三口逛吃🍢</span></div></div>
+  </div>
+</div>
+
+<div class="day-card">
+  <div class="day-header">
+    <h3>D6 · 八大关+奥帆+灯光秀</h3>
+    <span class="date">8/6（四）</span>
+    <span class="theme">万国+夜景</span>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item"><span class="dot play"></span><span class="time">🏛️ 09:00-11:30</span><div class="content">八大关风景区<br><span class="note">花石楼(8.5元)→公主楼(20元，城堡风)→妈妈拍照圣地📸</span></div></div>
+    <div class="timeline-item"><span class="dot food"></span><span class="time">🍜 12:00-13:00</span><div class="content">午餐·八大关附近</div></div>
+    <div class="timeline-item"><span class="dot hotel"></span><span class="time">😴 13:30-15:00</span><div class="content">午休</div></div>
+    <div class="timeline-item"><span class="dot play"></span><span class="time">⛵ 15:30-17:00</span><div class="content">奥帆中心<br><span class="note">看帆船，可选坐帆船出海(~80元/人)</span></div></div>
+    <div class="timeline-item"><span class="dot play"></span><span class="time">🌃 19:40-20:30</span><div class="content">灯光秀 或 🌅小麦岛看日落（更浪漫）</div></div>
+    <div class="timeline-item"><span class="dot food"></span><span class="time">🍜 20:30</span><div class="content">晚餐</div></div>
+  </div>
+</div>
+
+<div class="day-card">
+  <div class="day-header">
+    <h3>D7 · 崂山一日游</h3>
+    <span class="date">8/7（五）</span>
+    <span class="theme">山海奇观</span>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item"><span class="dot transport"></span><span class="time">🚗 08:00-08:40</span><div class="content">自驾到崂山·大河东游客中心<br><span class="note">🎫 门票+观光车约140元/人</span><br><span class="tip">⚠️ 提前1-2天购票预约</span></div></div>
+    <div class="timeline-item"><span class="dot play"></span><span class="time">🚌 08:40-10:30</span><div class="content">景区大巴进山 → 太清宫（千年道观，男孩摸古树）</div></div>
+    <div class="timeline-item"><span class="dot play"></span><span class="time">🚶 10:30-11:00</span><div class="content">太清海边栈道·山海相连，妈妈拍照📸</div></div>
+    <div class="timeline-item"><span class="dot play"></span><span class="time">🚡 11:00-12:00</span><div class="content">索道上山🚡→明霞洞<br><span class="note">男孩坐缆车会超级兴奋！</span></div></div>
+    <div class="timeline-item"><span class="dot food"></span><span class="time">🍜 12:00-13:00</span><div class="content">山上简餐（自带零食更佳）</div></div>
+    <div class="timeline-item"><span class="dot play"></span><span class="time">🚡 13:00-14:30</span><div class="content">索道下山→景区大巴返回</div></div>
+    <div class="timeline-item"><span class="dot hotel"></span><span class="time">😴 15:00-17:00</span><div class="content">回酒店休息</div></div>
+    <div class="timeline-item"><span class="dot food"></span><span class="time">🦐 18:00</span><div class="content"><strong>海鲜大餐收官</strong>🥟<br><span class="note">辣炒蛤蜊+海鲜水饺+清蒸鱼</span></div></div>
+  </div>
+  <div class="alert info" style="margin-top:10px;"><strong>💡 太清线最轻松</strong>：大巴+索道，走路不多，一家三口无压力。不要选巨峰线！</div>
+</div>
+
+<div class="day-card">
+  <div class="day-header">
+    <h3>D8 · 石老人+极地海洋→返程</h3>
+    <span class="date">8/8（六）</span>
+    <span class="theme">海洋+回家</span>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item"><span class="dot play"></span><span class="time">🏖️ 09:00-10:30</span><div class="content">石老人海水浴场<br><span class="note">沙细水清，男孩挖沙踩浪，妈妈拍照</span></div></div>
+    <div class="timeline-item"><span class="dot play"></span><span class="time">🐬 10:30-12:30</span><div class="content">极地海洋世界（紧邻石老人）<br><span class="note">🎫约200元/人。白鲸🐳海豚🐬表演，男孩超爱！</span></div></div>
+    <div class="timeline-item"><span class="dot food"></span><span class="time">🍜 12:30-13:30</span><div class="content">午餐+买特产</div></div>
+    <div class="timeline-item"><span class="dot transport"></span><span class="time">🚗 14:00-14:30</span><div class="content">开往机场·路上加油（50km/40min）</div></div>
+    <div class="timeline-item"><span class="dot transport"></span><span class="time">🅿️ 14:30</span><div class="content">机场还车</div></div>
+    <div class="timeline-item"><span class="dot transport"></span><span class="time">🛫 16:00-17:30</span><div class="content"><strong>青岛 ✈️ 上海·回家！</strong></div></div>
+  </div>
+</div>
+</div>
+
+<div class="section">
+  <h2>🚗 交通方案</h2>
+  <table class="info-table">
+    <tr><th>项目</th><th>建议</th></tr>
+    <tr><td>平台</td><td>神州租车 / 一嗨租车</td></tr>
+    <tr><td>取车</td><td>威海大水泊机场（到达厅内）</td></tr>
+    <tr><td>还车</td><td>青岛胶东机场（出发厅还车点）</td></tr>
+    <tr><td>🚙 车型</td><td><strong>SUV</strong>（途观/RAV4同级，一家三口空间大）</td></tr>
+    <tr><td>💰 租金</td><td>~300元/天 × 7天 ≈ <strong>2,100元</strong></td></tr>
+    <tr><td>⛽ 油费+高速</td><td>全程~600km，约<strong>550元</strong></td></tr>
+    <tr><td>🅿️ 停车策略</td><td>威海免费车位多；到青岛后酒店停好车，市区景点打车</td></tr>
+    <tr><td>🪑 儿童座椅</td><td>加租约50元/天（强烈建议！）</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <h2>🏨 住宿推荐</h2>
+  <h3>威海（D1-D3，3晚）</h3>
+  <table class="info-table">
+    <tr><th>区域</th><th>推荐理由</th><th>参考价/晚</th></tr>
+    <tr><td>🥇 韩乐坊附近（D1）</td><td>近机场、近取车点、吃饭方便</td><td>350-450元</td></tr>
+    <tr><td>🥇 国际海水浴场（D2-D3）</td><td>海景房、下楼就是沙滩</td><td>400-600元</td></tr>
+  </table>
+  <h3>青岛（D4-D7，4晚）</h3>
+  <table class="info-table">
+    <tr><th>区域</th><th>推荐理由</th><th>参考价/晚</th></tr>
+    <tr><td>🥇 五四广场/万象城</td><td>核心地段、车位充足、近灯光秀</td><td>450-650元</td></tr>
+  </table>
+  <div class="alert info" style="margin-top:10px;"><strong>💡</strong> 建议订家庭房或双床房，男孩跟妈妈睡、爸爸单独一张</div>
+</div>
+
+<div class="section">
+  <h2>🍜 美食指南</h2>
+  <h3>🦐 威海必吃</h3>
+  <div class="food-grid">
+    <div class="food-item"><div class="name">鲅鱼水饺🥟</div><div class="price">40-60元/份</div><div class="who"><span class="tag green">全家都爱</span></div></div>
+    <div class="food-item"><div class="name">海鲜蒸锅🦀</div><div class="price">120-180元/锅</div><div class="who"><span class="tag green">原汁原味</span></div></div>
+    <div class="food-item"><div class="name">韩式烤肉🥩</div><div class="price">80-150元/人</div><div class="who"><span class="tag green">孩子爱吃</span></div></div>
+    <div class="food-item"><div class="name">海鲜饼🫓</div><div class="price">20-30元</div><div class="who"><span class="tag green">香脆可口</span></div></div>
+  </div>
+  <p style="font-size:12px;color:var(--text-secondary);margin-top:8px;">🏪 推荐：韩香福烤肉庄园、北方饺子王、百姓海鲜烧烤</p>
+  <h3 style="margin-top:16px;">🦑 青岛必吃</h3>
+  <div class="food-grid">
+    <div class="food-item"><div class="name">海鲜水饺🥟</div><div class="price">50-80元/份</div><div class="who"><span class="tag green">全家推荐</span></div></div>
+    <div class="food-item"><div class="name">辣炒蛤蜊</div><div class="price">20-30元</div><div class="who"><span class="tag orange">微辣</span></div></div>
+    <div class="food-item"><div class="name">烤鱿鱼🦑</div><div class="price">15-25元/串</div><div class="who"><span class="tag green">男孩最爱</span></div></div>
+    <div class="food-item"><div class="name">原浆啤酒🍺</div><div class="price">15-25元/杯</div><div class="who"><span class="tag blue">爸爸·妈妈喝老酸奶</span></div></div>
+  </div>
+  <p style="font-size:12px;color:var(--text-secondary);margin-top:8px;">🏪 推荐：船歌鱼水饺、开海、王姐烧烤、台东夜市</p>
+</div>
+
+<div class="section">
+  <h2>💰 预算估算（一家三口·舒适型）</h2>
+  <table class="info-table">
+    <tr><th>项目</th><th>明细</th><th>金额</th></tr>
+    <tr><td>✈️ 机票</td><td>上海↔威海/青岛 × 3人</td><td><strong>4,800元</strong></td></tr>
+    <tr><td>🚗 租车</td><td>SUV 300元/天×7天</td><td><strong>2,100元</strong></td></tr>
+    <tr><td>⛽ 油费+过路费</td><td>全程600km</td><td><strong>550元</strong></td></tr>
+    <tr><td>🏨 住宿</td><td>7晚×舒适型约450/晚</td><td><strong>3,150元</strong></td></tr>
+    <tr><td>🎫 门票</td><td>刘公岛+成山头+崂山+极地+信号山等</td><td><strong>~2,075元</strong></td></tr>
+    <tr><td>🍜 餐饮</td><td>350-500/天×8天</td><td><strong>2,800-4,000元</strong></td></tr>
+    <tr><td>🅿️ 停车+打车</td><td>青岛老城打车费用</td><td><strong>200-300元</strong></td></tr>
+    <tr><td>🛍️ 其他</td><td>零食、特产、挖沙工具</td><td><strong>300-500元</strong></td></tr>
+  </table>
+  <div class="budget-total">
+    <div class="label">💵 预估总花费（一家三口）</div>
+    <div class="amount">16,000 — 17,500 元</div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>⭐ 景点评分总表</h2>
+  <div style="overflow-x:auto;">
+  <table class="info-table">
+    <tr><th>景点</th><th>评分</th><th>亲子</th><th>门票</th><th>一句话</th></tr>
+    <tr><td>🏖️ 那香海钻石沙滩</td><td><span class="stars">★★★★★</span></td><td><span class="tag green">最佳</span></td><td>免费</td><td>全程最期待⭐</td></tr>
+    <tr><td>🚢 刘公岛</td><td><span class="stars">★★★★★</span></td><td><span class="tag green">超适合</span></td><td>122元</td><td>历史教育+🐼熊猫</td></tr>
+    <tr><td>🏔️ 崂山太清线</td><td><span class="stars">★★★★★</span></td><td><span class="tag green">超适合</span></td><td>140元</td><td>大巴+索道不累</td></tr>
+    <tr><td>🏛️ 八大关</td><td><span class="stars">★★★★★</span></td><td><span class="tag green">超适合</span></td><td>免费</td><td>妈妈拍照圣地📸</td></tr>
+    <tr><td>🐬 极地海洋世界</td><td><span class="stars">★★★★★</span></td><td><span class="tag green">超适合</span></td><td>200元</td><td>白鲸表演男孩爱</td></tr>
+    <tr><td>🏔️ 成山头</td><td><span class="stars">★★★★</span></td><td><span class="tag green">适合</span></td><td>148元</td><td>索道🚡孩子兴奋</td></tr>
+    <tr><td>🏔️ 信号山</td><td><span class="stars">★★★★</span></td><td><span class="tag green">适合</span></td><td>15元</td><td>俯瞰全景必去</td></tr>
+    <tr><td>📸 火炬八街</td><td><span class="stars">★★★★</span></td><td><span class="tag green">适合</span></td><td>免费</td><td>妈妈出片📸</td></tr>
+    <tr><td>🌃 灯光秀</td><td><span class="stars">★★★★</span></td><td><span class="tag green">适合</span></td><td>免费</td><td>夜晚必看</td></tr>
+    <tr><td>🏖️ 石老人浴场</td><td><span class="stars">★★★★</span></td><td><span class="tag green">适合</span></td><td>免费</td><td>沙细水清</td></tr>
+    <tr><td>🍢 台东夜市</td><td><span class="stars">★★★★</span></td><td><span class="tag green">适合</span></td><td>—</td><td>逛吃逛吃</td></tr>
+    <tr><td>🗼 栈桥</td><td><span class="stars">★★★</span></td><td><span class="tag green">适合</span></td><td>免费</td><td>地标打卡</td></tr>
+    <tr><td>🌅 小麦岛</td><td><span class="stars">★★★★</span></td><td><span class="tag green">适合</span></td><td>免费</td><td>日落备选</td></tr>
+  </table>
+  </div>
+</div>
+
+<div class="section">
+  <h2>🧳 行李清单（一家三口）</h2>
+  <h3>⭐ 必带</h3>
+  <table class="info-table">
+    <tr><th>物品</th><th>爸爸</th><th>妈妈</th><th>男孩</th></tr>
+    <tr><td>🆔 身份证</td><td>✅</td><td>✅</td><td>✅（或户口本）</td></tr>
+    <tr><td>👕 短袖上衣</td><td>×5</td><td>×4</td><td>×5</td></tr>
+    <tr><td>🩳 短裤/裙装</td><td>×4</td><td>×3</td><td>×3</td></tr>
+    <tr><td>👖 薄长裤</td><td>×2</td><td>×1</td><td>×2</td></tr>
+    <tr><td>🩱 泳衣</td><td>×1</td><td>×1</td><td>×1</td></tr>
+    <tr><td>🧥 防晒外套</td><td>×1</td><td>×1</td><td>×1</td></tr>
+    <tr><td>🧥 薄外套(防风)</td><td>×1</td><td>×1</td><td>×1</td></tr>
+    <tr><td>👟 运动鞋</td><td>✅</td><td>✅</td><td>✅</td></tr>
+    <tr><td>🩴 凉拖/沙滩鞋</td><td>✅</td><td>✅</td><td>✅</td></tr>
+    <tr><td>🩲 内衣裤</td><td>×7</td><td>×7</td><td>×7</td></tr>
+  </table>
+  <h3 style="margin-top:16px;">✅ 建议带</h3>
+  <ul class="checklist">
+    <li>🧴 SPF50+防晒霜 <span class="prio must">全家共用大瓶</span></li>
+    <li>👒 遮阳帽 <span class="prio must">一人一顶</span></li>
+    <li>🕶️ 墨镜 <span class="prio must">一人一副</span></li>
+    <li>🦟 驱蚊液 <span class="prio must">傍晚海边必喷</span></li>
+    <li>💊 常备药：蒙脱石散+创可贴+藿香正气 <span class="prio must">防腹泻/中暑</span></li>
+    <li>🔋 充电宝 <span class="prio must">自驾导航+拍照耗电</span></li>
+    <li>📱 防水手机袋 <span class="prio suggest">妈妈海边拍照</span></li>
+    <li>🪣 挖沙工具 <span class="prio suggest">到威海买~20元</span></li>
+    <li>👕 男孩干衣服×1套 <span class="prio suggest">那香海玩完换</span></li>
+    <li>💧 大号水壶 <span class="prio must">全家1.5L+/天</span></li>
+  </ul>
+  <h3 style="margin-top:16px;">可选带</h3>
+  <ul class="checklist">
+    <li>iPad - 给男孩车上/飞机消遣 <span class="prio optional">可选</span></li>
+    <li>自拍杆/三脚架 - 一家三口合影 <span class="prio optional">可选</span></li>
+    <li>一次性浴缸套 - 给孩子泡澡 <span class="prio optional">可选</span></li>
+    <li>零食 - 车上充饥 <span class="prio optional">可选</span></li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>⚠️ 健康与安全提示</h2>
+  <div class="risk-grid">
+    <div class="risk-item danger"><span class="r-icon">🌊</span><strong>离岸流</strong><br>只在有救生员的浴场下海（第一/第二/石老人/国际海水浴场）</div>
+    <div class="risk-item danger"><span class="r-icon">☀️</span><strong>防晒</strong><br>SPF50+，每2h补涂，晒伤影响后续行程</div>
+    <div class="risk-item warn"><span class="r-icon">🦐</span><strong>饮食安全</strong><br>海鲜吃活的、熟透的，到正规餐厅吃</div>
+    <div class="risk-item warn"><span class="r-icon">🌀</span><strong>台风季</strong><br>关注"青岛气象""威海气象"公众号</div>
+    <div class="risk-item info"><span class="r-icon">🚗</span><strong>自驾安全</strong><br>威海→青岛含停靠约5h，中间养马岛休息</div>
+    <div class="risk-item info"><span class="r-icon">🏥</span><strong>紧急信息</strong><br>威海市立医院 / 青大附院（市南）<br>海上救援 ☎️ 12395</div>
+  </div>
+  <h3 style="margin-top:16px;">⏰ 预约清单（别忘！）</h3>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+    <span class="tag red">🚢 刘公岛 · 提前3天购票</span>
+    <span class="tag orange">🏔️ 崂山 · 提前1-2天预约</span>
+    <span class="tag blue">🛫 返程 · 订下午航班</span>
+    <span class="tag blue">🚗 租车 · 提前预订SUV</span>
+  </div>
+</div>
+
+<div class="footer">
+  <p>🌊 青岛+威海 8日亲子自驾游 · 整合版</p>
+  <p>smart-traveler（行程编排）+ tourist-assistant（细节分析）</p>
+  <p style="margin-top:8px;opacity:0.6;">生成于 2026年7月 · 请以实际价格为准</p>
+</div>
+
+</div>
 </body>
 </html>
