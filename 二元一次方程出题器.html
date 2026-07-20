@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>二元一次方程出题器</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #e8e8e8;
+  font-family: "STSong","华文宋体","SimSun","宋体","Noto Serif CJK SC",serif;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 16px 0 40px; min-height: 100vh;
+}
+#toolbar {
+  display: flex; gap: 10px; align-items: center;
+  margin-bottom: 16px; background: #fff;
+  padding: 10px 20px; border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.12);
+  font-size: 13px; position: sticky; top: 10px; z-index: 100;
+}
+#toolbar button {
+  padding: 7px 16px; border: 1px solid #bbb; border-radius: 5px;
+  background: #f8f8f8; cursor: pointer; font-size: 13px; font-family: inherit;
+  user-select: none;
+}
+#toolbar button:hover { background: #eee; }
+#toolbar .primary { background: #1a73e8; color: #fff; border-color: #1a73e8; }
+#toolbar .primary:hover { background: #1558b0; }
+.toolbar-label { color: #888; font-size: 12px; }
+#answer-btn.answer-visible { background: #e8f5e9; border-color: #4caf50; color: #2e7d32; }
+
+#paper {
+  width: 210mm; height: 297mm;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0,0,0,.15);
+  padding: 8mm 16mm 5mm 16mm;
+  font-size: 10.5pt; line-height: 1.25; color: #1a1a1a;
+  display: flex; flex-direction: column;
+}
+
+.header { text-align: center; margin-bottom: 0.8mm; padding-bottom: 1mm; border-bottom: 1.5px solid #333; flex-shrink: 0; }
+.header h1 { font-size: 15pt; letter-spacing: 2px; margin-bottom: 0.2mm; }
+.header .sub { font-size: 8.5pt; color: #555; }
+.header .info-line { display: flex; justify-content: space-between; font-size: 8.5pt; margin-top: 0.8mm; }
+
+h2 { font-size: 10pt; margin: 1.2mm 0 0.3mm 0; padding-left: 4px; border-left: 3px solid #333; flex-shrink: 0; }
+.section-desc { font-size: 8pt; color: #666; margin-bottom: 0.5mm; flex-shrink: 0; }
+
+.calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12mm; flex-shrink: 0; }
+.calc-item { padding: 0.5mm 0; border-bottom: 1px dashed #ddd; }
+.calc-item .num { font-weight: bold; font-size: 8.5pt; color: #333; }
+.calc-item .eq { margin: 0.2mm 0 0.2mm 5px; font-size: 10pt; font-family: "Times New Roman", serif; letter-spacing: 0.5px; line-height: 1.35; }
+.calc-item .answer-space { height: 5.5mm; }
+
+#app-section { flex: 1; display: flex; flex-direction: column; }
+.app-item { flex: 1; display: flex; flex-direction: column; padding: 0.3mm 0; border-bottom: 1px dashed #ddd; }
+.app-item:last-child { border-bottom: none; }
+.app-item .num { font-weight: bold; font-size: 8.5pt; flex-shrink: 0; }
+.app-item .q { margin: 0.1mm 0 0.2mm 5px; text-indent: 2em; font-size: 9pt; line-height: 1.35; flex-shrink: 0; }
+.app-item .q .hint { font-size: 8pt; color: #888; }
+.app-item .answer-box { flex-shrink: 0; }
+.app-item .answer-space { flex: 1; min-height: 0; }
+
+.answer-box { display: none; font-size: 7.5pt; color: #2e7d32; background: #e8f5e9; padding: 0.5mm 2mm; border-radius: 2px; margin: 0.2mm 0 0.2mm 5px; line-height: 1.3; }
+body.show-answers .answer-box { display: block; }
+
+@media print {
+  @page { margin: 10mm 12mm; }
+  html, body {
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+    background: #fff;
+  }
+  body { display: block; min-height: auto; }
+  #toolbar { display: none; }
+  #paper {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    box-shadow: none;
+    margin: 0;
+    padding: 2mm 6mm 5mm 6mm;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  body.show-answers .answer-box { display: none; }
+}
+</style>
+</head>
+<body>
+<div id="toolbar">
+  <button class="primary" onclick="regenerate()">🔄 重新出题</button>
+  <button onclick="printPage()">🖨 打印试卷</button>
+  <button id="answer-btn" onclick="toggleAnswers()">👁 显示答案</button>
+  <span class="toolbar-label" id="version-label">第 1 套</span>
+</div>
+<div id="paper">
+  <div class="header">
+    <h1>二元一次方程练习卷</h1>
+    <div class="sub">小学数学 · 二元一次方程组</div>
+    <div class="info-line">
+      <span>姓名：__________</span>
+      <span>班级：__________</span>
+      <span>日期：__________</span>
+      <span>用时：______分钟</span>
+    </div>
+  </div>
+  <h2>一、解下列方程组 <span style="font-size:8pt;font-weight:normal;color:#666;margin-left:6px;">（每题 8 分，共 40 分）</span></h2>
+  <p class="section-desc">用代入法或加减法求解，写出计算过程。</p>
+  <div class="calc-grid" id="calc-grid"></div>
+  <h2>二、列方程组解应用题 <span style="font-size:8pt;font-weight:normal;color:#666;margin-left:6px;">（每题 12 分，共 60 分）</span></h2>
+  <p class="section-desc">先设未知数，再列方程组并求解。</p>
+  <div id="app-section"></div>
+</div>
+<script>
+function ri(m,M){return Math.floor(Math.random()*(M-m+1))+m;}
+function pi(arr){return arr[ri(0,arr.length-1)];}
+function sh(a){for(var i=a.length-1;i>0;i--){var j=ri(0,i);var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function rp(mx,my){var x=ri(1,mx||9),y=ri(1,my||9);while(y===x)y=ri(1,my||9);return[x,y];}
+
+var NP=['小明','小红','小华','小刚','小丽','小军','小兰','亮亮','朵朵','乐乐'];
+var FP=['苹果','橘子','香蕉','梨','桃子','草莓'];
+var SP=['钢笔','铅笔','圆珠笔','尺子','橡皮','彩笔'];
+var FA=['面包','蛋糕','饼干','薯片'];
+var FB=['牛奶','可乐','果汁','奶茶'];
+var SCENE=['果园里','菜园里','花园里','操场上','教室里','院子里','池塘边','马路边'];
+
+var CT=[
+function(x,y){var s=x+y,d=x-y;if(d===0)return null;return{e1:'x + y = '+s,e2:'x \u2212 y = '+d,a:x+', '+y};},
+function(x,y){var s=2*x+y,d=x-y;if(d===0)return null;return{e1:'2x + y = '+s,e2:'x \u2212 y = '+d,a:x+', '+y};},
+function(x,y){var s=x+2*y,t=3*x-y;if(t<=0)return null;return{e1:'x + 2y = '+s,e2:'3x \u2212 y = '+t,a:x+', '+y};},
+function(x,y){var s=3*x+2*y,t=x+y;return{e1:'3x + 2y = '+s,e2:'x + y = '+t,a:x+', '+y};},
+function(x,y){var s=2*x+3*y,d=x-y;if(d===0)return null;return{e1:'2x + 3y = '+s,e2:'x \u2212 y = '+d,a:x+', '+y};},
+function(x,y){var s=x+3*y,t=2*x-y;if(t<=0)return null;return{e1:'x + 3y = '+s,e2:'2x \u2212 y = '+t,a:x+', '+y};},
+function(x,y){var s=x+y,t=2*x-y;if(t<=0)return null;return{e1:'x + y = '+s,e2:'2x \u2212 y = '+t,a:x+', '+y};},
+function(x,y){var s=x+y,t=3*x+2*y;return{e1:'x + y = '+s,e2:'3x + 2y = '+t,a:x+', '+y};},
+function(x,y){var s=2*x+3*y,t=3*x+2*y;return{e1:'2x + 3y = '+s,e2:'3x + 2y = '+t,a:x+', '+y};},
+function(x,y){var s=4*x+y,d=x-y;if(d===0)return null;return{e1:'4x + y = '+s,e2:'x \u2212 y = '+d,a:x+', '+y};},
+function(x,y){var s=3*x+2*y,t=2*x-y;if(t<=0)return null;return{e1:'3x + 2y = '+s,e2:'2x \u2212 y = '+t,a:x+', '+y};},
+function(x,y){var s=2*x+5*y,t=5*x+2*y;return{e1:'2x + 5y = '+s,e2:'5x + 2y = '+t,a:x+', '+y};}
+];
+
+function genCalc() {
+  var tpl=sh(CT.slice()).slice(0,5);
+  var out=[];
+  for(var i=0;i<5;i++){
+    var p,q;
+    for(var c=0;c<50;c++){p=rp(9,9);q=tpl[i](p[0],p[1]);if(q!==null)break;}
+    if(q===null){p=rp(5,5);q=tpl[i](p[0],p[1]);}
+    var eqs=[q.e1,q.e2];
+    if(ri(0,1)){var t=eqs[0];eqs[0]=eqs[1];eqs[1]=t;}
+    out.push({n:i+1,e1:eqs[0],e2:eqs[1],a:q.a});
+  }
+  return out;
+}
+
+function genApp() {
+  var templates=sh([1,2,3,4,5,6,7,8,9,10,11,12]).slice(0,5);
+  var qs=[];
+  for(var ti=0;ti<templates.length;ti++){
+    var t=templates[ti],n1=pi(NP),n2=pi(NP);
+    while(n2===n1)n2=pi(NP);
+    var scene=pi(SCENE);
+    switch(t){
+      case 1:{var f=pi(FP);var p=rp(9,9);if(p[0]<p[1]){var t=p[0];p[0]=p[1];p[1]=t;}
+        qs.push({n:ti+1,t:n1+'和'+n2+'一共有 '+(p[0]+p[1])+' 个'+f+'，'+n1+'比'+n2+'多 '+(p[0]-p[1])+' 个。'+n1+'和'+n2+'各有多少个'+f+'？',a:n1+' '+p[0]+' 个，'+n2+' '+p[1]+' 个'});break;}
+      case 2:{var s=pi(SP);var p=rp(9,9);if(p[0]<p[1]){var t=p[0];p[0]=p[1];p[1]=t;}
+        qs.push({n:ti+1,t:'一支'+s+'和一块橡皮一共 '+(p[0]+p[1])+' 元，'+s+'比橡皮贵 '+(p[0]-p[1])+' 元。一支'+s+'和一块橡皮各多少元？',a:s+' '+p[0]+' 元，橡皮 '+p[1]+' 元'});break;}
+      case 3:{var p=rp(9,6);while(p[0]+p[1]>14||p[0]+p[1]<3)p=rp(9,6);
+        qs.push({n:ti+1,t:'停车场停了自行车和三轮车共 '+(p[0]+p[1])+' 辆，数一数轮子共有 '+(2*p[0]+3*p[1])+' 个。自行车和三轮车各多少辆？<br><span class="hint">（提示：自行车 2 个轮，三轮车 3 个轮）</span>',a:'自行车 '+p[0]+' 辆，三轮车 '+p[1]+' 辆'});break;}
+      case 4:{var p=rp(8,5);while(p[0]+p[1]>12||p[0]+p[1]<3)p=rp(8,5);
+        qs.push({n:ti+1,t:'笼子里有鸡和兔子共 '+(p[0]+p[1])+' 只，数一数腿共有 '+(2*p[0]+4*p[1])+' 条。鸡和兔子各多少只？<br><span class="hint">（提示：鸡 2 条腿，兔 4 条腿）</span>',a:'鸡 '+p[0]+' 只，兔 '+p[1]+' 只'});break;}
+      case 5:{var y=ri(3,8),k=pi([2,3,4]);var x=k*y;var m=pi([3,5,8]);var sl=(x+m)+(y+m);
+        qs.push({n:ti+1,t:n1+'今年年龄是弟弟的 '+k+' 倍，'+m+' 年后两人年龄之和是 '+sl+' 岁。'+n1+'和弟弟今年各多少岁？',a:n1+' '+x+' 岁，弟弟 '+y+' 岁'});break;}
+      case 6:{var x=ri(2,6),y=ri(2,6);var f1=pi(FA),f2=pi(FB);
+        qs.push({n:ti+1,t:'买 2 个'+f1+'和 3 瓶'+f2+'共 '+(2*x+3*y)+' 元，买 3 个'+f1+'和 2 瓶'+f2+'共 '+(3*x+2*y)+' 元。一个'+f1+'和一瓶'+f2+'各多少元？',a:f1+' '+x+' 元，'+f2+' '+y+' 元'});break;}
+      case 7:{var x=ri(2,6),y=ri(2,6);
+        qs.push({n:ti+1,t:'买 3 本练习本和 2 支钢笔共 '+(3*x+2*y)+' 元，买 2 本练习本和 1 支钢笔共 '+(2*x+y)+' 元。一本练习本和一支钢笔各多少元？',a:'练习本 '+x+' 元，钢笔 '+y+' 元'});break;}
+      case 8:{var p=rp(15,15);if(p[0]<p[1]){var t=p[0];p[0]=p[1];p[1]=t;}
+        qs.push({n:ti+1,t:n1+'和'+n2+'一共有零花钱 '+(p[0]+p[1])+' 元，'+n1+'比'+n2+'多 '+(p[0]-p[1])+' 元。'+n1+'和'+n2+'各有多少元零花钱？',a:n1+' '+p[0]+' 元，'+n2+' '+p[1]+' 元'});break;}
+      case 9:{var p=rp(8,6);while(p[0]+p[1]>12||p[0]+p[1]<3)p=rp(8,6);
+        var s0=pi(['杨树','柳树','松树','柏树']),digs=3*p[0]+5*p[1],a1=ri(0,1)?'3':'5',a2=a1==='3'?'5':'3';
+        qs.push({n:ti+1,t:scene+'种了'+s0+'和另一种树共 '+(p[0]+p[1])+' 棵，共挖了 '+digs+' 个树坑。'+s0+'每棵挖 '+a1+' 个坑，另一种每棵挖 '+a2+' 个坑。两种树各种了多少棵？',a:s0+' '+p[0]+' 棵，另一种 '+p[1]+' 棵'});break;}
+      case 10:{var x=ri(2,5),y=ri(2,5);var f1=pi(FA),f2=pi(FB);
+        qs.push({n:ti+1,t:'买 4 盒'+f1+'和 2 瓶'+f2+'共 '+(4*x+2*y)+' 元，买 2 盒'+f1+'和 3 瓶'+f2+'共 '+(2*x+3*y)+' 元。一盒'+f1+'和一瓶'+f2+'各多少元？',a:f1+' '+x+' 元，'+f2+' '+y+' 元'});break;}
+      case 11:{var x=ri(1,4),y=ri(1,4);
+        qs.push({n:ti+1,t:'买 2 支钢笔和 5 支铅笔共 '+(2*x+5*y)+' 元，买 5 支钢笔和 2 支铅笔共 '+(5*x+2*y)+' 元。一支钢笔和一支铅笔各多少元？',a:'钢笔 '+x+' 元，铅笔 '+y+' 元'});break;}
+      case 12:{var p=rp(15,20);if(p[0]<p[1]){var t=p[0];p[0]=p[1];p[1]=t;}
+        qs.push({n:ti+1,t:n1+'和'+n2+'一共收集了 '+(p[0]+p[1])+' 张邮票，'+n1+'比'+n2+'多 '+(p[0]-p[1])+' 张。'+n1+'和'+n2+'各有多少张邮票？',a:n1+' '+p[0]+' 张，'+n2+' '+p[1]+' 张'});break;}
+    }
+  }
+  return qs;
+}
+
+var ver=0,showAns=false;
+function render(){
+  var cq=genCalc(),aq=genApp();
+  var h='';
+  for(var i=0;i<cq.length;i++){h+='<div class="calc-item"><div class="num">\u7b2c '+cq[i].n+' \u9898</div><div class="eq">'+cq[i].e1+'<br>'+cq[i].e2+'</div><div class="answer-box">x = '+cq[i].a+'</div><div class="answer-space"></div></div>';}
+  document.getElementById('calc-grid').innerHTML=h;
+  h='';
+  for(var i=0;i<aq.length;i++){h+='<div class="app-item"><div class="num">\u7b2c '+aq[i].n+' \u9898</div><div class="q">'+aq[i].t+'</div><div class="answer-box">'+aq[i].a+'</div><div class="answer-space"></div></div>';}
+  document.getElementById('app-section').innerHTML=h;
+}
+function regenerate(){ver++;document.getElementById('version-label').textContent='\u7b2c '+ver+' \u5957';render();if(showAns)document.body.classList.add('show-answers');}
+function toggleAnswers(){showAns=!showAns;document.body.classList.toggle('show-answers',showAns);document.getElementById('answer-btn').textContent=showAns?'\ud83d\ude48 \u9690\u85cf\u7b54\u6848':'\ud83d\udc41 \u663e\u793a\u7b54\u6848';document.getElementById('answer-btn').classList.toggle('answer-visible',showAns);}
+function printPage(){var w=showAns;if(w)toggleAnswers();window.print();if(w)toggleAnswers();}
+render();
+</script>
+</body>
+</html>
