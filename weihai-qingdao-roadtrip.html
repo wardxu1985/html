@@ -47,7 +47,8 @@ a:hover{color:#d4a857}
 }
 .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 @media(max-width:640px){
-  .hero{min-height:0;height:auto;aspect-ratio:16/9;max-height:none}
+  .hero{min-height:400px;height:55dvh;max-height:500px;aspect-ratio:auto}
+  .hero-bg{object-position:center 30%}
   .hero-overlay{background:linear-gradient(180deg,rgba(13,31,52,0.30) 0%,rgba(13,31,52,0.60) 50%,rgba(13,31,52,0.88) 100%)}
   .hero-content{padding:12px 16px 24px}
   .hero-title{font-size:clamp(1.2rem,4.5vw,2rem);letter-spacing:2px}
