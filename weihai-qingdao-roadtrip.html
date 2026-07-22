@@ -199,15 +199,17 @@ a:hover{color:#d4a857}
   display:flex;
   gap:8px;
   overflow-x:auto;
-  padding:8px 20px 12px;
+  padding:8px 0;
   scrollbar-width:none;
   -webkit-overflow-scrolling:touch;
+}
+.day-nav-wrap{
   position:sticky;
   top:0;
   z-index:50;
   background:#faf6f0;
-  margin:0 calc(-1*20px);
-  width:calc(100% + 40px);
+  padding:0 20px;
+  border-bottom:1px solid #e0d6c4;
 }
 .day-nav::-webkit-scrollbar{display:none}
 .day-nav-btn{
@@ -611,7 +613,11 @@ footer .navy-line{width:40px;height:2px;background:var(--gold);margin:12px auto;
     <h2 class="section-title">📅 每日行程</h2>
     <p class="section-subtitle">点击日期快速跳转</p>
   </div>
-  <div class="day-nav" role="tablist">
+</section>
+
+<!-- ========== STICKY NAV BAR ========== -->
+<div class="day-nav-wrap">
+<div class="day-nav" role="tablist">
     <button class="day-nav-btn" onclick="document.getElementById('d1').scrollIntoView({behavior:'smooth',block:'start'})"><span class="num">D1</span><span class="date">8/1</span></button>
     <button class="day-nav-btn" onclick="document.getElementById('d2').scrollIntoView({behavior:'smooth',block:'start'})"><span class="num">D2</span><span class="date">8/2</span></button>
     <button class="day-nav-btn" onclick="document.getElementById('d3').scrollIntoView({behavior:'smooth',block:'start'})"><span class="num">D3</span><span class="date">8/3</span></button>
@@ -621,7 +627,7 @@ footer .navy-line{width:40px;height:2px;background:var(--gold);margin:12px auto;
     <button class="day-nav-btn" onclick="document.getElementById('d7').scrollIntoView({behavior:'smooth',block:'start'})"><span class="num">D7</span><span class="date">8/7</span></button>
     <button class="day-nav-btn" onclick="document.getElementById('d8').scrollIntoView({behavior:'smooth',block:'start'})"><span class="num">D8</span><span class="date">8/8</span></button>
   </div>
-</section>
+</div>
 
 <!-- ========== DAILY ITINERARY ========== -->
 
