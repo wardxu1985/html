@@ -3,856 +3,1161 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>威海→青岛 · 沿海自驾</title>
+<title>威海→青岛 · 沿海自驾 | 8天7晚家庭之旅</title>
 <style>
-:root {
-  --ocean: #0B2A45;
-  --ocean-light: #1A5276;
-  --teal: #1A7A7A;
-  --teal-light: #E8F4F4;
-  --sand: #E8D5B7;
-  --sand-light: #F5EDE0;
-  --coral: #D4564A;
-  --gold: #D4A043;
-  --pine: #3A7A4A;
-  --body: #2C2C2C;
-  --card: #FFFFFF;
-  --radius: 12px;
-  --font: "Inter", -apple-system, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
-  --font-display: "Inter", "PingFang SC", sans-serif;
+/* ========== RESET & BASE ========== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px;-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;background:#faf6f0;color:#1a3a5c;line-height:1.7;overflow-x:hidden}
+img{max-width:100%;height:auto;display:block}
+a{color:#1a3a5c;text-decoration:none}
+a:hover{color:#d4a857}
+::selection{background:#d4a857;color:#1a3a5c}
+
+/* ========== VARIABLES ========== */
+:root{
+  --navy:#1a3a5c;
+  --gold:#d4a857;
+  --gold-light:#e6c87a;
+  --warm:#faf6f0;
+  --sand:#f0e6d3;
+  --dark:#0d1f34;
+  --teal:#2d7a8e;
+  --text:#1a3a5c;
+  --text-light:#5a7a9a;
+  --radius:16px;
+  --radius-sm:10px;
+  --shadow:0 4px 24px rgba(26,58,92,0.08);
+  --shadow-hover:0 8px 40px rgba(26,58,92,0.14);
+  --max-w:1040px;
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family: var(--font);
-  background: #F8F6F2;
-  color: var(--body);
-  line-height:1.6;
-}
-
-/* ===== HERO ===== */
-.hero {
-  background: linear-gradient(165deg, #0A1628 0%, #0B2A45 40%, #1A5A6A 70%, #2A8A7A 100%);
-  color: #fff;
-  padding: 56px 20px 72px;
-  text-align:center;
+/* ========== HERO ========== */
+.hero{
   position:relative;
+  width:100%;
+  height:100vh;
+  min-height:520px;
+  max-height:800px;
   overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
 }
-.hero::after {
-  content:'';
-  position:absolute; bottom:-1px; left:0; right:0;
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(13,31,52,0.40) 0%,rgba(13,31,52,0.70) 60%,rgba(13,31,52,0.92) 100%);
+}
+.hero-content{position:relative;z-index:2;padding:24px 20px 60px;max-width:var(--max-w)}
+.hero-badge{
+  display:inline-block;
+  background:rgba(212,168,87,0.2);
+  border:1px solid rgba(212,168,87,0.4);
+  color:#d4a857;
+  padding:6px 20px;
+  border-radius:50px;
+  font-size:0.8rem;
+  letter-spacing:2px;
+  margin-bottom:20px;
+  backdrop-filter:blur(4px);
+}
+.hero-title{
+  font-size:clamp(2rem,6vw,4rem);
+  font-weight:800;
+  color:#fff;
+  line-height:1.15;
+  letter-spacing:4px;
+  text-shadow:0 2px 20px rgba(0,0,0,0.3);
+  margin-bottom:16px;
+}
+.hero-title span{color:#d4a857}
+.hero-tags{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:8px 12px;
+  margin-top:12px;
+}
+.hero-tag{
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(4px);
+  border:1px solid rgba(255,255,255,0.18);
+  padding:6px 16px;
+  border-radius:50px;
+  color:rgba(255,255,255,0.92);
+  font-size:0.82rem;
+  letter-spacing:1px;
+}
+.hero-scroll{
+  position:absolute;
+  bottom:28px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:3;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  color:rgba(255,255,255,0.5);
+  font-size:0.7rem;
+  letter-spacing:2px;
+  animation:bounce 2s infinite;
+}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+/* ========== WAVE DIVIDER ========== */
+.wave-divider{
+  position:relative;
+  width:100%;
+  height:0;
+  margin-bottom:-1px;
+}
+.wave-divider svg{
+  display:block;
+  width:100%;
   height:60px;
-  background: #F8F6F2;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60'%3E%3Cpath d='M0,30 Q150,60 300,30 Q450,0 600,30 Q750,60 900,30 Q1050,0 1200,30 L1200,60 L0,60 Z' fill='%23F8F6F2'/%3E%3C/svg%3E") bottom/100% 100% no-repeat;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60'%3E%3Cpath d='M0,30 Q150,60 300,30 Q450,0 600,30 Q750,60 900,30 Q1050,0 1200,30 L1200,60 L0,60 Z' fill='%23F8F6F2'/%3E%3C/svg%3E") bottom/100% 100% no-repeat;
+  fill:#faf6f0;
 }
-.hero h1 {
-  font-family: var(--font-display);
-  font-size: clamp(26px,5vw,40px);
+
+/* ========== SECTIONS ========== */
+.section{padding:32px 20px;max-width:var(--max-w);margin:0 auto}
+.section-wide{padding:40px 20px}
+.section-title{
+  font-size:clamp(1.3rem,3.5vw,2rem);
+  font-weight:700;
+  letter-spacing:2px;
+  margin-bottom:6px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.section-subtitle{
+  color:var(--text-light);
+  font-size:0.88rem;
+  margin-bottom:24px;
+  letter-spacing:0.5px;
+}
+.section-head{text-align:center;margin-bottom:28px}
+.section-head .section-subtitle{margin-bottom:0}
+
+/* ========== ALERT BAR ========== */
+.alert-bar{
+  background:linear-gradient(135deg,#1a3a5c,#0d1f34);
+  color:#d4a857;
+  padding:14px 20px;
+  text-align:center;
+  font-size:0.85rem;
+  letter-spacing:1px;
+  border-bottom:3px solid #d4a857;
+}
+.alert-bar strong{color:#fff}
+.alert-bar span{display:inline-block;margin:0 4px}
+
+/* ========== ROUTE MAP ========== */
+.route-map-wrap{
+  background:var(--sand);
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  margin-bottom:8px;
+}
+.route-map-wrap svg{display:block;width:100%;height:auto}
+
+/* Distance legend */
+.route-distances{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
+  margin-top:16px;
+}
+.route-dist{
+  background:#fff;
+  border:1px solid #e0d6c4;
+  border-radius:var(--radius-sm);
+  padding:8px 14px;
+  text-align:center;
+  font-size:0.78rem;
+  line-height:1.4;
+}
+.route-dist strong{display:block;font-size:1rem;color:var(--navy)}
+
+/* ========== NAV ========== */
+.day-nav{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:8px 0 12px;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+.day-nav::-webkit-scrollbar{display:none}
+.day-nav-btn{
+  flex-shrink:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  background:#fff;
+  border:2px solid #e0d6c4;
+  cursor:pointer;
+  transition:all .25s;
+  font-family:inherit;
+  color:var(--text-light);
+  line-height:1.2;
+}
+.day-nav-btn:hover,.day-nav-btn.active{
+  background:var(--navy);
+  border-color:var(--navy);
+  color:#fff;
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(26,58,92,0.2);
+}
+.day-nav-btn .num{font-size:0.78rem;font-weight:600}
+.day-nav-btn .date{font-size:0.6rem;opacity:0.7}
+
+/* ========== DAY CARD ========== */
+.day-card{
+  background:#fff;
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  margin-bottom:28px;
+  scroll-margin-top:20px;
+  transition:box-shadow .3s;
+}
+.day-card:hover{box-shadow:var(--shadow-hover)}
+.day-card-img{width:100%;height:220px;object-fit:cover;background:var(--sand)}
+.day-card-body{padding:20px 20px 24px}
+.day-card-header{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  margin-bottom:12px;
+  flex-wrap:wrap;
+}
+.day-card-header h3{
+  font-size:1.15rem;
   font-weight:700;
   letter-spacing:1px;
-  margin-bottom:6px;
 }
-.hero .sub {
-  font-size:15px;
-  opacity:.8;
-  margin-bottom:20px;
-}
-.hero-tags {
-  display:flex; gap:8px; justify-content:center; flex-wrap:wrap;
-}
-.hero-tags span {
-  background: rgba(255,255,255,.12);
-  backdrop-filter: blur(6px);
-  padding:5px 16px;
-  border-radius:24px;
-  font-size:13px;
-  border:1px solid rgba(255,255,255,.08);
-}
-
-/* ===== ROUTE SVG ===== */
-.route-svg-wrap {
-  max-width:820px; margin: -36px auto 0;
-  padding: 0 16px;
-  position:relative;
-  z-index:2;
-}
-.route-svg-card {
-  background: var(--card);
-  border-radius: var(--radius);
-  box-shadow: 0 4px 24px rgba(0,0,0,.1);
-  padding:24px;
-}
-.route-svg-card h2 {
-  font-size:16px;
-  color: var(--ocean);
-  margin-bottom:16px;
-  font-weight:600;
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.route-svg-card h2 small {
-  font-size:12px;
-  color:#999;
-  font-weight:400;
-}
-.route-map { width:100%; height:auto; display:block; }
-
-/* ===== CONTAINER ===== */
-.container { max-width:820px; margin:0 auto; padding:0 16px; }
-
-/* ===== DAY OVERVIEW STRIP ===== */
-.day-strip {
-  display:flex;
-  gap:6px;
-  overflow-x:auto;
-  padding:4px 0 12px;
-  -webkit-overflow-scrolling:touch;
-  scrollbar-width:none;
-}
-.day-strip::-webkit-scrollbar { display:none; }
-.day-strip-item {
-  flex-shrink:0;
-  padding:8px 14px;
-  border-radius:10px;
-  font-size:12px;
-  font-weight:600;
-  text-align:center;
-  min-width:70px;
-  background: var(--teal-light);
-  color: var(--teal);
-  cursor:default;
-}
-.day-strip-item .ds-num { font-size:18px; display:block; }
-.day-strip-item .ds-label { font-size:11px; opacity:.7; }
-
-/* ===== SECTION ===== */
-.section { margin:28px 0; }
-.section-title {
-  font-size:20px;
-  font-weight:700;
-  color: var(--ocean);
-  padding-bottom:10px;
-  border-bottom:2px solid var(--sand);
-  margin-bottom:16px;
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-/* ===== ALERT ===== */
-.alert {
-  background: #FFF8F0;
-  border-left: 4px solid var(--gold);
-  padding: 14px 18px;
-  border-radius: 10px;
-  margin: 20px 0;
-  font-size:14px;
-}
-.alert strong { color: var(--coral); }
-
-/* ===== OVERVIEW TABLE ===== */
-.overview-wrap { overflow-x:auto; border-radius:var(--radius); border:1px solid #E8E0D5; }
-.overview-table { width:100%; border-collapse:collapse; font-size:13px; }
-.overview-table th {
-  background: var(--ocean);
+.day-number{
+  background:var(--navy);
   color:#fff;
-  padding:10px 8px;
-  text-align:left;
+  padding:4px 12px;
+  border-radius:6px;
+  font-size:0.72rem;
   font-weight:600;
-  font-size:12px;
-  letter-spacing:.5px;
+  letter-spacing:1px;
 }
-.overview-table td { padding:10px 8px; border-bottom:1px solid #EDE8E0; vertical-align:top; }
-.overview-table tr:last-child td { border-bottom:none; }
-.overview-table tr:nth-child(even) { background:#FAF7F3; }
-.city-badge {
+.day-stay{
   display:inline-block;
-  padding:2px 10px;
-  border-radius:10px;
-  font-size:11px;
-  font-weight:600;
+  background:rgba(212,168,87,0.15);
+  color:#8a6a2e;
+  padding:3px 10px;
+  border-radius:6px;
+  font-size:0.72rem;
+  font-weight:500;
+  margin-left:auto;
 }
-.city-weihai { background:#E0E8F0; color:var(--ocean-light); }
-.city-penglai { background:#F0E8D8; color:#7A5A30; }
-.city-qingdao { background:#D8E8E8; color:var(--teal); }
 
-/* ===== DAY CARD ===== */
-.day-card {
-  background: var(--card);
-  border-radius: var(--radius);
-  box-shadow: 0 2px 16px rgba(0,0,0,.06);
-  padding:24px;
-  margin-bottom:20px;
-  border:1px solid #EDE8E0;
+/* Timeline */
+.timeline{
+  position:relative;
+  padding-left:28px;
+  margin:8px 0 16px;
 }
-.day-header {
+.timeline::before{
+  content:'';
+  position:absolute;
+  left:9px;
+  top:4px;
+  bottom:4px;
+  width:2px;
+  background:linear-gradient(180deg,#d4a857,var(--sand));
+  border-radius:2px;
+}
+.timeline-item{
+  position:relative;
+  margin-bottom:10px;
+  font-size:0.88rem;
+  line-height:1.5;
+  color:var(--text);
+}
+.timeline-item::before{
+  content:'';
+  position:absolute;
+  left:-20px;
+  top:8px;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--gold);
+  border:2px solid #fff;
+  box-shadow:0 0 0 2px var(--gold);
+}
+.timeline-item .time{font-weight:600;color:var(--navy);margin-right:4px}
+.timeline-item .emoji{margin-right:4px}
+
+.day-card-footer{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+  padding-top:14px;
+  border-top:1px solid var(--sand);
+}
+.btn-nav{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 16px;
+  border-radius:var(--radius-sm);
+  font-size:0.78rem;
+  font-weight:500;
+  border:1.5px solid var(--navy);
+  color:var(--navy);
+  transition:all .2s;
+}
+.btn-nav:hover{background:var(--navy);color:#fff}
+.btn-nav.gold{
+  border-color:var(--gold);
+  color:#8a6a2e;
+  background:rgba(212,168,87,0.08);
+}
+.btn-nav.gold:hover{background:var(--gold);color:#fff}
+.btn-nav .icon{font-size:1rem}
+
+/* ========== DUAL COLUMN ========== */
+.dual-layout{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:20px;
+}
+@media(min-width:768px){.dual-layout{grid-template-columns:1fr 1fr;gap:28px}}
+
+/* ========== BUDGET ========== */
+.budget-card{
+  background:#fff;
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.budget-card-img{width:100%;height:auto;max-height:300px;object-fit:cover}
+.budget-body{padding:20px}
+.budget-total{
+  text-align:center;
+  padding:16px;
+  margin-bottom:16px;
+  background:linear-gradient(135deg,var(--navy),#0d1f34);
+  border-radius:var(--radius-sm);
+  color:#fff;
+}
+.budget-total .amount{font-size:2rem;font-weight:800;color:#d4a857}
+.budget-total .label{font-size:0.8rem;opacity:0.7;margin-top:2px}
+.budget-items{display:grid;gap:8px}
+.budget-item{
   display:flex;
   justify-content:space-between;
-  align-items:flex-start;
-  padding-bottom:14px;
-  border-bottom:2px solid var(--sand-light);
-  margin-bottom:16px;
-  flex-wrap:wrap;
-  gap:8px;
-}
-.day-header h3 {
-  font-family: var(--font-display);
-  font-size:20px;
-  color: var(--ocean);
-  font-weight:700;
-}
-.day-header .day-meta { font-size:13px; color:#888; }
-.day-header .day-drive-badge {
-  display:inline-block;
-  background: var(--sand-light);
-  color: #7A5A30;
-  padding:4px 12px;
+  align-items:center;
+  padding:10px 14px;
+  background:var(--sand);
   border-radius:8px;
-  font-size:12px;
-  font-weight:600;
+  font-size:0.85rem;
+}
+.budget-item .name{font-weight:500}
+.budget-item .cost{font-weight:700;color:var(--navy)}
+
+/* ========== FOOD ========== */
+.food-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:10px;
+}
+.food-card{
+  background:#fff;
+  border:1px solid #e0d6c4;
+  border-radius:var(--radius-sm);
+  padding:14px;
+  text-align:center;
+  transition:all .2s;
+}
+.food-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.food-card .icon{font-size:1.6rem;margin-bottom:4px}
+.food-card .name{font-size:0.82rem;font-weight:600}
+.food-card .price{font-size:0.72rem;color:var(--text-light);margin-top:2px}
+.food-card .tag{
+  display:inline-block;
+  background:rgba(212,168,87,0.12);
+  color:#8a6a2e;
+  font-size:0.62rem;
+  padding:2px 8px;
+  border-radius:4px;
+  margin-top:4px;
 }
 
-/* ===== MINI ROUTE SVG ===== */
-.mini-route {
-  background: #FAF8F5;
-  border-radius:10px;
-  padding:12px 16px;
-  margin-bottom:12px;
+/* ========== STAY CARD ========== */
+.stay-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:12px;
+}
+.stay-card{
+  background:#fff;
+  border:1px solid #e0d6c4;
+  border-radius:var(--radius-sm);
+  padding:16px;
+  font-size:0.85rem;
+}
+.stay-card .city{font-weight:700;color:var(--gold);font-size:0.9rem;margin-bottom:4px}
+.stay-card .hotels{color:var(--text);line-height:1.5}
+
+/* ========== WEATHER ========== */
+.weather-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:10px;
+}
+.weather-card{
+  background:#fff;
+  border:1px solid #e0d6c4;
+  border-radius:var(--radius-sm);
+  padding:16px;
+  text-align:center;
+}
+.weather-card .city{font-weight:700;font-size:0.9rem}
+.weather-card .temp{font-size:1.4rem;font-weight:700;color:var(--navy);margin:4px 0}
+.weather-card .detail{font-size:0.75rem;color:var(--text-light)}
+
+/* ========== INFO GRID ========== */
+.info-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+}
+@media(min-width:640px){.info-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:900px){.info-grid{grid-template-columns:1fr 1fr 1fr}}
+.info-card{
+  background:#fff;
+  border-radius:var(--radius-sm);
+  padding:20px;
+  box-shadow:var(--shadow);
+  border-top:3px solid var(--gold);
+}
+.info-card h4{
+  font-size:0.95rem;
+  font-weight:700;
+  margin-bottom:10px;
   display:flex;
   align-items:center;
-  gap:12px;
-  flex-wrap:wrap;
+  gap:6px;
 }
-.mini-route .mr-label {
-  font-size:12px;
-  font-weight:600;
-  color: var(--ocean-light);
-  white-space:nowrap;
-}
-.mini-route .mr-stats {
-  font-size:12px;
-  color:#888;
-  white-space:nowrap;
-}
-.mini-route .mr-link {
-  font-size:12px;
-  color: var(--teal);
-  text-decoration:none;
-  margin-left:auto;
-  white-space:nowrap;
-}
-.mini-route .mr-link:hover { text-decoration:underline; }
-.mini-route svg { flex-shrink:0; }
-
-/* ===== TIMELINE ===== */
-.timeline { position:relative; padding-left:32px; }
-.timeline::before {
-  content:'';
-  position:absolute;
-  left:11px; top:8px; bottom:8px;
-  width:2px;
-  background: #E0D8D0;
-}
-.tl-item { position:relative; margin-bottom:18px; }
-.tl-item::before {
-  content:'';
-  position:absolute;
-  left:-22px; top:6px;
-  width:14px; height:14px;
-  border-radius:50%;
-  border:3px solid #fff;
-  box-shadow:0 0 0 2px;
-}
-.tl-item.play::before { background: var(--teal); color: var(--teal); }
-.tl-item.drive::before { background: #8A8A8A; color: #8A8A8A; }
-.tl-item.food::before { background: var(--coral); color: var(--coral); }
-.tl-item.hotel::before { background: var(--gold); color: var(--gold); }
-.tl-item.kid::before { background: var(--pine); color: var(--pine); }
-.tl-item.alert-item::before { background: var(--coral); color: var(--coral); }
-
-.tl-time {
-  font-size:12px;
-  font-weight:700;
-  color: var(--teal);
-  letter-spacing:.3px;
-  margin-bottom:2px;
-}
-.tl-content { font-size:14px; }
-.tl-content .tl-title { font-weight:600; }
-.tl-content .tl-note { color:#888; font-size:13px; margin-top:2px; line-height:1.5; }
-.tl-content .tl-link {
+.info-card ul{list-style:none;font-size:0.82rem;line-height:1.7}
+.info-card ul li::before{content:"· ";color:var(--gold);font-weight:700}
+.info-card ul li{margin-bottom:2px}
+.info-card ul li strong{font-weight:600}
+.info-card .safe-tag{
   display:inline-block;
-  font-size:12px;
-  color: var(--teal);
-  text-decoration:none;
-  margin-top:2px;
-  font-weight:500;
+  background:#fef5e7;
+  color:#b8860b;
+  font-size:0.68rem;
+  padding:2px 8px;
+  border-radius:4px;
+  font-weight:600;
 }
-.tl-content .tl-link:hover { text-decoration:underline; }
 
-/* ===== INFO CARDS ===== */
-.info-card {
-  background: var(--card);
-  border-radius: var(--radius);
-  box-shadow: 0 2px 12px rgba(0,0,0,.05);
-  padding:20px;
-  margin-bottom:14px;
-  border:1px solid #EDE8E0;
+/* ========== SECTION BG ========== */
+.bg-sand{
+  background:var(--sand);
+  padding:40px 20px;
 }
-.info-card h4 { font-size:15px; color: var(--ocean); margin-bottom:8px; }
-.info-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-@media (max-width:520px) { .info-grid { grid-template-columns:1fr; } }
+.bg-sand .section,.bg-sand .section-wide{max-width:var(--max-w);margin:0 auto}
 
-/* ===== FOOD GRID ===== */
-.food-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-@media (max-width:520px) { .food-grid { grid-template-columns:1fr; } }
-.food-item {
-  background: #FAF8F5;
-  border-radius:10px;
-  padding:14px;
-  border:1px solid #EDE8E0;
-}
-.food-item .f-name { font-weight:600; font-size:14px; }
-.food-item .f-price { font-size:12px; color:#888; margin-top:2px; }
-.food-item .f-tags { margin-top:6px; display:flex; gap:4px; flex-wrap:wrap; }
-.tag-pill { display:inline-block; padding:2px 10px; border-radius:10px; font-size:11px; font-weight:500; }
-.tag-allfam { background:#E0F0E0; color:#2A6A3A; }
-.tag-local { background:#F0E8D8; color:#7A5A30; }
-.tag-parents { background:#F0E0E0; color:#7A3040; }
-
-/* ===== BUDGET ===== */
-.budget-wrap { overflow-x:auto; border-radius:var(--radius); border:1px solid #E8E0D5; }
-.budget-table { width:100%; border-collapse:collapse; font-size:14px; }
-.budget-table th { background: var(--ocean); color:#fff; padding:10px; text-align:left; font-size:12px; letter-spacing:.5px; }
-.budget-table td { padding:10px; border-bottom:1px solid #EDE8E0; }
-.budget-table tr.total td { font-weight:700; background: var(--sand-light); font-size:16px; color: var(--ocean); }
-.budget-table td:last-child { text-align:right; font-weight:600; }
-.budget-table .paid { color: var(--pine); font-weight:700; }
-
-/* ===== ATTRACTION TABLE ===== */
-.attr-wrap { overflow-x:auto; border-radius:var(--radius); border:1px solid #E8E0D5; }
-.attr-table { width:100%; border-collapse:collapse; font-size:13px; }
-.attr-table th { background: var(--ocean); color:#fff; padding:8px; text-align:left; font-size:12px; }
-.attr-table td { padding:8px; border-bottom:1px solid #EDE8E0; }
-.attr-table tr:nth-child(even) { background:#FAF7F3; }
-.star { color: var(--gold); letter-spacing:1px; }
-.rating-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:4px; }
-.rating-dot.high { background: var(--pine); }
-.rating-dot.mid { background: var(--gold); }
-
-/* ===== CHECKLIST ===== */
-.checklist { list-style:none; padding:0; }
-.checklist li { padding:6px 0; font-size:14px; display:flex; align-items:center; gap:8px; }
-.checklist li::before { content:'☐'; font-size:16px; color: var(--teal); flex-shrink:0; }
-.prio-m { background: #FDECEA; color: var(--coral); padding:1px 8px; border-radius:8px; font-size:10px; font-weight:600; }
-.prio-s { background: #FEF6E0; color: #8A6A20; padding:1px 8px; border-radius:8px; font-size:10px; }
-
-/* ===== RISK ===== */
-.risk-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-@media (max-width:520px) { .risk-grid { grid-template-columns:1fr; } }
-.risk-item { border-radius:10px; padding:14px; font-size:13px; }
-.risk-item.danger { background:#FDECEA; border:1px solid #E8B4AA; }
-.risk-item.warn { background:#FEF6E0; border:1px solid #E8D090; }
-.risk-item.info { background:#E8F0F4; border:1px solid #A0C8D8; }
-.risk-item .risk-title { font-weight:600; margin-bottom:4px; }
-
-/* ===== TIPS LIST ===== */
-.tips-list { padding-left:18px; font-size:14px; line-height:2; }
-.tips-list li strong { color: var(--ocean); }
-
-.footer {
+/* ========== FOOTER ========== */
+footer{
+  background:var(--dark);
+  color:rgba(255,255,255,0.5);
   text-align:center;
   padding:32px 20px;
-  color:#AAA;
-  font-size:12px;
-  border-top:1px solid #EDE8E0;
-  margin-top:20px;
+  font-size:0.78rem;
+  line-height:1.8;
 }
+footer strong{color:#d4a857;font-weight:600}
+footer .navy-line{width:40px;height:2px;background:var(--gold);margin:12px auto;border-radius:2px}
+
+/* ========== RESPONSIVE ========== */
+@media(min-width:480px){
+  .day-nav-btn{width:72px;height:72px}
+  .day-nav-btn .num{font-size:0.85rem}
+}
+@media(min-width:640px){
+  .day-card-img{height:260px}
+  .hero{min-height:600px}
+}
+@media(min-width:768px){
+  .section{padding:48px 32px}
+  .section-wide{padding:56px 32px}
+  .bg-sand{padding:56px 32px}
+  .day-card{display:grid;grid-template-columns:40% 60%}
+  .day-card-img{height:100%;min-height:280px}
+  .day-card-body{padding:24px 28px}
+  .day-card.reverse{grid-template-columns:60% 40%}
+  .day-card.reverse .day-card-img{order:1}
+  .hero{min-height:640px}
+  .wave-divider svg{height:80px}
+}
+@media(min-width:1024px){
+  .hero-title{font-size:4rem}
+  .section{padding:60px 32px}
+  .section-wide{padding:64px 32px}
+  .bg-sand{padding:64px 32px}
+}
+
+/* ========== REDUCED MOTION ========== */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .hero-scroll{animation:none}
+  .day-card,.food-card{transition:none}
+}
+
+/* ========== SVGs within day cards ========== */
+.mini-route-svg{width:100%;max-width:320px;margin:6px 0;border-radius:8px;background:var(--sand)}
 </style>
 </head>
 <body>
 
-<!-- ===== HERO ===== -->
-<div class="hero">
-  <h1>🚗 威海→青岛 · 沿海自驾</h1>
-  <div class="sub">2026年8月1日 — 8月8日 · 一家三口 · 北线</div>
-  <div class="hero-tags">
-    <span>🏖️ 那香海</span>
-    <span>⛰️ 成山头</span>
-    <span>🚢 海军博物馆</span>
-    <span>🏯 蓬莱阁</span>
-    <span>🐬 极地海洋</span>
+<!-- ========== HERO ========== -->
+<section class="hero" id="top">
+  <img class="hero-bg" src="imgs/cover.png" alt="威海沿海公路" loading="lazy">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🚗 沿海自驾 · 家庭之旅</div>
+    <h1 class="hero-title">威海→青岛<br><span>· 沿海自驾</span></h1>
+    <div class="hero-tags">
+      <span class="hero-tag">8天7晚</span>
+      <span class="hero-tag">👨‍👩‍👦 一家三口</span>
+      <span class="hero-tag">~520km</span>
+      <span class="hero-tag">2026.8.1 — 8.8</span>
+    </div>
   </div>
+  <div class="hero-scroll">
+    <span>向下探索</span>
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 2v8M2 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</section>
+
+<!-- Wave Divider -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+    <path d="M0,40 C360,80 720,0 1080,40 C1260,60 1350,30 1440,40 L1440,80 L0,80 Z"/>
+  </svg>
 </div>
 
-<!-- ===== ROUTE OVERVIEW MAP ===== -->
-<div class="route-svg-wrap">
-  <div class="route-svg-card">
-    <h2>🗺️ 路线总览 <small>威海→青岛 沿海自驾 · 全程约 520km</small></h2>
-    <svg class="route-map" viewBox="0 0 820 340" xmlns="http://www.w3.org/2000/svg">
-      <!-- Coastline -->
-      <path d="M80,300 Q120,280 160,290 Q200,300 240,270 Q280,240 320,250 Q360,260 400,220 Q440,180 480,170 Q520,160 560,140 Q600,120 640,100 Q680,80 720,90 Q760,100 780,80" fill="none" stroke="#C8D8D8" stroke-width="2" stroke-dasharray="6,4" opacity="0.6"/>
-      <!-- Sea area -->
-      <text x="760" y="60" fill="#C8D8D8" font-size="11" opacity="0.5" font-weight="500">🌊 黄 海</text>
+<!-- ========== ALERT BAR ========== -->
+<div class="alert-bar">
+  <strong>⚠️ 重要提醒</strong>
+  <span>|</span>
+  8月为台风季·关注天气·备雨具·离岸流危险区域不下水
+</div>
 
-      <!-- Route line -->
-      <path d="M100,240 Q160,230 220,220 Q280,210 340,200 Q400,190 430,170 Q460,150 500,140 Q540,130 600,120 Q660,110 700,95" fill="none" stroke="var(--teal)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
-      <path d="M100,240 Q160,230 220,220 Q280,210 340,200 Q400,190 430,170 Q460,150 500,140 Q540,130 600,120 Q660,110 700,95" fill="none" stroke="var(--teal)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.15"/>
+<!-- ========== ROUTE OVERVIEW ========== -->
+<section class="section" id="overview">
+  <div class="section-head">
+    <h2 class="section-title">📍 路线总览</h2>
+    <p class="section-subtitle">全程约 520km · 威海机场出发 → 青岛胶东机场还车</p>
+  </div>
 
-      <!-- Route dots and labels -->
-      <!-- 威海机场 -->
-      <circle cx="120" cy="235" r="7" fill="var(--teal)" stroke="#fff" stroke-width="2.5"/>
-      <text x="120" y="220" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ocean)">✈️ 威海</text>
-      <text x="120" y="260" text-anchor="middle" font-size="9" fill="#888">大水泊机场</text>
+  <div class="route-map-wrap">
+    <svg viewBox="0 0 820 660" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,PingFang SC,Microsoft YaHei,sans-serif">
+      <defs>
+        <filter id="shadow" x="-2" y="-2" width="6" height="6"><feDropShadow dx="1" dy="1" stdDeviation="2" flood-opacity="0.15"/></filter>
+        <marker id="dot" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="8" markerHeight="8"><circle cx="5" cy="5" r="4" fill="#d4a857"/></marker>
+      </defs>
 
-      <!-- 那香海 -->
-      <circle cx="190" cy="228" r="6" fill="var(--teal)" stroke="#fff" stroke-width="2.5"/>
-      <text x="190" y="213" text-anchor="middle" font-size="11" font-weight="600" fill="var(--ocean)">🏖️ 那香海</text>
-      <text x="152" y="240" font-size="9" fill="#999" transform="rotate(-15,152,240)">43km · 47min</text>
+      <!-- Background sea -->
+      <rect x="0" y="0" width="820" height="660" fill="#e8f4f8"/>
 
-      <!-- 成山头 -->
-      <circle cx="280" cy="215" r="6" fill="var(--teal)" stroke="#fff" stroke-width="2.5"/>
-      <text x="280" y="200" text-anchor="middle" font-size="11" font-weight="600" fill="var(--ocean)">⛰️ 成山头</text>
-      <text x="237" y="226" font-size="9" fill="#999" transform="rotate(-12,237,226)">30km · 43min</text>
+      <!-- Subtle grid lines -->
+      <g stroke="#d0e2ed" stroke-width="0.5" opacity="0.4">
+        <line x1="0" y1="132" x2="820" y2="132"/>
+        <line x1="0" y1="264" x2="820" y2="264"/>
+        <line x1="0" y1="396" x2="820" y2="396"/>
+        <line x1="0" y1="528" x2="820" y2="528"/>
+      </g>
 
-      <!-- 刘公岛 -->
-      <circle cx="340" cy="210" r="5" fill="#8A8A8A" stroke="#fff" stroke-width="2.5"/>
-      <text x="340" y="195" text-anchor="middle" font-size="10" fill="#888">🚢 刘公岛</text>
-      <text x="313" y="218" font-size="9" fill="#999" transform="rotate(-10,313,218)">66km · ≈1h</text>
+      <!-- Landmass (Shandong Peninsula stylized) -->
+      <path d="M 20,640 L 20,580
+               C 60,560 120,550 180,530
+               C 260,500 320,480 380,440
+               C 420,410 460,370 500,330
+               C 540,290 580,250 630,220
+               C 670,195 710,185 740,200
+               C 760,215 760,240 740,260
+               C 710,280 680,310 660,340
+               C 640,370 620,400 600,420
+               C 560,450 510,470 470,480
+               C 420,495 380,510 340,525
+               C 280,545 200,560 120,570
+               C 80,575 50,575 30,565
+               C 15,558 10,545 10,530
+               L 10,30
+               C 40,20 80,20 120,28
+               C 180,40 230,55 270,70
+               C 320,88 360,100 390,105
+               C 420,110 450,108 470,100
+               C 500,90 520,75 540,65
+               C 560,55 570,52 580,55
+               C 590,58 595,68 590,80
+               C 580,100 560,120 540,140
+               C 510,168 480,185 450,200
+               C 420,215 390,230 360,250
+               C 320,278 280,300 240,320
+               C 200,340 160,355 120,365
+               C 80,375 50,380 20,380 Z"
+            fill="#ecd8bf" stroke="#c4a57a" stroke-width="1.5" opacity="0.85"/>
 
-      <!-- 蓬莱 -->
-      <circle cx="440" cy="180" r="7" fill="var(--teal)" stroke="#fff" stroke-width="2.5"/>
-      <text x="440" y="165" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ocean)">🏯 蓬莱阁</text>
-      <text x="390" y="188" font-size="9" fill="#999">157km · 2.5h</text>
+      <!-- Sea wave decorations -->
+      <g stroke="#b0d0e0" stroke-width="1" fill="none" opacity="0.5">
+        <path d="M 550,40 Q 565,35 580,40 Q 595,45 610,40"/>
+        <path d="M 620,55 Q 635,50 650,55 Q 665,60 680,55"/>
+        <path d="M 700,70 Q 715,65 730,70 Q 745,75 760,70"/>
+        <path d="M 640,90 Q 655,85 670,90 Q 685,95 700,90"/>
+        <path d="M 80,130 Q 100,123 120,130 Q 140,137 160,130"/>
+        <path d="M 60,160 Q 80,153 100,160 Q 120,167 140,160"/>
+        <path d="M 90,100 Q 105,95 120,100 Q 135,105 150,100"/>
+      </g>
 
-      <!-- 青岛 -->
-      <circle cx="620" cy="118" r="9" fill="var(--ocean)" stroke="#fff" stroke-width="3"/>
-      <text x="620" y="100" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ocean)">🌊 青岛</text>
-      <text x="530" y="138" font-size="9" fill="#999">233km · 2.8h</text>
-      <!-- Sub-stops -->
-      <circle cx="565" cy="128" r="4" fill="#8A8A8A" stroke="#fff" stroke-width="2"/>
-      <text x="565" y="118" text-anchor="middle" font-size="9" fill="#888">🚢 海军博物馆</text>
-      <circle cx="650" cy="108" r="4" fill="#8A8A8A" stroke="#fff" stroke-width="2"/>
-      <text x="650" y="98" text-anchor="middle" font-size="9" fill="#888">⛰️ 崂山</text>
-      <circle cx="710" cy="92" r="4" fill="#8A8A8A" stroke="#fff" stroke-width="2"/>
-      <text x="710" y="82" text-anchor="middle" font-size="9" fill="#888">✈️ 胶东机场</text>
+      <!-- Coastline decorative dashed line -->
+      <path d="M 20,640 C 40,610 80,570 160,530 C 240,490 300,460 360,420
+               C 420,380 470,340 530,300 C 570,275 610,250 640,230
+               C 670,210 700,200 730,210 C 750,218 760,235 750,255
+               C 730,280 700,310 670,340 C 640,370 610,400 570,420
+               C 530,440 480,460 430,475 C 370,492 300,510 230,530
+               C 160,550 100,560 50,565 C 30,568 15,560 10,530"
+            fill="none" stroke="#1a3a5c" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.3"/>
+
+      <!-- Route line (golden) -->
+      <path d="M 130,585 C 200,560 280,520 340,480
+               C 400,440 460,390 510,340
+               C 560,290 610,250 660,225
+               C 690,210 720,215 740,235
+               C 720,280 680,320 630,350
+               C 580,380 530,410 470,435
+               C 410,460 340,485 270,505
+               C 210,520 160,530 130,530"
+            fill="none" stroke="#d4a857" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="0" opacity="0.9"/>
+
+      <!-- Direction arrow on route -->
+      <polygon points="595,295 585,310 600,308" fill="#d4a857" opacity="0.7"/>
+      <polygon points="310,492 300,507 315,505" fill="#d4a857" opacity="0.7"/>
+
+      <!-- Waypoint dots and labels -->
+
+      <!-- 1. 青岛 -->
+      <circle cx="130" cy="585" r="10" fill="#1a3a5c" stroke="#fff" stroke-width="3" filter="url(#shadow)"/>
+      <text x="130" y="608" text-anchor="middle" font-size="14" font-weight="700" fill="#1a3a5c">青岛</text>
+      <text x="130" y="622" text-anchor="middle" font-size="10" fill="#5a7a9a">终点</text>
+
+      <!-- 2. 蓬莱阁 -->
+      <circle cx="130" cy="530" r="9" fill="#d4a857" stroke="#fff" stroke-width="3" filter="url(#shadow)"/>
+      <text x="130" y="517" text-anchor="middle" font-size="13" font-weight="700" fill="#1a3a5c">蓬莱阁</text>
+
+      <!-- Distance: 蓬莱→青岛 233km -->
+      <rect x="80" y="540" width="100" height="20" rx="10" fill="rgba(26,58,92,0.08)" stroke="none"/>
+      <text x="130" y="554" text-anchor="middle" font-size="9" fill="#5a7a9a">← 233km · 沈海高速 →</text>
+
+      <!-- 3. 刘公岛 -->
+      <circle cx="560" cy="155" r="9" fill="#d4a857" stroke="#fff" stroke-width="3" filter="url(#shadow)"/>
+      <text x="560" y="142" text-anchor="middle" font-size="13" font-weight="700" fill="#1a3a5c">刘公岛</text>
+
+      <!-- 4. 成山头 -->
+      <circle cx="720" cy="218" r="9" fill="#d4a857" stroke="#fff" stroke-width="3" filter="url(#shadow)"/>
+      <text x="720" y="205" text-anchor="middle" font-size="13" font-weight="700" fill="#1a3a5c">成山头</text>
+
+      <!-- 5. 那香海 -->
+      <circle cx="635" cy="240" r="9" fill="#d4a857" stroke="#fff" stroke-width="3" filter="url(#shadow)"/>
+      <text x="635" y="227" text-anchor="middle" font-size="13" font-weight="700" fill="#1a3a5c">那香海</text>
+
+      <!-- 6. 威海机场 -->
+      <circle cx="575" cy="275" r="9" fill="#d4a857" stroke="#fff" stroke-width="3" filter="url(#shadow)"/>
+      <text x="575" y="262" text-anchor="middle" font-size="13" font-weight="700" fill="#1a3a5c">威海机场</text>
+      <text x="575" y="292" text-anchor="middle" font-size="10" fill="#5a7a9a">起点</text>
+
+      <!-- Distance markers along route -->
+
+      <!-- 威海机场→那香海 43km -->
+      <rect x="582" y="248" width="56" height="16" rx="8" fill="rgba(212,168,87,0.12)" stroke="#d4a857" stroke-width="0.5"/>
+      <text x="610" y="259" text-anchor="middle" font-size="8" fill="#8a6a2e">43km</text>
+      <line x1="585" y1="275" x2="620" y2="245" stroke="#d4a857" stroke-width="0.8" stroke-dasharray="2,2"/>
+
+      <!-- 那香海→成山头 30km -->
+      <rect x="662" y="220" width="56" height="16" rx="8" fill="rgba(212,168,87,0.12)" stroke="#d4a857" stroke-width="0.5"/>
+      <text x="690" y="231" text-anchor="middle" font-size="8" fill="#8a6a2e">30km</text>
+      <line x1="660" y1="225" x2="700" y2="215" stroke="#d4a857" stroke-width="0.8" stroke-dasharray="2,2"/>
+
+      <!-- 成山头→刘公岛 66km -->
+      <rect x="615" y="170" width="56" height="16" rx="8" fill="rgba(212,168,87,0.12)" stroke="#d4a857" stroke-width="0.5"/>
+      <text x="643" y="181" text-anchor="middle" font-size="8" fill="#8a6a2e">66km</text>
+      <line x1="690" y1="195" x2="630" y2="170" stroke="#d4a857" stroke-width="0.8" stroke-dasharray="2,2"/>
+
+      <!-- 威海→蓬莱 157km -->
+      <rect x="330" y="50" width="70" height="16" rx="8" fill="rgba(212,168,87,0.12)" stroke="#d4a857" stroke-width="0.5"/>
+      <text x="365" y="61" text-anchor="middle" font-size="8" fill="#8a6a2e">157km</text>
+      <line x1="500" y1="120" x2="370" y2="65" stroke="#d4a857" stroke-width="0.8" stroke-dasharray="2,2"/>
+
+      <!-- ========== COMPASS ROSE ========== -->
+      <g transform="translate(740,50)">
+        <circle cx="0" cy="0" r="22" fill="rgba(26,58,92,0.06)" stroke="#1a3a5c" stroke-width="0.8"/>
+        <polygon points="0,-20 4,-6 0,-8 -4,-6" fill="#1a3a5c"/>
+        <polygon points="0,20 4,6 0,8 -4,6" fill="#c4a57a" opacity="0.5"/>
+        <polygon points="-20,0 -6,4 -8,0 -6,-4" fill="#c4a57a" opacity="0.5"/>
+        <polygon points="20,0 6,4 8,0 6,-4" fill="#1a3a5c"/>
+        <text x="0" y="-28" text-anchor="middle" font-size="10" font-weight="700" fill="#1a3a5c">北</text>
+        <text x="0" y="34" text-anchor="middle" font-size="9" fill="#5a7a9a">南</text>
+        <text x="34" y="4" text-anchor="middle" font-size="9" fill="#5a7a9a">东</text>
+        <text x="-34" y="4" text-anchor="middle" font-size="9" fill="#5a7a9a">西</text>
+      </g>
+
+      <!-- Decorative car icon at start -->
+      <g transform="translate(575,305)">
+        <rect x="-10" y="-6" width="20" height="12" rx="4" fill="#1a3a5c" opacity="0.15"/>
+        <circle cx="-5" cy="6" r="3" fill="#1a3a5c" opacity="0.2"/>
+        <circle cx="5" cy="6" r="3" fill="#1a3a5c" opacity="0.2"/>
+      </g>
+
+      <!-- Label: 黄海 -->
+      <text x="420" y="100" text-anchor="middle" font-size="16" font-weight="700" fill="#a0c8d8" opacity="0.4" letter-spacing="8">黄 海</text>
 
       <!-- Legend -->
-      <line x1="80" y1="310" x2="110" y2="310" stroke="var(--teal)" stroke-width="3" stroke-linecap="round"/>
-      <text x="115" y="314" font-size="11" fill="#888">自驾路线</text>
-      <line x1="80" y1="328" x2="110" y2="328" stroke="#C8D8D8" stroke-width="2" stroke-dasharray="6,4"/>
-      <text x="115" y="332" font-size="11" fill="#888">海岸线</text>
-      <circle cx="240" cy="328" r="5" fill="var(--teal)" stroke="#fff" stroke-width="2"/>
-      <text x="250" y="332" font-size="11" fill="#888">停靠点</text>
+      <g transform="translate(20,20)">
+        <rect x="0" y="0" width="120" height="64" rx="8" fill="rgba(255,255,255,0.85)" stroke="#d0d0d0" stroke-width="0.5"/>
+        <line x1="12" y1="16" x2="40" y2="16" stroke="#d4a857" stroke-width="3"/>
+        <text x="48" y="20" font-size="9" fill="#5a7a9a">自驾路线</text>
+        <circle cx="16" cy="40" r="4" fill="#1a3a5c"/>
+        <text x="48" y="44" font-size="9" fill="#5a7a9a">途经站点</text>
+        <circle cx="16" cy="56" r="6" fill="#1a3a5c" stroke="#fff" stroke-width="2"/>
+        <text x="48" y="60" font-size="9" fill="#5a7a9a">停留城市</text>
+      </g>
+
+      <!-- Decorative clouds -->
+      <g fill="#fff" opacity="0.5">
+        <ellipse cx="200" cy="30" rx="30" ry="12"/>
+        <ellipse cx="220" cy="25" rx="20" ry="10"/>
+        <ellipse cx="190" cy="28" rx="18" ry="9"/>
+        <ellipse cx="680" cy="35" rx="25" ry="10"/>
+        <ellipse cx="700" cy="30" rx="18" ry="8"/>
+      </g>
     </svg>
   </div>
-</div>
 
-<div class="container">
-
-<!-- ===== QUICK-NAV STRIP ===== -->
-<div class="day-strip">
-  <div class="day-strip-item"><span class="ds-num">D1</span><span class="ds-label">8/1 威海</span></div>
-  <div class="day-strip-item"><span class="ds-num">D2</span><span class="ds-label">8/2 威海</span></div>
-  <div class="day-strip-item"><span class="ds-num">D3</span><span class="ds-label">8/3 蓬莱</span></div>
-  <div class="day-strip-item"><span class="ds-num">D4</span><span class="ds-label">8/4 青岛</span></div>
-  <div class="day-strip-item"><span class="ds-num">D5</span><span class="ds-label">8/5 海军</span></div>
-  <div class="day-strip-item"><span class="ds-num">D6</span><span class="ds-label">8/6 山海</span></div>
-  <div class="day-strip-item"><span class="ds-num">D7</span><span class="ds-label">8/7 极地</span></div>
-  <div class="day-strip-item"><span class="ds-num">D8</span><span class="ds-label">8/8 返程</span></div>
-</div>
-
-<!-- ALERT -->
-<div class="alert">
-  <strong>⚠️ 行前必读</strong><br>
-  • 成山头/刘公岛提前3天预约 · 海军博物馆免费但需公众号预约（核潜艇单独约）<br>
-  • 崂山亲子选太清线（大巴+索道），别走巨峰线 · 儿童安全座椅一嗨加租约¥50/天
-</div>
-
-<!-- ===== 行程总览 ===== -->
-<div class="section">
-  <div class="section-title">📋 行程总览</div>
-  <div class="overview-wrap">
-  <table class="overview-table">
-    <thead><tr><th>天</th><th>日期</th><th>城市</th><th>主题</th><th>核心活动</th><th>🏨</th></tr></thead>
-    <tbody>
-      <tr><td>D1</td><td>8/1 六</td><td><span class="city-badge city-weihai">威海</span></td><td>🚙 到达</td><td>取车 · 那香海沙滩 · 环海路</td><td>那香海</td></tr>
-      <tr><td>D2</td><td>8/2 日</td><td><span class="city-badge city-weihai">威海</span></td><td>⛰️ 极东</td><td>成山头 + 刘公岛</td><td>威海市区</td></tr>
-      <tr><td>D3</td><td>8/3 一</td><td><span class="city-badge city-penglai">蓬莱</span></td><td>🛣️ 跨城</td><td>午前自由 → 开车蓬莱 → 蓬莱阁</td><td>蓬莱</td></tr>
-      <tr><td>D4</td><td>8/4 二</td><td><span class="city-badge city-qingdao">青岛</span></td><td>🛣️ 入青</td><td>午前蓬莱自由 → 开车青岛</td><td>青岛海边</td></tr>
-      <tr><td>D5</td><td>8/5 三</td><td><span class="city-badge city-qingdao">青岛</span></td><td>🚢 军舰</td><td>海军博物馆（必去）</td><td>青岛</td></tr>
-      <tr><td>D6</td><td>8/6 四</td><td><span class="city-badge city-qingdao">青岛</span></td><td>⛰️🏖️ 山海</td><td>崂山太清线上午 + 金沙滩下午</td><td>青岛</td></tr>
-      <tr><td>D7</td><td>8/7 五</td><td><span class="city-badge city-qingdao">青岛</span></td><td>🎢 亲子</td><td>极地海洋世界</td><td>青岛</td></tr>
-      <tr><td>D8</td><td>8/8 六</td><td><span class="city-badge city-qingdao">青岛</span></td><td>✈️ 返程</td><td>海底世界 → 还车 → 17:10飞</td><td>—</td></tr>
-    </tbody>
-  </table>
+  <!-- Distance legend tiles -->
+  <div class="route-distances">
+    <div class="route-dist"><strong>43km</strong>威海机场→那香海</div>
+    <div class="route-dist"><strong>30km</strong>那香海→成山头</div>
+    <div class="route-dist"><strong>66km</strong>成山头→刘公岛</div>
+    <div class="route-dist"><strong>157km</strong>威海→蓬莱</div>
+    <div class="route-dist"><strong>233km</strong>蓬莱→青岛</div>
+    <div class="route-dist"><strong>55km</strong>崂山→金沙滩</div>
+    <div class="route-dist"><strong>59km</strong>市区→机场</div>
   </div>
-</div>
+</section>
 
-<!-- ===== 分日行程 ===== -->
-<div class="section">
-  <div class="section-title">📅 分日行程</div>
+<!-- ========== QUICK NAV ========== -->
+<section class="section" id="nav">
+  <div class="section-head">
+    <h2 class="section-title">📅 每日行程</h2>
+    <p class="section-subtitle">点击日期快速跳转</p>
+  </div>
+  <div class="day-nav" role="tablist">
+    <button class="day-nav-btn" onclick="document.getElementById('d1').scrollIntoView({behavior:'smooth',block:'start'})"><span class="num">D1</span><span class="date">8/1</span></button>
+    <button class="day-nav-btn" onclick="document.getElementById('d2').scrollIntoView({behavior:'smooth',block:'start'})"><span class="num">D2</span><span class="date">8/2</span></button>
+    <button class="day-nav-btn" onclick="document.getElementById('d3').scrollIntoView({behavior:'smooth',block:'start'})"><span class="num">D3</span><span class="date">8/3</span></button>
+    <button class="day-nav-btn" onclick="document.getElementById('d4').scrollIntoView({behavior:'smooth',block:'start'})"><span class="num">D4</span><span class="date">8/4</span></button>
+    <button class="day-nav-btn" onclick="document.getElementById('d5').scrollIntoView({behavior:'smooth',block:'start'})"><span class="num">D5</span><span class="date">8/5</span></button>
+    <button class="day-nav-btn" onclick="document.getElementById('d6').scrollIntoView({behavior:'smooth',block:'start'})"><span class="num">D6</span><span class="date">8/6</span></button>
+    <button class="day-nav-btn" onclick="document.getElementById('d7').scrollIntoView({behavior:'smooth',block:'start'})"><span class="num">D7</span><span class="date">8/7</span></button>
+    <button class="day-nav-btn" onclick="document.getElementById('d8').scrollIntoView({behavior:'smooth',block:'start'})"><span class="num">D8</span><span class="date">8/8</span></button>
+  </div>
+</section>
 
-  <!-- ====== D1 ====== -->
+<!-- ========== DAILY ITINERARY ========== -->
+
+<!-- D1 -->
+<div class="section" id="d1">
   <div class="day-card">
-    <div class="day-header">
-      <div><h3>D1 · 8月1日 周六</h3><div class="day-meta">🏖️ 那香海沙滩 · 威海</div></div>
-      <div><span class="day-drive-badge">🔑 威海机场提车</span></div>
-    </div>
-
-    <div class="mini-route">
-      <svg width="120" height="32" viewBox="0 0 120 32">
-        <circle cx="16" cy="16" r="7" fill="var(--teal)" stroke="#fff" stroke-width="2.5"/>
-        <text x="16" y="20" text-anchor="middle" font-size="8" fill="#fff" font-weight="700">✈️</text>
-        <line x1="26" y1="16" x2="56" y2="8" stroke="#8A8A8A" stroke-width="2" stroke-dasharray="4,2"/>
-        <polygon points="56,8 56,14 63,8 56,2" fill="#8A8A8A"/>
-        <circle cx="80" cy="24" r="7" fill="var(--sand)" stroke="var(--gold)" stroke-width="2"/>
-        <text x="80" y="28" text-anchor="middle" font-size="9">🏖️</text>
-      </svg>
-      <span class="mr-label">威海机场 → 那香海</span>
-      <span class="mr-stats">43km · 47min</span>
-      <a class="mr-link" href="https://ditu.amap.com/dir?policy=0&from[latlng]=37.179742,122.197304&from[name]=威海机场&to[latlng]=37.401465,122.410360&to[name]=那香海" target="_blank">📍 高德导航 →</a>
-    </div>
-
-    <div class="timeline">
-      <div class="tl-item drive"><div class="tl-time">08:25 — 10:20</div><div class="tl-content"><div class="tl-title">✈️ 浦东→威海 9C6391</div><div class="tl-note">上海浦东T2 → 威海大水泊机场</div></div></div>
-      <div class="tl-item play"><div class="tl-time">10:20 — 11:30</div><div class="tl-content"><div class="tl-title">🚙 提车 + 开往那香海</div><div class="tl-note">一嗨速腾 · 机场店取车</div></div></div>
-      <div class="tl-item hotel"><div class="tl-time">11:30 — 12:30</div><div class="tl-content"><div class="tl-title">🏨 入住 + 午餐</div><div class="tl-note">那香海海景/儿童主题房 · 小镇餐厅</div></div></div>
-      <div class="tl-item kid"><div class="tl-time">13:00 — 17:00</div><div class="tl-content"><div class="tl-title">🏖️ 那香海沙滩</div><div class="tl-note">沙细浪缓 · 儿子挖沙踩浪 · 带防晒+帐篷+玩具</div><a class="tl-link" href="https://ditu.amap.com/search?query=那香海&query_type=RQBXY&longitude=122.410360&latitude=37.401465&range=5000" target="_blank">📍 高德定位</a></div></div>
-      <div class="tl-item drive"><div class="tl-time">17:00 — 18:00</div><div class="tl-content"><div class="tl-title">🚙 环海路自驾</div><div class="tl-note">那香海→成山头方向沿海公路，风景绝佳</div></div></div>
-      <div class="tl-item food"><div class="tl-time">18:30 — 20:00</div><div class="tl-content"><div class="tl-title">🍜 韩式烤肉或海鲜</div><div class="tl-note">威海韩餐很地道</div></div></div>
-      <div class="tl-item hotel"><div class="tl-time">🌙</div><div class="tl-content"><div class="tl-title">🏨 那香海·海景房</div><div class="tl-note">那香海人假日酒店 / 香海豪生</div></div></div>
-    </div>
-  </div>
-
-  <!-- ====== D2 ====== -->
-  <div class="day-card">
-    <div class="day-header">
-      <div><h3>D2 · 8月2日 周日</h3><div class="day-meta">⛰️ 成山头 + 🚢 刘公岛</div></div>
-    </div>
-
-    <div class="mini-route">
-      <svg width="200" height="32" viewBox="0 0 200 32">
-        <circle cx="16" cy="16" r="7" fill="var(--sand)" stroke="var(--gold)" stroke-width="2"/>
-        <text x="16" y="20" text-anchor="middle" font-size="9">🏖️</text>
-        <line x1="26" y1="16" x2="56" y2="8" stroke="var(--teal)" stroke-width="2"/>
-        <polygon points="56,8 56,14 63,8 56,2" fill="var(--teal)"/>
-        <circle cx="80" cy="8" r="7" fill="var(--teal)" stroke="#fff" stroke-width="2.5"/>
-        <text x="80" y="12" text-anchor="middle" font-size="9" fill="#fff">⛰️</text>
-        <line x1="90" y1="8" x2="130" y2="18" stroke="var(--teal)" stroke-width="2"/>
-        <polygon points="130,18 130,12 137,18 130,24" fill="var(--teal)"/>
-        <circle cx="152" cy="24" r="7" fill="#8A8A8A" stroke="#fff" stroke-width="2"/>
-        <text x="152" y="28" text-anchor="middle" font-size="9">🚢</text>
-      </svg>
-      <span class="mr-label">那香海 → 成山头 → 市区</span>
-      <span class="mr-stats">30km+66km</span>
-      <a class="mr-link" href="https://ditu.amap.com/dir?policy=0&from[latlng]=37.401465,122.410360&from[name]=那香海&to[latlng]=37.401724,122.698982&to[name]=成山头" target="_blank">📍 高德导航 →</a>
-    </div>
-
-    <div class="timeline">
-      <div class="tl-item play"><div class="tl-time">08:00 — 08:45</div><div class="tl-content"><div class="tl-title">🚙 那香海→成山头</div><div class="tl-note">30km / 43min</div></div></div>
-      <div class="tl-item play"><div class="tl-time">09:00 — 11:30</div><div class="tl-content"><div class="tl-title">⛰️ 成山头</div><div class="tl-note">🎫 ~¥180 · 中国最东端 · 天尽头石碑 · 索道可坐</div><a class="tl-link" href="https://ditu.amap.com/search?query=成山头&query_type=RQBXY&longitude=122.698982&latitude=37.401724&range=5000" target="_blank">📍 高德定位</a></div></div>
-      <div class="tl-item drive"><div class="tl-time">11:30 — 13:00</div><div class="tl-content"><div class="tl-title">🚙 成山头→威海市区</div><div class="tl-note">66km · 荣乌高速约1h · 午餐</div></div></div>
-      <div class="tl-item kid"><div class="tl-time">13:30 — 17:00</div><div class="tl-content"><div class="tl-title">🚢 刘公岛</div><div class="tl-note">🎫 ~¥122 · 甲午纪念馆+退役驱逐舰登舰<br>⚠️ 提前线上购票！暑假人多</div><a class="tl-link" href="https://ditu.amap.com/search?query=刘公岛&query_type=RQBXY&longitude=122.183090&latitude=37.502573&range=5000" target="_blank">📍 高德定位</a></div></div>
-      <div class="tl-item food"><div class="tl-time">18:00 — 19:30</div><div class="tl-content"><div class="tl-title">🍜 海鲜大排档</div><div class="tl-note">鲅鱼水饺必吃</div></div></div>
-      <div class="tl-item hotel"><div class="tl-time">🌙</div><div class="tl-content"><div class="tl-title">🏨 威海市区</div><div class="tl-note">威海卫大厦 / 百纳中心</div></div></div>
-    </div>
-  </div>
-
-  <!-- ====== D3 ====== -->
-  <div class="day-card">
-    <div class="day-header">
-      <div><h3>D3 · 8月3日 周一</h3><div class="day-meta">🏯 蓬莱阁 · 跨城</div></div>
-      <div><span class="day-drive-badge">🛣️ 跨城 157km</span></div>
-    </div>
-
-    <div class="mini-route">
-      <svg width="200" height="32" viewBox="0 0 200 32">
-        <circle cx="16" cy="16" r="7" fill="var(--teal)" stroke="#fff" stroke-width="2.5"/>
-        <text x="16" y="20" text-anchor="middle" font-size="8" fill="#fff">🏙️</text>
-        <line x1="26" y1="16" x2="66" y2="12" stroke="var(--teal)" stroke-width="2.5"/>
-        <polygon points="66,12 66,18 74,12 66,6" fill="var(--teal)"/>
-        <text x="48" y="8" font-size="8" fill="#999" text-anchor="middle">荣乌高速</text>
-        <circle cx="90" cy="16" r="7" fill="var(--sand)" stroke="var(--gold)" stroke-width="2"/>
-        <text x="90" y="20" text-anchor="middle" font-size="9">🏯</text>
-      </svg>
-      <span class="mr-label">威海市区 → 蓬莱阁</span>
-      <span class="mr-stats">157km · 2.5h</span>
-      <a class="mr-link" href="https://ditu.amap.com/dir?policy=0&from[latlng]=37.494926,122.140165&from[name]=威海市区&to[latlng]=37.819201,120.760462&to[name]=蓬莱阁" target="_blank">📍 高德导航 →</a>
-    </div>
-
-    <div class="timeline">
-      <div class="tl-item play"><div class="tl-time">09:00 — 11:30</div><div class="tl-content"><div class="tl-title">☕ 威海自由</div><div class="tl-note">睡到自然醒 / 环翠楼公园 / 补前日景点</div></div></div>
-      <div class="tl-item drive"><div class="tl-time">11:30 — 14:00</div><div class="tl-content"><div class="tl-title">🚙 威海→蓬莱（荣乌高速）</div><div class="tl-note">服务区午餐</div></div></div>
-      <div class="tl-item hotel"><div class="tl-time">14:00 — 14:30</div><div class="tl-content"><div class="tl-title">🏨 入住</div><div class="tl-note">蓬莱阁附近酒店</div></div></div>
-      <div class="tl-item play"><div class="tl-time">15:00 — 17:30</div><div class="tl-content"><div class="tl-title">🏯 蓬莱阁</div><div class="tl-note">🎫 ~¥100 · 八仙过海传说 · 儿子会喜欢神话故事</div><a class="tl-link" href="https://ditu.amap.com/search?query=蓬莱阁&query_type=RQBXY&longitude=120.760462&latitude=37.819201&range=5000" target="_blank">📍 高德定位</a></div></div>
-      <div class="tl-item food"><div class="tl-time">18:00 — 19:30</div><div class="tl-content"><div class="tl-title">🍜 蓬莱小面+海鲜</div></div></div>
-      <div class="tl-item hotel"><div class="tl-time">🌙</div><div class="tl-content"><div class="tl-title">🏨 蓬莱</div><div class="tl-note">欧乐堡骑士酒店（儿童主题房）</div></div></div>
-    </div>
-  </div>
-
-  <!-- ====== D4 ====== -->
-  <div class="day-card">
-    <div class="day-header">
-      <div><h3>D4 · 8月4日 周二</h3><div class="day-meta">🌊 入青岛 · 跨城</div></div>
-      <div><span class="day-drive-badge">🛣️ 跨城 233km</span></div>
-    </div>
-
-    <div class="mini-route">
-      <svg width="200" height="32" viewBox="0 0 200 32">
-        <circle cx="16" cy="16" r="7" fill="var(--sand)" stroke="var(--gold)" stroke-width="2"/>
-        <text x="16" y="20" text-anchor="middle" font-size="9">🏯</text>
-        <line x1="26" y1="16" x2="66" y2="10" stroke="var(--ocean)" stroke-width="2.5"/>
-        <polygon points="66,10 66,16 74,10 66,4" fill="var(--ocean)"/>
-        <text x="48" y="6" font-size="8" fill="#999" text-anchor="middle">沈海高速</text>
-        <circle cx="90" cy="16" r="9" fill="var(--ocean)" stroke="#fff" stroke-width="3"/>
-        <text x="90" y="20" text-anchor="middle" font-size="10" fill="#fff">🌊</text>
-      </svg>
-      <span class="mr-label">蓬莱阁 → 青岛市区</span>
-      <span class="mr-stats">233km · 2.8h · 过路费≈93元</span>
-      <a class="mr-link" href="https://ditu.amap.com/dir?policy=0&from[latlng]=37.819201,120.760462&from[name]=蓬莱阁&to[latlng]=36.066938,120.382665&to[name]=青岛市区" target="_blank">📍 高德导航 →</a>
-    </div>
-
-    <div class="timeline">
-      <div class="tl-item play"><div class="tl-time">09:00 — 11:00</div><div class="tl-content"><div class="tl-title">☕ 蓬莱自由</div><div class="tl-note">八仙过海景区 / 补蓬莱阁</div></div></div>
-      <div class="tl-item drive"><div class="tl-time">11:00 — 14:00</div><div class="tl-content"><div class="tl-title">🚙 蓬莱→青岛（沈海高速）</div><div class="tl-note">午餐在莱阳/即墨服务区解决</div></div></div>
-      <div class="tl-item hotel"><div class="tl-time">14:00 — 15:00</div><div class="tl-content"><div class="tl-title">🏨 入住青岛</div><div class="tl-note">海景房优先 · 酒店停车后市区打车💡</div></div></div>
-      <div class="tl-item kid"><div class="tl-time">15:30 — 17:30</div><div class="tl-content"><div class="tl-title">🏖️ 第一海水浴场散步</div><div class="tl-note">适应青岛节奏</div></div></div>
-      <div class="tl-item food"><div class="tl-time">18:00 — 20:00</div><div class="tl-content"><div class="tl-title">🍜 云霄路美食街</div><div class="tl-note">辣炒蛤蜊（不辣版）· 海鲜水饺</div></div></div>
-      <div class="tl-item hotel"><div class="tl-time">🌙</div><div class="tl-content"><div class="tl-title">🏨 青岛海边</div><div class="tl-note">海天大酒店 / 海尔洲际 / 威斯汀</div></div></div>
-    </div>
-  </div>
-
-  <!-- ====== D5 ====== -->
-  <div class="day-card">
-    <div class="day-header">
-      <div><h3>D5 · 8月5日 周三</h3><div class="day-meta">🚢 海军博物馆 · 男孩日</div></div>
-      <div><span class="day-drive-badge">🚕 打车出行</span></div>
-    </div>
-    <div class="timeline">
-      <div class="tl-item kid"><div class="tl-time">09:00 — 12:00</div><div class="tl-content"><div class="tl-title">🚢 海军博物馆</div><div class="tl-note">🎫 免费（公众号预约）· 退役驱逐舰/潜艇登舰<br>🔥 儿子绝对兴奋！核潜艇需单独约</div><a class="tl-link" href="https://ditu.amap.com/search?query=海军博物馆&query_type=RQBXY&longitude=120.382665&latitude=36.066938&range=5000" target="_blank">📍 高德定位</a></div></div>
-      <div class="tl-item food"><div class="tl-time">12:00 — 13:30</div><div class="tl-content"><div class="tl-title">🍜 中山路附近午餐</div></div></div>
-      <div class="tl-item play"><div class="tl-time">14:00 — 17:00</div><div class="tl-content"><div class="tl-title">🌊 小青岛 / 鲁迅公园（可选）</div><div class="tl-note">紧邻海军博物馆，步行可到</div></div></div>
-      <div class="tl-item kid"><div class="tl-time">🌇 傍晚</div><div class="tl-content"><div class="tl-title">五四广场 · 奥帆中心夜景</div><div class="tl-note">灯光秀</div></div></div>
-    </div>
-  </div>
-
-  <!-- ====== D6 ====== -->
-  <div class="day-card">
-    <div class="day-header">
-      <div><h3>D6 · 8月6日 周四</h3><div class="day-meta">⛰️ 崂山 + 🏖️ 金沙滩</div></div>
-      <div><span class="day-drive-badge">🚗 驾车一日</span></div>
-    </div>
-
-    <div class="mini-route">
-      <svg width="260" height="32" viewBox="0 0 260 32">
-        <circle cx="16" cy="16" r="6" fill="var(--ocean)" stroke="#fff" stroke-width="2"/>
-        <text x="16" y="20" text-anchor="middle" font-size="7" fill="#fff">🏨</text>
-        <line x1="24" y1="16" x2="54" y2="8" stroke="var(--teal)" stroke-width="2"/>
-        <polygon points="54,8 54,14 61,8 54,2" fill="var(--teal)"/>
-        <circle cx="72" cy="8" r="6" fill="var(--teal)" stroke="#fff" stroke-width="2"/>
-        <text x="72" y="12" text-anchor="middle" font-size="8" fill="#fff">⛰️</text>
-        <line x1="82" y1="8" x2="122" y2="20" stroke="var(--teal)" stroke-width="2"/>
-        <polygon points="122,20 122,14 129,20 122,26" fill="var(--teal)"/>
-        <circle cx="145" cy="24" r="6" fill="var(--sand)" stroke="var(--gold)" stroke-width="2"/>
-        <text x="145" y="28" text-anchor="middle" font-size="8">🏖️</text>
-        <line x1="155" y1="24" x2="185" y2="16" stroke="#8A8A8A" stroke-width="2" stroke-dasharray="4,2"/>
-        <polygon points="185,16 185,22 192,16 185,10" fill="#8A8A8A"/>
-        <circle cx="206" cy="16" r="6" fill="var(--ocean)" stroke="#fff" stroke-width="2"/>
-        <text x="206" y="20" text-anchor="middle" font-size="7" fill="#fff">🏨</text>
-      </svg>
-      <span class="mr-label">市区 → 崂山 → 金沙滩 → 市区</span>
-      <span class="mr-stats">33km+55km 环线</span>
-      <a class="mr-link" href="https://ditu.amap.com/dir?policy=0&from[latlng]=36.066938,120.382665&from[name]=市区&to[latlng]=36.139998,120.677011&to[name]=崂山" target="_blank">📍 高德导航 →</a>
-    </div>
-
-    <div class="timeline">
-      <div class="tl-item play"><div class="tl-time">08:00 — 08:40</div><div class="tl-content"><div class="tl-title">🚙 市区→崂山</div><div class="tl-note">33km / 40min · 大河东客服中心</div></div></div>
-      <div class="tl-item play"><div class="tl-time">08:30 — 12:00</div><div class="tl-content"><div class="tl-title">⛰️ 崂山·太清线（亲子推荐）</div><div class="tl-note">🎫 ~¥120+观光车+索道 · 大巴+索道不累<br>✅ 太清线 · ❌ 不要走巨峰线</div><a class="tl-link" href="https://ditu.amap.com/search?query=崂山太清宫&query_type=RQBXY&longitude=120.677011&latitude=36.139998&range=5000" target="_blank">📍 高德定位</a></div></div>
-      <div class="tl-item drive"><div class="tl-time">12:00 — 13:30</div><div class="tl-content"><div class="tl-title">🚙 崂山→金沙滩（黄岛）</div><div class="tl-note">55km / 80min · 午餐路上</div></div></div>
-      <div class="tl-item kid"><div class="tl-time">14:00 — 17:00</div><div class="tl-content"><div class="tl-title">🏖️ 金沙滩</div><div class="tl-note">青岛最细沙滩 · 儿子挖沙 · 爸妈躺平</div><a class="tl-link" href="https://ditu.amap.com/search?query=金沙滩&query_type=RQBXY&longitude=120.245130&latitude=35.957210&range=5000" target="_blank">📍 高德定位</a></div></div>
-      <div class="tl-item drive"><div class="tl-time">19:30 — 20:00</div><div class="tl-content"><div class="tl-title">🚙 返回市区</div><div class="tl-note">隧道免费</div></div></div>
-    </div>
-  </div>
-
-  <!-- ====== D7 ====== -->
-  <div class="day-card">
-    <div class="day-header">
-      <div><h3>D7 · 8月7日 周五</h3><div class="day-meta">🐬 极地海洋世界</div></div>
-      <div><span class="day-drive-badge">🚕 打车</span></div>
-    </div>
-    <div class="timeline">
-      <div class="tl-item kid"><div class="tl-time">09:00 — 12:30</div><div class="tl-content"><div class="tl-title">🐬 极地海洋世界</div><div class="tl-note">🎫 ~¥240 · 白鲸海豚企鹅表演<br>上午表演场次多，早点去</div><a class="tl-link" href="https://ditu.amap.com/search?query=极地海洋世界&query_type=RQBXY&longitude=120.441559&latitude=36.070541&range=5000" target="_blank">📍 高德定位</a></div></div>
-      <div class="tl-item play"><div class="tl-time">14:30 — 17:00</div><div class="tl-content"><div class="tl-title">🎪 自由选择</div><div class="tl-note">· 八大关+第二海水浴场 · 奥帆坐帆船 · 台东夜市</div></div></div>
-      <div class="tl-item food"><div class="tl-time">18:00 — 20:00</div><div class="tl-content"><div class="tl-title">🍜 双合园饺子 / 开海海鲜</div></div></div>
-    </div>
-  </div>
-
-  <!-- ====== D8 ====== -->
-  <div class="day-card">
-    <div class="day-header">
-      <div><h3>D8 · 8月8日 周六 · 返程</h3><div class="day-meta">✈️ CZ6225 17:10→18:40</div></div>
-      <div><span class="day-drive-badge">🔑 机场还车</span></div>
-    </div>
-
-    <div class="mini-route">
-      <svg width="200" height="32" viewBox="0 0 200 32">
-        <circle cx="16" cy="16" r="6" fill="var(--sand)" stroke="var(--gold)" stroke-width="2"/>
-        <text x="16" y="20" text-anchor="middle" font-size="8">🐠</text>
-        <line x1="26" y1="16" x2="56" y2="10" stroke="#8A8A8A" stroke-width="2" stroke-dasharray="4,2"/>
-        <polygon points="56,10 56,16 63,10 56,4" fill="#8A8A8A"/>
-        <circle cx="78" cy="10" r="6" fill="#8A8A8A" stroke="#fff" stroke-width="2"/>
-        <text x="78" y="14" text-anchor="middle" font-size="7" fill="#fff">🔑</text>
-        <line x1="86" y1="10" x2="116" y2="16" stroke="var(--teal)" stroke-width="2"/>
-        <polygon points="116,16 116,10 123,16 116,22" fill="var(--teal)"/>
-        <circle cx="138" cy="24" r="7" fill="var(--ocean)" stroke="#fff" stroke-width="2.5"/>
-        <text x="138" y="28" text-anchor="middle" font-size="8" fill="#fff">✈️</text>
-      </svg>
-      <span class="mr-label">海底世界 → 机场还车</span>
-      <span class="mr-stats">59km · 1h</span>
-      <a class="mr-link" href="https://ditu.amap.com/dir?policy=0&from[latlng]=36.057077,120.336020&from[name]=海底世界&to[latlng]=36.359973,120.094940&to[name]=胶东机场" target="_blank">📍 高德导航 →</a>
-    </div>
-
-    <div class="timeline">
-      <div class="tl-item play"><div class="tl-time">09:00 — 11:30</div><div class="tl-content"><div class="tl-title">🐠 海底世界</div><div class="tl-note">🎫 ~¥130 · 鲨鱼水母海底隧道 · 3h</div><a class="tl-link" href="https://ditu.amap.com/search?query=海底世界&query_type=RQBXY&longitude=120.336020&latitude=36.057077&range=5000" target="_blank">📍 高德定位</a></div></div>
-      <div class="tl-item drive"><div class="tl-time">12:00 — 13:30</div><div class="tl-content"><div class="tl-title">🍜 午餐 + 取行李</div></div></div>
-      <div class="tl-item drive"><div class="tl-time">13:30 — 14:00</div><div class="tl-content"><div class="tl-title">🚙 开往胶东机场</div><div class="tl-note">59km / ≈1h</div></div></div>
-      <div class="tl-item alert-item"><div class="tl-time">15:00 — 16:30</div><div class="tl-content"><div class="tl-title">🔑 还车 + 值机</div><div class="tl-note">一嗨机场店还车 → 过安检</div></div></div>
-      <div class="tl-item drive"><div class="tl-time">17:10 — 18:40</div><div class="tl-content"><div class="tl-title">✈️ 青岛→上海 CZ6225</div><div class="tl-note">到家！🎉</div></div></div>
+    <img class="day-card-img" src="imgs/02-scene-naxianghai.png" alt="那香海" loading="lazy">
+    <div class="day-card-body">
+      <div class="day-card-header">
+        <span class="day-number">D1 · 8/1 周六</span>
+        <h3>威海 · 那香海</h3>
+        <span class="day-stay">🏨 那香海</span>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item"><span class="time">08:25-10:20</span><span class="emoji">✈️</span>浦东→威海 9C6391</div>
+        <div class="timeline-item"><span class="time">10:20-11:30</span><span class="emoji">🚙</span>提车 + 开往那香海 43km</div>
+        <div class="timeline-item"><span class="time">11:30-12:30</span><span class="emoji">🏨</span>入住 + 午餐（那香海海景房）</div>
+        <div class="timeline-item"><span class="time">13:00-17:00</span><span class="emoji">🏖️</span>那香海沙滩 · 儿子挖沙踩浪</div>
+        <div class="timeline-item"><span class="time">17:00-18:00</span><span class="emoji">🚙</span>环海路自驾</div>
+        <div class="timeline-item"><span class="time">18:30-20:00</span><span class="emoji">🍜</span>韩式烤肉 / 海鲜</div>
+      </div>
+      <div class="day-card-footer">
+        <a class="btn-nav" href="https://ditu.amap.com/search?query=那香海&longitude=122.410360&latitude=37.401465&range=5000" target="_blank" rel="noopener"><span class="icon">📍</span>高德导航·那香海</a>
+        <a class="btn-nav gold" href="https://ditu.amap.com/dir?policy=0&from[latlng]=122.197304,37.179742&from[name]=威海机场&to[latlng]=122.410360,37.401465&to[name]=那香海" target="_blank" rel="noopener"><span class="icon">🚗</span>机场→那香海</a>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ===== 住宿 ===== -->
-<div class="section">
-  <div class="section-title">🏨 住宿推荐</div>
-  <div class="info-card"><h4>🌊 那香海 D1</h4><p style="font-size:14px;">那香海人假日酒店 / 香海豪生 · 海景/儿童房</p></div>
-  <div class="info-card"><h4>🌆 威海市区 D2</h4><p style="font-size:14px;">威海卫大厦 / 百纳中心 · 近刘公岛码头</p></div>
-  <div class="info-card"><h4>🏯 蓬莱 D3</h4><p style="font-size:14px;">欧乐堡骑士酒店（儿童主题房）</p></div>
-  <div class="info-card"><h4>🌊 青岛 D4-D7</h4><p style="font-size:14px;">海天大酒店 / 海尔洲际 / 威斯汀 · 海景房优先<br>💡 酒店停车后市区打车</p></div>
-</div>
-
-<!-- ===== 美食 ===== -->
-<div class="section">
-  <div class="section-title">🍜 美食指南</div>
-  <div class="food-grid">
-    <div class="food-item"><div class="f-name">🥟 鲅鱼水饺</div><div class="f-price">¥40-60/人</div><div class="f-tags"><span class="tag-pill tag-allfam">全家</span></div></div>
-    <div class="food-item"><div class="f-name">🦪 辣炒蛤蜊（可不辣）</div><div class="f-price">¥30-50/人</div><div class="f-tags"><span class="tag-pill tag-allfam">全家</span></div></div>
-    <div class="food-item"><div class="f-name">🥘 海鲜大咖</div><div class="f-price">¥80-120/人</div><div class="f-tags"><span class="tag-pill tag-allfam">全家</span></div></div>
-    <div class="food-item"><div class="f-name">🍜 蓬莱小面</div><div class="f-price">¥15-25/人</div><div class="f-tags"><span class="tag-pill tag-local">蓬莱特色</span></div></div>
-    <div class="food-item"><div class="f-name">🇰🇷 韩式烤肉</div><div class="f-price">¥80-100/人</div><div class="f-tags"><span class="tag-pill tag-allfam">威海必吃</span></div></div>
-    <div class="food-item"><div class="f-name">🦐 葱烧海参</div><div class="f-price">¥100-150/人</div><div class="f-tags"><span class="tag-pill tag-local">鲁菜经典</span></div></div>
-    <div class="food-item"><div class="f-name">🦀 清蒸螃蟹</div><div class="f-price">¥60-100/人</div><div class="f-tags"><span class="tag-pill tag-allfam">全家</span></div></div>
-    <div class="food-item"><div class="f-name">🍺 青岛原浆</div><div class="f-price">¥15-25/杯</div><div class="f-tags"><span class="tag-pill tag-parents">爸妈限定</span></div></div>
+<!-- D2 -->
+<div class="section" id="d2">
+  <div class="day-card reverse">
+    <img class="day-card-img" src="imgs/03-scene-chengshantou.png" alt="成山头" loading="lazy">
+    <div class="day-card-body">
+      <div class="day-card-header">
+        <span class="day-number">D2 · 8/2 周日</span>
+        <h3>威海 · 成山头 + 刘公岛</h3>
+        <span class="day-stay">🏨 威海市区</span>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item"><span class="time">08:00-08:45</span><span class="emoji">🚙</span>那香海→成山头 30km</div>
+        <div class="timeline-item"><span class="time">09:00-11:30</span><span class="emoji">⛰️</span>成山头 · 中国最东端 ¥180</div>
+        <div class="timeline-item"><span class="time">11:30-13:00</span><span class="emoji">🚙</span>成山头→威海市区 66km</div>
+        <div class="timeline-item"><span class="time">13:30-17:00</span><span class="emoji">🚢</span>刘公岛 · 甲午纪念馆 + 登驱逐舰 ¥122</div>
+        <div class="timeline-item"><span class="time">18:00-19:30</span><span class="emoji">🍜</span>海鲜大排档</div>
+      </div>
+      <div class="day-card-footer">
+        <a class="btn-nav" href="https://ditu.amap.com/search?query=成山头&longitude=122.698982&latitude=37.401724&range=5000" target="_blank" rel="noopener"><span class="icon">📍</span>成山头</a>
+        <a class="btn-nav gold" href="https://ditu.amap.com/dir?policy=0&from[latlng]=122.410360,37.401465&from[name]=那香海&to[latlng]=122.698982,37.401724&to[name]=成山头" target="_blank" rel="noopener"><span class="icon">🚗</span>那香海→成山头</a>
+        <a class="btn-nav gold" href="https://ditu.amap.com/search?query=刘公岛&longitude=122.183090&latitude=37.502573&range=5000" target="_blank" rel="noopener"><span class="icon">📍</span>刘公岛</a>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- ===== 预算 ===== -->
-<div class="section">
-  <div class="section-title">💰 预算</div>
-  <div class="budget-wrap">
-  <table class="budget-table">
-    <thead><tr><th>项目</th><th>明细</th><th>金额</th></tr></thead>
-    <tbody>
-      <tr><td>🚗 租车</td><td>一嗨速腾7天含异地</td><td class="paid">¥1,160 ✅</td></tr>
-      <tr><td>⛽ 油+过路+停</td><td>全程≈600km</td><td>~¥800</td></tr>
-      <tr><td>🏨 住宿7晚</td><td>海景2×800 + 舒适5×500</td><td>~¥4,100</td></tr>
-      <tr><td>🎫 门票</td><td>成+刘+蓬+崂+极+海底</td><td>~¥2,700</td></tr>
-      <tr><td>🍜 餐饮8天</td><td>日均¥500</td><td>~¥4,000</td></tr>
-      <tr><td>🛍️ 其他</td><td>零食纪念品应急</td><td>~¥500</td></tr>
-      <tr class="total"><td>💰 总计</td><td>不含机票</td><td>~¥13,260</td></tr>
-    </tbody>
-  </table>
+<!-- D3 -->
+<div class="section" id="d3">
+  <div class="day-card">
+    <img class="day-card-img" src="imgs/04-scene-penglai.png" alt="蓬莱阁" loading="lazy">
+    <div class="day-card-body">
+      <div class="day-card-header">
+        <span class="day-number">D3 · 8/3 周一</span>
+        <h3>威海 → 蓬莱</h3>
+        <span class="day-stay">🏨 蓬莱</span>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item"><span class="time">09:00-11:30</span><span class="emoji">☕</span>威海自由半日</div>
+        <div class="timeline-item"><span class="time">11:30-14:00</span><span class="emoji">🚙</span>威海→蓬莱 荣乌高速 157km/2.5h</div>
+        <div class="timeline-item"><span class="time">14:00-14:30</span><span class="emoji">🏨</span>入住蓬莱</div>
+        <div class="timeline-item"><span class="time">15:00-17:30</span><span class="emoji">🏯</span>蓬莱阁 · 八仙过海 ¥100</div>
+        <div class="timeline-item"><span class="time">18:00-19:30</span><span class="emoji">🍜</span>蓬莱小面 + 海鲜</div>
+      </div>
+      <div class="day-card-footer">
+        <a class="btn-nav" href="https://ditu.amap.com/search?query=蓬莱阁&longitude=120.760462&latitude=37.819201&range=5000" target="_blank" rel="noopener"><span class="icon">📍</span>蓬莱阁</a>
+        <a class="btn-nav gold" href="https://ditu.amap.com/dir?policy=0&from[latlng]=122.140165,37.494926&from[name]=威海市区&to[latlng]=120.760462,37.819201&to[name]=蓬莱阁" target="_blank" rel="noopener"><span class="icon">🚗</span>威海→蓬莱</a>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- ===== 景点评分 ===== -->
-<div class="section">
-  <div class="section-title">⭐ 景点评分</div>
-  <div class="attr-wrap">
-  <table class="attr-table">
-    <thead><tr><th>景点</th><th>评分</th><th>适配</th><th>门票</th><th>一句话</th></tr></thead>
-    <tbody>
-      <tr><td>🏖️ 那香海</td><td><span class="star">★★★★★</span></td><td><span class="rating-dot high"></span>必去</td><td>免费</td><td>威海最美沙滩</td></tr>
-      <tr><td>⛰️ 成山头</td><td><span class="star">★★★★★</span></td><td><span class="rating-dot high"></span>必去</td><td>~¥180</td><td>中国最东端</td></tr>
-      <tr><td>🚢 刘公岛</td><td><span class="star">★★★★☆</span></td><td><span class="rating-dot mid"></span>推荐</td><td>~¥122</td><td>登舰+历史</td></tr>
-      <tr><td>🏯 蓬莱阁</td><td><span class="star">★★★★☆</span></td><td><span class="rating-dot mid"></span>推荐</td><td>~¥100</td><td>八仙神话</td></tr>
-      <tr><td>🚢 海军博物馆</td><td><span class="star">★★★★★</span></td><td><span class="rating-dot high"></span>必去</td><td>免费</td><td>军舰，男孩天堂</td></tr>
-      <tr><td>⛰️ 崂山太清</td><td><span class="star">★★★★☆</span></td><td><span class="rating-dot mid"></span>推荐</td><td>~¥120</td><td>大巴索道不累</td></tr>
-      <tr><td>🏖️ 金沙滩</td><td><span class="star">★★★★★</span></td><td><span class="rating-dot high"></span>必去</td><td>免费</td><td>青岛最细沙滩</td></tr>
-      <tr><td>🐬 极地海洋</td><td><span class="star">★★★★★</span></td><td><span class="rating-dot high"></span>必去</td><td>~¥240</td><td>白鲸海豚表演</td></tr>
-      <tr><td>🐠 海底世界</td><td><span class="star">★★★★☆</span></td><td><span class="rating-dot mid"></span>推荐</td><td>~¥130</td><td>海底隧道收尾</td></tr>
-    </tbody>
-  </table>
+<!-- D4 -->
+<div class="section" id="d4">
+  <div class="day-card">
+    <div class="day-card-body" style="padding-bottom:0">
+      <div class="day-card-header">
+        <span class="day-number">D4 · 8/4 周二</span>
+        <h3>蓬莱 → 青岛</h3>
+        <span class="day-stay">🏨 青岛</span>
+      </div>
+    </div>
+    <div style="padding:0 20px 20px">
+      <div style="background:var(--sand);border-radius:var(--radius-sm);padding:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+        <span style="font-size:2.5rem">🚗</span>
+        <div>
+          <div style="font-weight:700;font-size:0.9rem">转场日 · 最长自驾段</div>
+          <div style="font-size:0.82rem;color:var(--text-light)">蓬莱→青岛 沈海高速 233km/2.8h · 过路费 ¥93</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-card-body">
+      <div class="timeline">
+        <div class="timeline-item"><span class="time">09:00-11:00</span><span class="emoji">☕</span>蓬莱自由时间</div>
+        <div class="timeline-item"><span class="time">11:00-14:00</span><span class="emoji">🚙</span>蓬莱→青岛 沈海高速 233km</div>
+        <div class="timeline-item"><span class="time">14:00-15:00</span><span class="emoji">🏨</span>入住青岛海景房</div>
+        <div class="timeline-item"><span class="time">15:30-17:30</span><span class="emoji">🏖️</span>第一海水浴场散步</div>
+        <div class="timeline-item"><span class="time">18:00-20:00</span><span class="emoji">🍜</span>云霄路美食街</div>
+      </div>
+      <div class="day-card-footer">
+        <a class="btn-nav" href="https://ditu.amap.com/dir?policy=0&from[latlng]=120.760462,37.819201&from[name]=蓬莱阁&to[latlng]=120.382665,36.066938&to[name]=青岛市区" target="_blank" rel="noopener"><span class="icon">🚗</span>蓬莱→青岛导航</a>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- ===== 天气 ===== -->
-<div class="section">
-  <div class="section-title">🌤️ 8月天气</div>
+<!-- D5 -->
+<div class="section" id="d5">
+  <div class="day-card reverse">
+    <img class="day-card-img" src="imgs/05-scene-navy-museum.png" alt="海军博物馆" loading="lazy">
+    <div class="day-card-body">
+      <div class="day-card-header">
+        <span class="day-number">D5 · 8/5 周三</span>
+        <h3>青岛 · 海军博物馆</h3>
+        <span class="day-stay">🏨 青岛</span>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item"><span class="time">09:00-12:00</span><span class="emoji">🚢</span>海军博物馆 · 免费需预约 · 登驱逐舰/潜艇</div>
+        <div class="timeline-item"><span class="time">12:00-13:30</span><span class="emoji">🍜</span>中山路午餐</div>
+        <div class="timeline-item"><span class="time">14:00-17:00</span><span class="emoji">🌊</span>小青岛 / 鲁迅公园（可选）</div>
+        <div class="timeline-item"><span class="time">🌇</span>五四广场 · 奥帆中心夜景</div>
+      </div>
+      <div class="day-card-footer">
+        <a class="btn-nav" href="https://ditu.amap.com/search?query=海军博物馆&longitude=120.382665&latitude=36.066938&range=5000" target="_blank" rel="noopener"><span class="icon">📍</span>海军博物馆</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- D6 -->
+<div class="section" id="d6">
+  <div class="day-card">
+    <img class="day-card-img" src="imgs/06-scene-laoshan-beach.png" alt="崂山+金沙滩" loading="lazy">
+    <div class="day-card-body">
+      <div class="day-card-header">
+        <span class="day-number">D6 · 8/6 周四</span>
+        <h3>青岛 · 崂山 + 金沙滩</h3>
+        <span class="day-stay">🏨 青岛</span>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item"><span class="time">08:00-08:40</span><span class="emoji">🚙</span>市区→崂山 33km</div>
+        <div class="timeline-item"><span class="time">08:30-12:00</span><span class="emoji">⛰️</span>崂山太清线 · 大巴+索道 ¥120</div>
+        <div class="timeline-item"><span class="time">12:00-13:30</span><span class="emoji">🚙</span>崂山→金沙滩 55km</div>
+        <div class="timeline-item"><span class="time">14:00-17:00</span><span class="emoji">🏖️</span>金沙滩 · 青岛最细沙滩</div>
+        <div class="timeline-item"><span class="time">19:30-20:00</span><span class="emoji">🚙</span>返回市区</div>
+      </div>
+      <div class="day-card-footer">
+        <a class="btn-nav" href="https://ditu.amap.com/search?query=崂山太清宫&longitude=120.677011&latitude=36.139998&range=5000" target="_blank" rel="noopener"><span class="icon">📍</span>崂山</a>
+        <a class="btn-nav gold" href="https://ditu.amap.com/search?query=金沙滩&longitude=120.245130&latitude=35.957210&range=5000" target="_blank" rel="noopener"><span class="icon">📍</span>金沙滩</a>
+        <a class="btn-nav gold" href="https://ditu.amap.com/dir?policy=0&from[latlng]=120.677011,36.139998&from[name]=崂山&to[latlng]=120.245130,35.957210&to[name]=金沙滩" target="_blank" rel="noopener"><span class="icon">🚗</span>崂山→金沙滩</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- D7 -->
+<div class="section" id="d7">
+  <div class="day-card reverse">
+    <img class="day-card-img" src="imgs/07-scene-polar-ocean.png" alt="极地海洋世界" loading="lazy">
+    <div class="day-card-body">
+      <div class="day-card-header">
+        <span class="day-number">D7 · 8/7 周五</span>
+        <h3>青岛 · 极地海洋世界</h3>
+        <span class="day-stay">🏨 青岛</span>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item"><span class="time">09:00-12:30</span><span class="emoji">🐬</span>极地海洋世界 · 白鲸海豚表演 ¥240</div>
+        <div class="timeline-item"><span class="time">14:30-17:00</span><span class="emoji">🎪</span>自由活动：八大关 / 奥帆 / 台东夜市</div>
+        <div class="timeline-item"><span class="time">18:00-20:00</span><span class="emoji">🍜</span>双合园饺子 / 开海海鲜</div>
+      </div>
+      <div class="day-card-footer">
+        <a class="btn-nav" href="https://ditu.amap.com/search?query=极地海洋世界&longitude=120.441559&latitude=36.070541&range=5000" target="_blank" rel="noopener"><span class="icon">📍</span>极地海洋世界</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- D8 -->
+<div class="section" id="d8">
+  <div class="day-card">
+    <div class="day-card-body" style="padding-bottom:0">
+      <div class="day-card-header">
+        <span class="day-number">D8 · 8/8 周六</span>
+        <h3>青岛 · 返程</h3>
+        <span class="day-stay">✈️ 返沪</span>
+      </div>
+    </div>
+    <div style="padding:0 20px 20px">
+      <div style="background:linear-gradient(135deg,var(--navy),#0d1f34);border-radius:var(--radius-sm);padding:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;color:#fff">
+        <span style="font-size:2.5rem">✈️</span>
+        <div>
+          <div style="font-weight:700;font-size:0.9rem">回程航班</div>
+          <div style="font-size:0.85rem;opacity:0.8">CZ6225 · 青岛17:10 → 浦东18:40</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-card-body">
+      <div class="timeline">
+        <div class="timeline-item"><span class="time">09:00-11:30</span><span class="emoji">🐠</span>海底世界 ¥130</div>
+        <div class="timeline-item"><span class="time">12:00-13:30</span><span class="emoji">🍜</span>午餐 + 取行李</div>
+        <div class="timeline-item"><span class="time">13:30-14:30</span><span class="emoji">🚙</span>海底世界→胶东机场 59km</div>
+        <div class="timeline-item"><span class="time">15:00-16:30</span><span class="emoji">🔑</span>还车 + 值机</div>
+        <div class="timeline-item"><span class="time">17:10-18:40</span><span class="emoji">✈️</span>青岛→上海 CZ6225</div>
+      </div>
+      <div class="day-card-footer">
+        <a class="btn-nav" href="https://ditu.amap.com/search?query=海底世界&longitude=120.336020&latitude=36.057077&range=5000" target="_blank" rel="noopener"><span class="icon">📍</span>海底世界</a>
+        <a class="btn-nav gold" href="https://ditu.amap.com/dir?policy=0&from[latlng]=120.336020,36.057077&from[name]=海底世界&to[latlng]=120.094940,36.359973&to[name]=胶东机场" target="_blank" rel="noopener"><span class="icon">🚗</span>海底世界→机场</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== BUDGET + FOOD ========== -->
+<section class="bg-sand" id="budget">
+  <div class="section-head">
+    <h2 class="section-title">💰 预算 &amp; 🍜 美食</h2>
+    <p class="section-subtitle">费用估算 ¥13,260（不含机票）· 无忌口·不吃辣</p>
+  </div>
+
+  <div class="dual-layout">
+    <!-- Budget -->
+    <div class="budget-card">
+      <img class="budget-card-img" src="imgs/08-infographic-budget-food.png" alt="预算信息图" loading="lazy">
+      <div class="budget-body">
+        <div class="budget-total">
+          <div class="amount">¥13,260</div>
+          <div class="label">预算总计（不含机票）</div>
+        </div>
+        <div class="budget-items">
+          <div class="budget-item"><span class="name">🚙 租车（一嗨速腾·已付）</span><span class="cost">¥1,160</span></div>
+          <div class="budget-item"><span class="name">⛽ 油费 + 过路费</span><span class="cost">¥600</span></div>
+          <div class="budget-item"><span class="name">🏨 住宿（7晚）</span><span class="cost">¥5,600</span></div>
+          <div class="budget-item"><span class="name">🎫 门票</span><span class="cost">¥1,800</span></div>
+          <div class="budget-item"><span class="name">🍜 餐饮（8天）</span><span class="cost">¥3,200</span></div>
+          <div class="budget-item"><span class="name">🛒 其他</span><span class="cost">¥900</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Food -->
+    <div>
+      <div style="background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:20px">
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:6px">🍽️ 必吃美食</h3>
+        <div class="food-grid">
+          <div class="food-card"><div class="icon">🥟</div><div class="name">鲅鱼水饺</div><div class="price">¥40-60/人</div><div class="tag">威海必吃</div></div>
+          <div class="food-card"><div class="icon">🥩</div><div class="name">韩式烤肉</div><div class="price">¥80-100/人</div><div class="tag">威海必吃</div></div>
+          <div class="food-card"><div class="icon">🦪</div><div class="name">海鲜大咖</div><div class="price">¥80-120/人</div><div class="tag">全家共享</div></div>
+          <div class="food-card"><div class="icon">🦀</div><div class="name">清蒸螃蟹</div><div class="price">¥60-100/人</div><div class="tag">时令</div></div>
+          <div class="food-card"><div class="icon">🍜</div><div class="name">蓬莱小面</div><div class="price">¥15-25/人</div><div class="tag">蓬莱特色</div></div>
+          <div class="food-card"><div class="icon">🐚</div><div class="name">辣炒蛤蜊</div><div class="price">¥30-50/人</div><div class="tag">可不辣</div></div>
+          <div class="food-card"><div class="icon">🥒</div><div class="name">葱烧海参</div><div class="price">¥100-150/人</div><div class="tag">鲁菜经典</div></div>
+          <div class="food-card"><div class="icon">🍺</div><div class="name">青岛原浆</div><div class="price">¥15-25/杯</div><div class="tag">爸爸专属</div></div>
+        </div>
+      </div>
+
+      <!-- Stay recommendations -->
+      <div style="background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;margin-top:16px">
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:6px">🏨 住宿推荐</h3>
+        <div class="stay-grid">
+          <div class="stay-card"><div class="city">📍 那香海</div><div class="hotels">那香海人假日酒店 · 香海豪生<br><span style="font-size:0.72rem;color:var(--text-light)">海景房 / 儿童房</span></div></div>
+          <div class="stay-card"><div class="city">📍 威海市区</div><div class="hotels">威海卫大厦 · 百纳中心</div></div>
+          <div class="stay-card"><div class="city">📍 蓬莱</div><div class="hotels">欧乐堡骑士酒店<br><span style="font-size:0.72rem;color:var(--text-light)">儿童主题房 🎠</span></div></div>
+          <div class="stay-card"><div class="city">📍 青岛</div><div class="hotels">海天大酒店 · 海尔洲际 · 威斯汀<br><span style="font-size:0.72rem;color:var(--text-light)">海景房优先，到酒店后打车出行</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PRACTICAL INFO ========== -->
+<section class="section-wide" id="info">
+  <div class="section-head">
+    <h2 class="section-title">📋 实用信息</h2>
+    <p class="section-subtitle">出行前必读 · 天气·自驾·行李·安全</p>
+  </div>
+
+  <!-- Weather -->
+  <div style="margin-bottom:28px">
+    <h3 style="font-size:1rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:6px">🌤️ 天气概况（8月）</h3>
+    <div class="weather-grid">
+      <div class="weather-card">
+        <div class="city">威海</div>
+        <div class="temp">25-28°C</div>
+        <div class="detail">水温 25°C · 适合下海</div>
+      </div>
+      <div class="weather-card">
+        <div class="city">蓬莱</div>
+        <div class="temp">24-27°C</div>
+        <div class="detail">水温 24°C · 体感舒适</div>
+      </div>
+      <div class="weather-card">
+        <div class="city">青岛</div>
+        <div class="temp">25-29°C</div>
+        <div class="detail">水温 26°C · 最佳游泳季</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Info grid -->
   <div class="info-grid">
-    <div class="info-card"><h4>🌊 威海</h4><p style="font-size:14px;">均温25-28°C · 水温25°C · 8月上旬偏雨</p></div>
-    <div class="info-card"><h4>🏯 蓬莱</h4><p style="font-size:14px;">均温24-27°C · 水温24°C</p></div>
-    <div class="info-card"><h4>🌊 青岛</h4><p style="font-size:14px;">均温25-29°C · 水温26°C · 月初雨35%</p></div>
-  </div>
-</div>
+    <div class="info-card">
+      <h4>🚗 自驾贴士</h4>
+      <ul>
+        <li><strong>租车：</strong>一嗨速腾 · 威海取青岛还 · 已付¥1,160</li>
+        <li><strong>过路费：</strong>荣乌高速免费 · 沈海高速约¥93</li>
+        <li><strong>停车：</strong>青岛酒店停车后建议打车出行</li>
+        <li><strong>加油：</strong>沿途服务区充足 · 预计总油费¥500</li>
+        <li><strong>提醒：</strong>蓬莱→青岛为最长段 233km · 建议中间服务区休息</li>
+      </ul>
+    </div>
 
-<!-- ===== 行李 ===== -->
-<div class="section">
-  <div class="section-title">🧳 行李清单</div>
-  <div class="info-card">
-    <ul class="checklist">
-      <li>身份证/户口本（儿子乘机）<span class="prio-m">必</span></li>
-      <li>28寸箱+背包<span class="prio-m">必</span></li>
-      <li>防晒SPF50+<span class="prio-m">必</span></li>
-      <li>沙滩玩具（铲桶）<span class="prio-m">必</span></li>
-      <li>遮阳帽+太阳镜<span class="prio-m">必</span></li>
-      <li>薄外套（早晚风大）<span class="prio-m">必</span></li>
-      <li>拖鞋+速干衣<span class="prio-m">必</span></li>
-      <li>充电器+车载充<span class="prio-m">必</span></li>
-      <li>儿童安全座椅（加租⚠️）<span class="prio-m">必</span></li>
-    </ul>
-  </div>
-  <div class="info-card">
-    <ul class="checklist">
-      <li>沙滩帐篷/遮阳伞<span class="prio-s">建议</span></li>
-      <li>防水手机袋<span class="prio-s">建议</span></li>
-      <li>防蚊+创可贴+肠胃药<span class="prio-s">建议</span></li>
-      <li>便携水壶+湿巾<span class="prio-s">建议</span></li>
-    </ul>
-  </div>
-</div>
+    <div class="info-card">
+      <h4>🎒 行李清单</h4>
+      <ul>
+        <li><strong>🔴 必带：</strong>身份证 · 驾驶证 · 手机/充电器 · 现金</li>
+        <li><strong>🔴 儿童：</strong>儿童座椅 · 挖沙工具 · 泳衣/泳圈 · 防晒</li>
+        <li><strong>🔵 建议：</strong>防晒霜SPF50+ · 墨镜 · 遮阳帽 · 雨伞</li>
+        <li><strong>🔵 衣物：</strong>短袖+薄外套 · 沙滩鞋 · 拖鞋</li>
+        <li><strong>🔵 药品：</strong>感冒药 · 肠胃药 · 创可贴 · 防蚊液</li>
+      </ul>
+    </div>
 
-<!-- ===== 安全 ===== -->
-<div class="section">
-  <div class="section-title">⚠️ 安全与贴士</div>
-  <div class="risk-grid">
-    <div class="risk-item danger"><div class="risk-title">🌊 离岸流</div>只在有救生员的区域玩水</div>
-    <div class="risk-item danger"><div class="risk-title">☀️ 紫外线</div>每2小时补涂防晒</div>
-    <div class="risk-item warn"><div class="risk-title">🍤 海鲜安全</div>选新鲜明码标价</div>
-    <div class="risk-item warn"><div class="risk-title">🌀 台风季</div>出发前看天气</div>
-    <div class="risk-item info"><div class="risk-title">🚗 自驾</div>每天≤3h · 青岛停车酒店打车</div>
-    <div class="risk-item info"><div class="risk-title">🏥 急救</div>威海市立 0631-5287556<br>青大附院 0532-82911886</div>
+    <div class="info-card">
+      <h4>⚠️ 安全提示</h4>
+      <ul>
+        <li><span class="safe-tag">⚠️ 离岸流</span> 不要在非泳区下水 · 注意警示标志</li>
+        <li><span class="safe-tag">☀️ 防晒</span> 海边紫外线强 · 每2小时补涂一次</li>
+        <li><span class="safe-tag">🦐 海鲜</span> 选新鲜活海鲜 · 彻底煮熟 · 配醋/姜</li>
+        <li><span class="safe-tag">🌀 台风</span> 8月台风季 · 出发前关注天气预报</li>
+        <li><span class="safe-tag">🚗 自驾</span> 注意疲劳驾驶 · 2小时休息一次</li>
+        <li><strong>紧急电话：</strong>110/120/122 · 租车客服</li>
+      </ul>
+    </div>
   </div>
-  <div class="info-card" style="margin-top:12px;">
-    <ul class="tips-list">
-      <li><strong>儿童座椅</strong> 一嗨加租约¥50/天</li>
-      <li><strong>青岛停车</strong> 酒店停好，市区打车</li>
-      <li><strong>过路费</strong> 蓬莱→青岛段≈93元</li>
-      <li><strong>导航</strong> 下载山东离线地图</li>
-    </ul>
-  </div>
-</div>
+</section>
 
-</div><!-- /container -->
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="navy-line"></div>
+  <p><strong>威海→青岛 · 沿海自驾</strong> — 8天7晚家庭之旅</p>
+  <p>✈️ 去程 9C6391 浦东→威海 · 回程 CZ6225 青岛→浦东</p>
+  <p style="margin-top:8px">👨‍👩‍👦 爸爸+妈妈+三年级儿子 · 不游泳但爱沙滩 🏖️</p>
+  <div class="navy-line"></div>
+  <p>📅 生成时间：2026-07-22</p>
+  <p>⚡ Powered by Claude Code + baoyu-article-illustrator</p>
+</footer>
 
-<div class="footer">
-  🚗 威海→青岛 · 沿海自驾 · 2026年8月<br>
-  路线数据：高德地图Web Service API · 设计：Hermes Agent + Frontend Design
-</div>
+<script>
+// Highlight active nav button on scroll (simple version)
+(function(){
+  const navBtns = document.querySelectorAll('.day-nav-btn');
+  const days = ['d1','d2','d3','d4','d5','d6','d7','d8'];
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const idx = days.indexOf(entry.target.id);
+        navBtns.forEach((btn,i) => btn.classList.toggle('active',i===idx));
+      }
+    });
+  }, {rootMargin:'-40% 0px -50% 0px'});
+  days.forEach(id => {
+    const el = document.getElementById(id);
+    if(el) observer.observe(el);
+  });
+})();
+</script>
 
 </body>
 </html>
