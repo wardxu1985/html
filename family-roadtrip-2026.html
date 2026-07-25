@@ -2,746 +2,508 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>🚗 威海→青岛 · 8天7晚家庭自驾游</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>威海→青岛 · 8天7晚家庭自驾游</title>
 <style>
-:root {
-  --coral: #FF6B6B;
-  --sunny: #FFD93D;
-  --teal: #6BCB77;
-  --ocean: #4D96FF;
-  --deep-blue: #1B4965;
-  --sand: #FEF9E7;
-  --bg: #FFFBF0;
-  --card: #FFFFFF;
-  --text: #2C3E50;
-  --text-light: #7F8C8D;
-  --shadow: 0 8px 32px rgba(0,0,0,0.08);
+:root{
+  --primary:#1565C0;
+  --primary-light:#1E88E5;
+  --primary-dark:#0D47A1;
+  --accent:#FF6B35;
+  --gold:#FFC107;
+  --teal:#00BFA5;
+  --bg:#F0F4F8;
+  --card:#FFFFFF;
+  --card-alt:#F8F9FA;
+  --text:#263238;
+  --text-light:#607D8B;
+  --border:#E0E0E0;
+  --shadow:0 4px 20px rgba(21,101,192,0.10);
+  --radius:16px;
 }
-*{margin:0;padding:0;box-sizing:border-box}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
-body{font-family:'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:var(--sand);color:var(--text);line-height:1.7}
-.container{max-width:960px;margin:0 auto;padding:0 20px}
+body{font-family:-apple-system,'PingFang SC','Microsoft YaHei','Helvetica Neue',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
 
-/* HERO */
-.hero{background:linear-gradient(135deg,var(--deep-blue) 0%,#2D6A9F 40%,#4D96FF 70%,#6BCB77 100%);min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:60px 20px}
-.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.08' d='M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,117.3C960,107,1056,149,1152,165.3C1248,181,1344,171,1392,165.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'/%3E%3C/svg%3E") no-repeat bottom/cover}
-.hero-content{position:relative;z-index:1;max-width:700px}
-.hero-badge{display:inline-block;background:rgba(255,255,255,0.2);backdrop-filter:blur(4px);padding:8px 20px;border-radius:50px;color:#fff;font-size:0.9rem;margin-bottom:20px;letter-spacing:1px}
-.hero-title{font-size:clamp(2.2rem,6vw,3.8rem);color:#fff;font-weight:800;line-height:1.2;margin-bottom:12px;text-shadow:0 2px 20px rgba(0,0,0,0.2)}
-.hero-title span{display:inline-block;animation:wave 2s infinite}
-@keyframes wave{0%,100%{transform:rotate(0)}25%{transform:rotate(10deg)}75%{transform:rotate(-5deg)}}
-.hero-sub{color:rgba(255,255,255,0.9);font-size:clamp(1rem,2vw,1.2rem);margin-bottom:24px}
-.hero-meta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-.hero-meta span{background:rgba(255,255,255,0.15);backdrop-filter:blur(4px);padding:6px 16px;border-radius:50px;color:#fff;font-size:0.85rem}
+/* Layout */
+.wrap{max-width:800px;margin:0 auto;padding:0 16px}
 
-/* 波浪分割 */
-.wave-divider{display:block;width:100%;height:50px}
+/* Hero */
+.hero{background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary) 50%,var(--primary-light) 100%);padding:48px 20px 40px;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:30px;background:var(--bg);border-radius:30px 30px 0 0}
+.hero-badge{display:inline-block;background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:6px 16px;border-radius:50px;color:#fff;font-size:0.78rem;letter-spacing:1px;margin-bottom:14px}
+.hero h1{font-size:clamp(1.8rem,5.5vw,2.8rem);color:#fff;font-weight:800;line-height:1.2;margin-bottom:8px;text-shadow:0 2px 12px rgba(0,0,0,0.15)}
+.hero p{color:rgba(255,255,255,0.88);font-size:clamp(0.88rem,2vw,1.05rem);margin-bottom:16px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.hero-tags span{background:rgba(255,255,255,0.12);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);padding:4px 12px;border-radius:50px;color:#fff;font-size:0.75rem}
 
-/* 章节 */
-.section{padding:50px 0}
-.section-title{font-size:1.6rem;font-weight:700;color:var(--deep-blue);margin-bottom:8px;display:flex;align-items:center;gap:10px}
-.section-subtitle{font-size:0.95rem;color:var(--text-light);margin-bottom:24px}
-.section-title-icon{font-size:1.8rem}
+/* ⚠️ 重要提醒条 */
+.alert-bar{background:#FFF8E1;border-left:4px solid #FF8F00;padding:12px 16px;border-radius:8px;margin:16px 0;font-size:0.88rem;line-height:1.7}
+.alert-bar .alert-title{font-weight:700;color:#E65100;margin-bottom:4px;font-size:0.92rem}
+.alert-bar.alert-blue{background:#E3F2FD;border-left-color:var(--primary)}
+.alert-bar.alert-blue .alert-title{color:var(--primary-dark)}
+.alert-bar.alert-green{background:#E8F5E9;border-left-color:#2E7D32}
+.alert-bar.alert-green .alert-title{color:#1B5E20}
 
-/* 卡片 */
-.card{background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:24px;margin-bottom:20px;border:1px solid rgba(0,0,0,0.04)}
-.card-title{font-size:1.1rem;font-weight:700;color:var(--deep-blue);margin-bottom:12px}
+/* Section */
+.sec{padding:24px 0}
+.sec-title{font-size:1.2rem;font-weight:700;color:var(--primary-dark);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.sec-sub{font-size:0.82rem;color:var(--text-light);margin-bottom:16px}
 
-/* 行程日卡 */
-.day-card{border-left:5px solid var(--ocean);margin-bottom:16px;transition:transform 0.2s}
-.day-card:hover{transform:translateX(4px)}
-.day-card .day-header{display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap}
-.day-card .day-num{background:var(--ocean);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem}
-.day-card .day-date{font-weight:600;color:var(--text)}
-.day-card .day-city{background:var(--sunny);color:var(--deep-blue);padding:2px 12px;border-radius:50px;font-size:0.8rem;font-weight:600}
-.day-card .day-hotels{color:var(--tex-light);font-size:0.85rem;margin-left:auto}
-.day-card .day-activity{display:flex;gap:14px;padding:6px 0;align-items:flex-start}
-.day-card .day-time{min-width:70px;font-size:0.8rem;color:var(--text-light);font-weight:600}
-.day-card .day-desc{flex:1;font-size:0.95rem}
-.day-card .day-tag{display:inline-block;font-size:0.75rem;padding:2px 8px;border-radius:4px;margin-left:6px;font-weight:600}
-.tag-outdoor{background:#E8F5E9;color:#2E7D32}
-.tag-indoor{background:#E3F2FD;color:#1565C0}
-.tag-food{background:#FFF3E0;color:#E65100}
-.tag-evening{background:#F3E5F5;color:#6A1B9A}
+/* Cards */
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;margin-bottom:14px;border:1px solid rgba(0,0,0,0.04)}
+.card-title{font-size:1rem;font-weight:700;color:var(--primary-dark);margin-bottom:10px;display:flex;align-items:center;gap:8px}
 
-/* 酒店表 */
-.hotel-card{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:16px;margin-bottom:12px}
-.hotel-icon{font-size:2rem;width:60px;height:60px;display:flex;align-items:center;justify-content:center;background:var(--sand);border-radius:12px}
-.hotel-info{flex:1;min-width:160px}
-.hotel-name{font-weight:700;font-size:1.05rem}
-.hotel-detail{font-size:0.85rem;color:var(--text-light)}
-.hotel-price{font-weight:700;color:var(--coral);font-size:1.1rem}
+/* Day Cards */
+.day-card{margin-bottom:12px;overflow:hidden}
+.day-hd{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.day-num{background:var(--primary);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.82rem;flex-shrink:0}
+.day-date{font-weight:600;font-size:0.9rem}
+.day-city{background:var(--gold);color:#333;padding:2px 10px;border-radius:50px;font-size:0.72rem;font-weight:600}
+.day-hotel{font-size:0.75rem;color:var(--text-light);margin-left:auto}
+.day-item{display:flex;gap:10px;padding:5px 0;align-items:flex-start;border-bottom:1px dashed #eee}
+.day-item:last-child{border:none}
+.day-time{min-width:58px;font-size:0.75rem;color:var(--text-light);font-weight:600;flex-shrink:0;padding-top:2px}
+.day-desc{font-size:0.88rem;flex:1}
+.tag{display:inline-block;font-size:0.65rem;padding:1px 7px;border-radius:4px;font-weight:600;vertical-align:middle;margin-left:4px}
+.tag-out{background:#E8F5E9;color:#2E7D32}
+.tag-in{background:#E3F2FD;color:var(--primary)}
+.tag-eat{background:#FFF3E0;color:#E65100}
+.tag-night{background:#F3E5F5;color:#6A1B9A}
+.tag-alert{background:#FFEBEE;color:#C62828}
 
-/* 预算表 */
-.budget-table{width:100%;border-collapse:collapse;font-size:0.95rem}
-.budget-table th{background:var(--deep-blue);color:#fff;padding:10px 14px;text-align:left}
-.budget-table td{padding:10px 14px;border-bottom:1px solid #eee}
-.budget-table tr:last-child{font-weight:700;background:#FFF8E1}
+/* Hotels */
+.hotel-card{display:flex;align-items:center;gap:14px;padding:14px;margin-bottom:10px;background:var(--card-alt);border-radius:12px}
+.hotel-icon{font-size:1.6rem;width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:10px;flex-shrink:0}
+.hotel-info{flex:1;min-width:0}
+.hotel-name{font-weight:700;font-size:0.92rem}
+.hotel-detail{font-size:0.78rem;color:var(--text-light)}
+.hotel-price{font-weight:700;color:var(--accent);font-size:1rem;white-space:nowrap}
 
-/* 天气信息 */
-.weather-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-.weather-item{text-align:center;padding:20px;background:var(--sand);border-radius:12px}
-.weather-item .w-icon{font-size:2.2rem}
-.weather-item .w-city{font-weight:700;color:var(--deep-blue)}
-.weather-item .w-temp{font-size:1.2rem;font-weight:700;color:var(--coral)}
-.weather-item .w-detail{font-size:0.85rem;color:var(--text-light)}
+/* Budget */
+table.budget{width:100%;border-collapse:collapse;font-size:0.85rem}
+table.budget th{background:var(--primary);color:#fff;padding:8px 10px;text-align:left;font-weight:600;font-size:0.82rem}
+table.budget td{padding:8px 10px;border-bottom:1px solid #eee}
+table.budget tr.sum{font-weight:700;background:#FFF8E1}
 
-/* 行李清单 */
-.luggage-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
-.luggage-cat{padding:14px;background:#F8F9FA;border-radius:10px;border:1px solid #eee}
-.luggage-cat h4{font-size:0.95rem;margin-bottom:8px;color:var(--deep-blue)}
-.luggage-cat ul{list-style:none;padding:0}
-.luggage-cat li{padding:3px 0;font-size:0.85rem;color:var(--text)}
-.luggage-cat li::before{content:'✓ ';color:var(--teal);font-weight:700}
+/* Weather */
+.w-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.w-item{text-align:center;padding:12px 8px;background:var(--card-alt);border-radius:10px}
+.w-item .wi{font-size:1.6rem}
+.w-item .wn{font-weight:700;font-size:0.88rem;color:var(--primary-dark)}
+.w-item .wt{font-size:1.1rem;font-weight:700;color:var(--accent);margin:2px 0}
+.w-item .wd{font-size:0.7rem;color:var(--text-light)}
 
-/* 美食 */
-.food-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
-.food-card{padding:16px;border-radius:12px;background:var(--sand);border:1px solid #eee}
-.food-card h4{font-size:1rem;color:var(--deep-blue);margin-bottom:6px}
-.food-card p{font-size:0.85rem;color:var(--text-light)}
-.food-card .food-tag{display:inline-block;padding:2px 8px;background:var(--coral);color:#fff;border-radius:4px;font-size:0.75rem;margin-top:6px}
+/* Luggage */
+.l-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.l-cat{padding:12px;background:var(--card-alt);border-radius:10px;border:1px solid #eee}
+.l-cat h4{font-size:0.85rem;margin-bottom:6px;color:var(--primary-dark)}
+.l-cat ul{list-style:none;padding:0}
+.l-cat li{padding:2px 0;font-size:0.78rem;color:var(--text)}
+.l-cat li::before{content:'✓ ';color:var(--teal);font-weight:700}
+.l-cat li.must::before{content:'★ ';color:var(--accent)}
+.l-cat li.opt::before{content:'○ ';color:var(--text-light)}
 
-/* 安全提示 */
-.tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
-.tip-card{padding:16px;border-radius:12px;display:flex;gap:12px;align-items:flex-start}
-.tip-card.tip-warning{background:#FFF8E1;border-left:4px solid #FFA000}
-.tip-card.tip-info{background:#E3F2FD;border-left:4px solid #1976D2}
-.tip-card.tip-safe{background:#E8F5E9;border-left:4px solid #388E3C}
-.tip-icon{font-size:1.4rem}
-.tip-text{font-size:0.9rem}
-.tip-text strong{display:block;margin-bottom:4px}
+/* Food */
+.f-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.f-card{padding:12px;border-radius:10px;background:var(--card-alt);border:1px solid #eee}
+.f-card h4{font-size:0.88rem;color:var(--primary-dark);margin-bottom:4px}
+.f-card p{font-size:0.78rem;color:var(--text-light)}
+.f-card .ftag{display:inline-block;padding:1px 7px;background:var(--accent);color:#fff;border-radius:4px;font-size:0.65rem;margin-top:4px}
 
-/* 脚注 */
-.footer{text-align:center;padding:40px 20px;color:var(--text-light);font-size:0.85rem}
-.footer .emoji{font-size:1.5rem}
-.footer .links{margin-top:12px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-.footer .links a{color:var(--ocean);text-decoration:none;font-weight:600}
+/* Tips */
+.t-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.t-card{padding:12px;border-radius:10px;display:flex;gap:8px;align-items:flex-start;font-size:0.82rem;border-left:3px solid #ccc}
+.t-card.tw{background:#FFF8E1;border-left-color:#FF8F00}
+.t-card.ti{background:#E3F2FD;border-left-color:var(--primary)}
+.t-card.ts{background:#E8F5E9;border-left-color:#2E7D32}
+.t-card .ticon{font-size:1.1rem;flex-shrink:0}
+.t-card strong{display:block;margin-bottom:2px;font-size:0.85rem}
 
-/* 响应式 */
-@media(max-width:640px){
-  .hero{min-height:50vh;padding:40px 16px}
-  .card{padding:16px}
-  .day-card .day-activity{flex-direction:column;gap:4px}
-  .day-card .day-time{min-width:auto;font-size:0.85rem;font-weight:700;color:var(--ocean)}
-  .budget-table{font-size:0.85rem}
-  .budget-table th,.budget-table td{padding:8px}
+/* Footer */
+.footer{text-align:center;padding:32px 16px;color:var(--text-light);font-size:0.78rem}
+.footer .big{font-size:1.5rem;display:block;margin-bottom:8px}
+
+/* Responsive */
+@media(max-width:480px){
+  .wrap{padding:0 12px}
+  .card{padding:14px;border-radius:12px}
+  .day-item{flex-wrap:wrap;gap:2px;padding:6px 0}
+  .day-time{min-width:auto;font-size:0.78rem;color:var(--primary);font-weight:700}
+  .day-desc{width:100%;padding-left:0;font-size:0.85rem}
+  .l-grid{grid-template-columns:1fr}
+  .f-grid{grid-template-columns:1fr}
+  .t-grid{grid-template-columns:1fr}
+  .w-grid{grid-template-columns:repeat(3,1fr);gap:6px}
+  .w-item{padding:8px 4px}
+  .w-item .wt{font-size:0.95rem}
+  .hotel-card{flex-wrap:wrap}
+  table.budget{font-size:0.78rem}
+  table.budget th,table.budget td{padding:6px 8px}
+  .hero{padding:36px 16px 32px}
+  .sec{padding:16px 0}
+  .hotel-price{margin-left:auto}
 }
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:10px 0;border-bottom:1px solid #eee}
+.nav-wrap{display:flex;gap:6px;overflow-x:auto;padding:0 4px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.nav-wrap::-webkit-scrollbar{display:none}
+.nav-wrap a{white-space:nowrap;padding:6px 14px;border-radius:50px;font-size:0.78rem;font-weight:600;text-decoration:none;color:var(--text);background:var(--card-alt);flex-shrink:0}
+.nav-wrap a:active{background:var(--primary);color:#fff}
 </style>
 </head>
 <body>
 
-<!-- HERO -->
+<!-- Hero -->
 <div class="hero">
-  <div class="hero-content">
-    <div class="hero-badge">🚗 2026 暑假 · 家庭自驾</div>
-    <h1 class="hero-title"><span>🏖️</span> 威海 → 青岛</h1>
-    <p class="hero-sub">沿着胶东最美海岸线，一家三口8天7晚的夏日度假之旅</p>
-    <div class="hero-meta">
-      <span>📅 8/1 — 8/8</span>
-      <span>👨‍👩‍👦 爸爸+妈妈+三年级儿子</span>
-      <span>🚗 一嗨自驾（威取青还）</span>
-      <span>🌡️ 规划避开中午暴晒</span>
+  <div class="hero-badge">🚗 2026 暑假 · 家庭自驾</div>
+  <h1>🏖️ 威海 → 青岛</h1>
+  <p>胶东最美海岸线 · 一家三口8天7晚夏日之旅</p>
+  <div class="hero-tags">
+    <span>📅 8/1 — 8/8</span>
+    <span>👨‍👩‍👦 爸爸+妈妈+三年级儿子</span>
+    <span>🚗 一嗨自驾</span>
+    <span>🌡️ 避开中午暴晒</span>
+  </div>
+</div>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-wrap wrap">
+    <a href="#plan">📅 行程</a>
+    <a href="#book">⚠️ 预约提醒</a>
+    <a href="#hotel">🏨 住宿</a>
+    <a href="#budget">💰 预算</a>
+    <a href="#weather">🌤️ 天气</a>
+    <a href="#food">🍜 美食</a>
+    <a href="#pack">🎒 行李</a>
+    <a href="#safe">⚠️ 安全</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- 航班总览 -->
+<div class="sec" style="padding-top:20px">
+  <div class="card" style="background:linear-gradient(135deg,#E3F2FD,#FFF8E1);padding:16px">
+    <div style="display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap">
+      <div>
+        <div style="font-size:0.72rem;color:var(--text-light)">✈️ 去程</div>
+        <div style="font-weight:700;font-size:1rem">9C6391</div>
+        <div style="color:var(--accent);font-weight:700;font-size:0.88rem">08:25→10:20</div>
+        <div style="font-size:0.72rem;color:var(--text-light)">浦东 → 威海</div>
+      </div>
+      <div style="text-align:center;font-size:1.2rem">🚗 8天自驾</div>
+      <div>
+        <div style="font-size:0.72rem;color:var(--text-light)">✈️ 回程</div>
+        <div style="font-weight:700;font-size:1rem">CZ6225</div>
+        <div style="color:var(--accent);font-weight:700;font-size:0.88rem">17:10→18:40</div>
+        <div style="font-size:0.72rem;color:var(--text-light)">青岛 → 浦东</div>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="container">
-
-<!-- 快速导航 -->
-<div class="section" style="padding-top:30px;padding-bottom:10px">
-  <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center">
-    <a href="#itinerary" style="background:var(--ocean);color:#fff;padding:8px 18px;border-radius:50px;text-decoration:none;font-size:0.9rem;font-weight:600">📅 每日行程</a>
-    <a href="#hotels" style="background:var(--coral);color:#fff;padding:8px 18px;border-radius:50px;text-decoration:none;font-size:0.9rem;font-weight:600">🏨 住宿</a>
-    <a href="#budget" style="background:var(--sunny);color:var(--deep-blue);padding:8px 18px;border-radius:50px;text-decoration:none;font-size:0.9rem;font-weight:600">💰 预算</a>
-    <a href="#weather" style="background:var(--teal);color:#fff;padding:8px 18px;border-radius:50px;text-decoration:none;font-size:0.9rem;font-weight:600">🌤️ 天气</a>
-    <a href="#food" style="background:var(--deep-blue);color:#fff;padding:8px 18px;border-radius:50px;text-decoration:none;font-size:0.9rem;font-weight:600">🍜 美食</a>
-    <a href="#luggage" style="background:#9C27B0;color:#fff;padding:8px 18px;border-radius:50px;text-decoration:none;font-size:0.9rem;font-weight:600">🎒 行李</a>
-    <a href="#safety" style="background:#FF5722;color:#fff;padding:8px 18px;border-radius:50px;text-decoration:none;font-size:0.9rem;font-weight:600">⚠️ 安全</a>
+<!-- ===== 重要提醒条：预约提醒 ===== -->
+<div class="alert-bar" id="book">
+  <div class="alert-title">🔔 景点预约提醒 — 务必提前操作</div>
+  <div style="font-size:0.85rem;line-height:2">
+    ✅ <strong>海军博物馆</strong> — 免费但需提前预约（微信搜"海军博物馆"公众号），旺季票紧<br>
+    ✅ <strong>海信探索中心</strong> — 建议提前线上购票，避开现场排队<br>
+    ✅ <strong>极地海洋世界</strong> — 提前购票选时段，看表演要查当日场次时间<br>
+    ✅ <strong>海底世界</strong> — 线上购票，D8上午去注意控制时间<br>
+    ✅ <strong>云上海天</strong> — 提前购票选时段<br>
+    ✅ <strong>海上摩天轮</strong> — 可现场购票<br>
+    ✅ <strong>成山头</strong> — 建议早去，网上购票<br>
+    ✅ <strong>神雕山动物园</strong> — 网上购票<br>
+    ✅ <strong>蓬莱阁</strong> — 网上购票<br>
+    ✅ <strong>蓬莱海洋极地世界</strong> — 提前购票<br>
+    ✅ <strong>森林野生动物园（黄岛）</strong> — 网上购票<br>
+    ✅ <strong>贝壳博物馆</strong> — 可现场购票<br>
+    ✅ <strong>一嗨租车</strong> — 确认订单，选好取还车时间<br>
+    ✅ <strong>酒店</strong> — 确认各酒店预订状态
   </div>
 </div>
 
-<!-- ============ 航班总览 ============ -->
-<div class="section" style="padding-top:10px">
-  <div class="card" style="background:linear-gradient(135deg,#E3F2FD,#FFF8E1)">
-    <div style="display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center">
-      <div>
-        <div style="font-size:0.85rem;color:var(--text-light)">✈️ 去程</div>
-        <div style="font-size:1.1rem;font-weight:700">9C6391 <span style="color:var(--text-light);font-weight:400;font-size:0.9rem">浦东 → 威海</span></div>
-        <div style="color:var(--coral);font-weight:700">08:25 → 10:20</div>
-      </div>
-      <div style="text-align:center;font-size:2rem">✈️ ──── 🚗 ──── ✈️</div>
-      <div>
-        <div style="font-size:0.85rem;color:var(--text-light)">✈️ 回程</div>
-        <div style="font-size:1.1rem;font-weight:700">CZ6225 <span style="color:var(--text-light);font-weight:400;font-size:0.9rem">青岛 → 浦东</span></div>
-        <div style="color:var(--coral);font-weight:700">17:10 → 18:40</div>
-      </div>
-    </div>
+<div class="alert-bar alert-blue">
+  <div class="alert-title">📱 出发前检查清单</div>
+  <div style="font-size:0.85rem;line-height:2">
+    ☐ 一嗨租车订单确认<br>
+    ☐ 三地酒店确认<br>
+    ☐ 海军博物馆预约<br>
+    ☐ 各景点门票预购<br>
+    ☐ 下载高德离线地图（威海/蓬莱/青岛）<br>
+    ☐ 准备防晒用品<br>
+    ☐ 查询潮汐表（那香海/金沙滩）<br>
+    ☐ 手机充电器/充电宝/车载充电
   </div>
 </div>
 
-<!-- ============ 行程总览 ============ -->
-<div class="section" id="itinerary">
-  <div class="section-title"><span class="section-title-icon">📅</span> 每日行程</div>
-  <div class="section-subtitle">高温优化：🌅07-11点户外 · 🏠11-15点室内避暑 · 🌇15点后户外</div>
+<!-- ===== 行程 ===== -->
+<div class="sec" id="plan">
+  <div class="sec-title">📅 每日行程</div>
+  <div class="sec-sub">🌅 07-11点户外 · 🏠 11-15点室内 · 🌇 15点后户外</div>
 
   <!-- D1 -->
-  <div class="card day-card" style="border-left-color:var(--coral)">
-    <div class="day-header">
+  <div class="card day-card">
+    <div class="day-hd">
       <span class="day-num">1</span>
       <span class="day-date">8/1（六）</span>
       <span class="day-city">📍 威海</span>
-      <span style="font-size:0.8rem;color:var(--text-light);margin-left:auto">🏨 百纳瑞汀酒店</span>
+      <span class="day-hotel">🏨 百纳瑞汀</span>
     </div>
-    <div class="day-activity">
-      <span class="day-time">08:25-10:20</span>
-      <span class="day-desc">✈️ 浦东出发 → 威海机场 <span class="day-tag tag-outdoor">飞行</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">10:30-11:00</span>
-      <span class="day-desc">🚗 一嗨取车（速腾），往市区方向 <span class="day-tag tag-outdoor">取车</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">11:00-12:30</span>
-      <span class="day-desc">🍽️ 威高广场午餐（百纳瑞汀楼下）<span class="day-tag tag-indoor">室内·午餐</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">12:30-15:30</span>
-      <span class="day-desc">🏠 威高广场逛街 / 百纳瑞汀午休避暑<span class="day-tag tag-indoor">避暑</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">16:00-18:30</span>
-      <span class="day-desc">🏖️🚗开车到那香海（40min）→ 钻石沙滩玩沙踏浪看日落<span class="day-tag tag-outdoor">沙滩</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">19:00后</span>
-      <span class="day-desc">🍢 韩乐坊夜市（韩式小吃、鲅鱼水饺）<span class="day-tag tag-food">晚餐</span></span>
-    </div>
+    <div class="day-item"><span class="day-time">08:25</span><span class="day-desc">✈️ 浦东出发 → 威海机场 <span class="tag tag-out">飞行</span></span></div>
+    <div class="day-item"><span class="day-time">10:20</span><span class="day-desc">🚗 一嗨取车（速腾），开车往市区</span></div>
+    <div class="day-item"><span class="day-time">11:00-12:30</span><span class="day-desc">🍽️ 威高广场午餐（百纳瑞汀楼下）<span class="tag tag-in">室内</span></span></div>
+    <div class="day-item"><span class="day-time">12:30-15:30</span><span class="day-desc">🏠 午休/威高广场逛街避暑 <span class="tag tag-in">避暑</span></span></div>
+    <div class="day-item"><span class="day-time">16:00-18:30</span><span class="day-desc">🏖️ 🚗那香海钻石沙滩 → 玩沙+日落 <span class="tag tag-out">沙滩</span></span></div>
+    <div class="day-item"><span class="day-time">19:00后</span><span class="day-desc">🍢 韩乐坊夜市（鲅鱼水饺+海鲜）<span class="tag tag-eat">晚餐</span></span></div>
   </div>
 
   <!-- D2 -->
-  <div class="card day-card" style="border-left-color:var(--sunny)">
-    <div class="day-header">
+  <div class="card day-card">
+    <div class="day-hd">
       <span class="day-num">2</span>
       <span class="day-date">8/2（日）</span>
       <span class="day-city">📍 威海</span>
-      <span style="font-size:0.8rem;color:var(--text-light);margin-left:auto">🏨 百纳瑞汀酒店</span>
+      <span class="day-hotel">🏨 百纳瑞汀</span>
     </div>
-    <div class="day-activity">
-      <span class="day-time">06:30-07:00</span>
-      <span class="day-desc">🌅 早起出发（早餐打包或车上吃）</span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">07:00-09:30</span>
-      <span class="day-desc">🚗开车50min→⛰️ **成山头**（"天尽头"，中国最早海上日出方向）<span class="day-tag tag-outdoor">户外</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">09:30-11:30</span>
-      <span class="day-desc">🦁 **神雕山野生动物园**（开车10min到，看动物表演）<span class="day-tag tag-outdoor">动物园</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">11:30-14:30</span>
-      <span class="day-desc">🚗回市区→午餐→🏛️ **威海市科技馆**（室内空调）<span class="day-tag tag-indoor">室内</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">15:00-17:00</span>
-      <span class="day-desc">🚗 **环海路兜风**（猫头山观景台看悬崖海景）<span class="day-tag tag-outdoor">户外</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">17:00后</span>
-      <span class="day-desc">🍽️ 晚餐（推荐赶海归来·肥蛤海鲜/韩乐坊）<span class="day-tag tag-food">晚餐</span></span>
-    </div>
+    <div class="day-item"><span class="day-time">06:30</span><span class="day-desc">🌅 早起出发（早餐打包）</span></div>
+    <div class="day-item"><span class="day-time">07:00-09:00</span><span class="day-desc">⛰️ 🚗50min→<strong>成山头</strong>（"天尽头"，中国最早海上日出）<span class="tag tag-out">户外</span></span></div>
+    <div class="day-item"><span class="day-time">09:00-11:00</span><span class="day-desc">🦁 <strong>神雕山野生动物园</strong>（同方向10min车程，动物表演）<span class="tag tag-out">动物园</span></span></div>
+    <div class="day-item"><span class="day-time">11:30-14:30</span><span class="day-desc">🚗回市区→午餐→🏛️ <strong>威海科技馆</strong><span class="tag tag-in">室内</span></span></div>
+    <div class="day-item"><span class="day-time">15:00-17:00</span><span class="day-desc">🚗 <strong>环海路</strong>兜风（猫头山观景台）<span class="tag tag-out">户外</span></span></div>
+    <div class="day-item"><span class="day-time">晚餐</span><span class="day-desc">🍽️ 推荐赶海归来·肥蛤海鲜 <span class="tag tag-eat">晚餐</span></span></div>
   </div>
 
   <!-- D3 -->
-  <div class="card day-card" style="border-left-color:var(--teal)">
-    <div class="day-header">
+  <div class="card day-card">
+    <div class="day-hd">
       <span class="day-num">3</span>
       <span class="day-date">8/3（一）</span>
-      <span class="day-city">📍 威海 → 蓬莱</span>
-      <span style="font-size:0.8rem;color:var(--text-light);margin-left:auto">🏨 漫亭酒店</span>
+      <span class="day-city">📍 威海→蓬莱</span>
+      <span class="day-hotel">🏨 漫亭酒店</span>
     </div>
-    <div class="day-activity">
-      <span class="day-time">上午</span>
-      <span class="day-desc">😴 睡到自然醒，退房，威海市区自由活动</span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">11:30-13:30</span>
-      <span class="day-desc">🚗 开车到蓬莱（约2h，沿途海景公路）</span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">14:00-15:30</span>
-      <span class="day-desc">⛩️ **蓬莱阁**（中国四大名楼，儿子听八仙故事）<span class="day-tag tag-outdoor">户外</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">15:30-17:30</span>
-      <span class="day-desc">🐬 **蓬莱海洋极地世界**（室内空调，白鲸企鹅海豚表演）<span class="day-tag tag-indoor">室内</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">18:00后</span>
-      <span class="day-desc">🍽️ 蓬莱小面/海鲜 → 入住漫亭酒店（宝龙广场）<span class="day-tag tag-food">晚餐</span></span>
-    </div>
+    <div class="day-item"><span class="day-time">上午</span><span class="day-desc">😴 睡到自然醒，退房</span></div>
+    <div class="day-item"><span class="day-time">11:30-13:30</span><span class="day-desc">🚗 开车到蓬莱（约2h，海景公路）</span></div>
+    <div class="day-item"><span class="day-time">14:00-15:30</span><span class="day-desc">⛩️ <strong>蓬莱阁</strong>（四大名楼，听八仙故事）<span class="tag tag-out">户外</span></span></div>
+    <div class="day-item"><span class="day-time">15:30-17:30</span><span class="day-desc">🐬 <strong>蓬莱海洋极地世界</strong>（室内空调，白鲸企鹅表演）<span class="tag tag-in">室内</span></span></div>
+    <div class="day-item"><span class="day-time">18:00后</span><span class="day-desc">🍽️ 蓬莱小面/海鲜 → 入住漫亭（宝龙广场）<span class="tag tag-eat">晚餐</span></span></div>
   </div>
 
   <!-- D4 -->
-  <div class="card day-card" style="border-left-color:var(--ocean)">
-    <div class="day-header">
+  <div class="card day-card">
+    <div class="day-hd">
       <span class="day-num">4</span>
       <span class="day-date">8/4（二）</span>
-      <span class="day-city">📍 蓬莱 → 青岛</span>
-      <span style="font-size:0.8rem;color:var(--text-light);margin-left:auto">🏨 美豪丽致万象城店</span>
+      <span class="day-city">📍 蓬莱→青岛</span>
+      <span class="day-hotel">🏨 美豪丽致</span>
     </div>
-    <div class="day-activity">
-      <span class="day-time">上午</span>
-      <span class="day-desc">😴 蓬莱自由活动</span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">12:00-14:30</span>
-      <span class="day-desc">🚗 开车到青岛（约2.5h）</span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">15:00-17:00</span>
-      <span class="day-desc">🔬 **海信探索中心**（室内，机器人+科学秀，儿子能玩疯）<span class="day-tag tag-indoor">室内</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">17:00-18:00</span>
-      <span class="day-desc">🏨 入住美豪丽致（万象城楼上）</span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">19:30后</span>
-      <span class="day-desc">🌃 **五四广场**看灯光秀 + 奥帆中心散步<span class="day-tag tag-evening">夜景</span></span>
-    </div>
+    <div class="day-item"><span class="day-time">上午</span><span class="day-desc">😴 蓬莱自由活动</span></div>
+    <div class="day-item"><span class="day-time">12:00-14:30</span><span class="day-desc">🚗 开车到青岛（约2.5h）</span></div>
+    <div class="day-item"><span class="day-time">15:00-17:00</span><span class="day-desc">🔬 <strong>海信探索中心</strong>（机器人+科学秀，儿子最爱！）<span class="tag tag-in">室内</span></span></div>
+    <div class="day-item"><span class="day-time">17:00-18:00</span><span class="day-desc">🏨 入住美豪丽致（万象城楼上）</span></div>
+    <div class="day-item"><span class="day-time">19:30后</span><span class="day-desc">🌃 <strong>五四广场</strong>灯光秀+奥帆中心散步<span class="tag tag-night">夜景</span></span></div>
   </div>
 
   <!-- D5 -->
-  <div class="card day-card" style="border-left-color:#9C27B0">
-    <div class="day-header">
+  <div class="card day-card">
+    <div class="day-hd">
       <span class="day-num">5</span>
       <span class="day-date">8/5（三）</span>
       <span class="day-city">📍 青岛·市南</span>
-      <span style="font-size:0.8rem;color:var(--text-light);margin-left:auto">🏨 美豪丽致万象城店</span>
+      <span class="day-hotel">🏨 美豪丽致</span>
     </div>
-    <div class="day-activity">
-      <span class="day-time">09:00-11:30</span>
-      <span class="day-desc">🚢 **海军博物馆**（儿子必去！看退役军舰潜艇）<span class="day-tag tag-outdoor">户外+室内</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">11:30-12:30</span>
-      <span class="day-desc">🏙️ **云上海天81层**（开车10min，玻璃地板看海，刺激！）<span class="day-tag tag-indoor">室内</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">12:30-14:00</span>
-      <span class="day-desc">🍽️ 午餐（万象城）<span class="day-tag tag-food">午餐</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">14:00-17:00</span>
-      <span class="day-desc">🔬 **海信探索中心**（昨天没玩够的继续）<span class="day-tag tag-indoor">室内</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">晚餐</span>
-      <span class="day-desc">自由安排（推荐云霄路美食街/万象城餐厅）</span>
-    </div>
+    <div class="day-item"><span class="day-time">09:00-11:00</span><span class="day-desc">🚢 <strong>海军博物馆</strong>（儿子必去！看真军舰潜艇）<span class="tag tag-out tag-alert">需预约</span></span></div>
+    <div class="day-item"><span class="day-time">11:00-12:00</span><span class="day-desc">🏙️ <strong>云上海天81层</strong>（玻璃地板看海，刺激！）<span class="tag tag-in">室内</span></span></div>
+    <div class="day-item"><span class="day-time">12:00-14:00</span><span class="day-desc">🍽️ 万象城午餐 <span class="tag tag-eat">午餐</span></span></div>
+    <div class="day-item"><span class="day-time">14:00-17:00</span><span class="day-desc">🔬 <strong>海信探索中心</strong>（续玩）<span class="tag tag-in">室内</span></span></div>
+    <div class="day-item"><span class="day-time">晚餐</span><span class="day-desc">云霄路美食街或万象城 <span class="tag tag-eat">晚餐</span></span></div>
   </div>
 
   <!-- D6 -->
-  <div class="card day-card" style="border-left-color:var(--coral)">
-    <div class="day-header">
+  <div class="card day-card">
+    <div class="day-hd">
       <span class="day-num">6</span>
       <span class="day-date">8/6（四）</span>
       <span class="day-city">📍 青岛·黄岛</span>
-      <span style="font-size:0.8rem;color:var(--text-light);margin-left:auto">🏨 美豪丽致万象城店</span>
+      <span class="day-hotel">🏨 美豪丽致</span>
     </div>
-    <div class="day-activity">
-      <span class="day-time">08:00-11:00</span>
-      <span class="day-desc">🚗过海底隧道→🦁 **森林野生动物园**（早上去动物活跃）<span class="day-tag tag-outdoor">户外</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">11:00-14:00</span>
-      <span class="day-desc">🐚 **贝壳博物馆**（室内空调）+ 午餐 <span class="day-tag tag-indoor">室内</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">16:00-18:30</span>
-      <span class="day-desc">🏖️ **金沙滩**（亚洲第一滩，玩沙看日落）<span class="day-tag tag-outdoor">沙滩</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">19:00后</span>
-      <span class="day-desc">🍽️ 金沙滩海鲜大排档 或 回市区</span>
-    </div>
+    <div class="day-item"><span class="day-time">08:00-11:00</span><span class="day-desc">🚗过隧道→🦁 <strong>森林野生动物园</strong><span class="tag tag-out">户外</span></span></div>
+    <div class="day-item"><span class="day-time">11:00-14:00</span><span class="day-desc">🐚 <strong>贝壳博物馆</strong>（室内空调）+ 午餐 <span class="tag tag-in">室内</span></span></div>
+    <div class="day-item"><span class="day-time">16:00-18:30</span><span class="day-desc">🏖️ <strong>金沙滩</strong>（亚洲第一滩，玩沙看日落）<span class="tag tag-out">沙滩</span></span></div>
+    <div class="day-item"><span class="day-time">19:00后</span><span class="day-desc">🍽️ 金沙滩海鲜大排档 <span class="tag tag-eat">晚餐</span></span></div>
   </div>
 
   <!-- D7 -->
-  <div class="card day-card" style="border-left-color:var(--sunny)">
-    <div class="day-header">
+  <div class="card day-card">
+    <div class="day-hd">
       <span class="day-num">7</span>
       <span class="day-date">8/7（五）</span>
       <span class="day-city">📍 青岛·崂山</span>
-      <span style="font-size:0.8rem;color:var(--text-light);margin-left:auto">🏨 美豪丽致万象城店</span>
+      <span class="day-hotel">🏨 美豪丽致</span>
     </div>
-    <div class="day-activity">
-      <span class="day-time">09:00-16:00</span>
-      <span class="day-desc">🐬 **极地海洋世界**（全天室内空调！白鲸海豚企鹅+表演）<span class="day-tag tag-indoor">室内</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">16:30-17:00</span>
-      <span class="day-desc">🎡 **海上摩天轮**（开车5min，高空看海岸线）<span class="day-tag tag-outdoor">户外</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">17:00-18:30</span>
-      <span class="day-desc">🌿 **小麦岛公园**（步行可达，夕阳海景草坪）<span class="day-tag tag-outdoor">户外</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">19:00后</span>
-      <span class="day-desc">🍢 **台东夜市**（晚餐小吃）<span class="day-tag tag-food">夜市</span></span>
-    </div>
+    <div class="day-item"><span class="day-time">09:00-16:00</span><span class="day-desc">🐬 <strong>极地海洋世界</strong>（全天室内，白鲸海豚企鹅+表演）<span class="tag tag-in">室内</span></span></div>
+    <div class="day-item"><span class="day-time">16:30-17:00</span><span class="day-desc">🎡 <strong>海上摩天轮</strong>（5min车程）<span class="tag tag-out">户外</span></span></div>
+    <div class="day-item"><span class="day-time">17:00-18:30</span><span class="day-desc">🌿 <strong>小麦岛公园</strong>（夕阳海景）<span class="tag tag-out">户外</span></span></div>
+    <div class="day-item"><span class="day-time">19:00后</span><span class="day-desc">🍢 <strong>台东夜市</strong><span class="tag tag-eat">夜市</span></span></div>
   </div>
 
   <!-- D8 -->
-  <div class="card day-card" style="border-left-color:#FF5722">
-    <div class="day-header">
+  <div class="card day-card">
+    <div class="day-hd">
       <span class="day-num">8</span>
       <span class="day-date">8/8（六）</span>
       <span class="day-city">📍 青岛→返程</span>
-      <span style="font-size:0.8rem;color:var(--text-light);margin-left:auto">✈️ 返程</span>
+      <span class="day-hotel">✈️</span>
     </div>
-    <div class="day-activity">
-      <span class="day-time">09:00-12:00</span>
-      <span class="day-desc">🐠 **海底世界**（室内，海底隧道+人鱼表演）<span class="day-tag tag-indoor">室内</span></span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">12:00-13:30</span>
-      <span class="day-desc">🍽️ 午餐</span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">14:00-15:00</span>
-      <span class="day-desc">🚗 还车（青岛胶东机场一嗨）</span>
-    </div>
-    <div class="day-activity">
-      <span class="day-time">17:10-18:40</span>
-      <span class="day-desc">✈️ CZ6225 青岛→浦东，到家！🏠</span>
-    </div>
+    <div class="day-item"><span class="day-time">09:00-12:00</span><span class="day-desc">🐠 <strong>海底世界</strong>（海底隧道+人鱼表演）<span class="tag tag-in">室内</span></span></div>
+    <div class="day-item"><span class="day-time">12:00-13:30</span><span class="day-desc">🍽️ 午餐</span></div>
+    <div class="day-item"><span class="day-time">14:00-15:00</span><span class="day-desc">🚗 还车（青岛胶东机场一嗨）</span></div>
+    <div class="day-item"><span class="day-time">17:10</span><span class="day-desc">✈️ CZ6225 青岛→浦东 🏠 <span class="tag tag-out">飞行</span></span></div>
   </div>
 </div>
 
-<!-- ============ 住宿 ============ -->
-<div class="section" id="hotels">
-  <div class="section-title"><span class="section-title-icon">🏨</span> 住宿安排</div>
-  <div class="section-subtitle">一路不走回头路，每个城市同一家酒店不搬行李</div>
-
-  <div class="card hotel-card">
+<!-- ===== 住宿 ===== -->
+<div class="sec" id="hotel">
+  <div class="sec-title">🏨 住宿安排</div>
+  <div class="sec-sub">每个城市同一家酒店不搬行李</div>
+  <div class="hotel-card">
     <div class="hotel-icon">🌊</div>
     <div class="hotel-info">
       <div class="hotel-name">百纳瑞汀酒店（幸福门店）</div>
-      <div class="hotel-detail">📍 威海·威高广场旁 · 评分9.6/10 · 有亲子主题房</div>
+      <div class="hotel-detail">威海 · 威高广场旁 · 评分9.6 · 有亲子主题房</div>
     </div>
-    <div class="hotel-price">2晚 ≈¥1,300</div>
+    <div class="hotel-price">2晚≈¥1,300</div>
   </div>
-
-  <div class="card hotel-card">
+  <div class="hotel-card">
     <div class="hotel-icon">🏰</div>
     <div class="hotel-info">
       <div class="hotel-name">漫亭酒店（宝龙广场店）</div>
-      <div class="hotel-detail">📍 蓬莱·宝龙广场 · 评分4.7/5 · 步行到蓬莱阁，有LOFT特色房</div>
+      <div class="hotel-detail">蓬莱 · 宝龙广场 · 评分4.7 · 步到蓬莱阁</div>
     </div>
     <div class="hotel-price">1晚 ¥413</div>
   </div>
-
-  <div class="card hotel-card">
+  <div class="hotel-card">
     <div class="hotel-icon">🏙️</div>
     <div class="hotel-info">
       <div class="hotel-name">美豪丽致酒店（万象城店）</div>
-      <div class="hotel-detail">📍 青岛·五四广场万象城楼上 · 评分4.7/5 · 海信探索中心步行5分钟</div>
+      <div class="hotel-detail">青岛·五四广场·评分4.7·海信探索中心步5分</div>
     </div>
     <div class="hotel-price">4晚 ¥3,643</div>
   </div>
 </div>
 
-<!-- ============ 预算 ============ -->
-<div class="section" id="budget">
-  <div class="section-title"><span class="section-title-icon">💰</span> 预算总汇</div>
-  <div class="section-subtitle">不含机票 · 人民币计价</div>
+<!-- ===== 预算 ===== -->
+<div class="sec" id="budget">
+  <div class="sec-title">💰 预算总汇</div>
+  <div class="sec-sub">不含机票 · 人民币</div>
   <div class="card" style="padding:0;overflow:hidden">
-    <table class="budget-table">
+    <table class="budget">
       <tr><th>项目</th><th>明细</th><th>金额</th></tr>
-      <tr><td>🏨 住宿</td><td>百纳瑞汀2晚 + 漫亭1晚 + 美豪丽致4晚</td><td>¥5,356</td></tr>
+      <tr><td>🏨 住宿</td><td>百纳瑞汀2+漫亭1+美豪丽致4</td><td>¥5,356</td></tr>
       <tr><td>🚗 租车</td><td>一嗨速腾（含异地还车）</td><td>¥1,160</td></tr>
-      <tr><td>🎫 门票</td><td>成山头+神雕山动物园+蓬莱阁+海洋极地+海军博物馆+海信探索中心+森林动物园+贝壳博物馆+极地海洋世界+海底世界+云上海天+海上摩天轮</td><td>≈¥2,000</td></tr>
-      <tr><td>⛽ 油费过路</td><td>全程约600km</td><td>≈¥500</td></tr>
+      <tr><td>🎫 门票</td><td>成山头+动物园+蓬莱阁+海洋极地+海军博物馆+海信+森林动物园+贝壳+极地海洋+海底+云上海天+摩天轮</td><td>≈¥2,000</td></tr>
+      <tr><td>⛽ 油费路费</td><td>全程约600km+隧道费</td><td>≈¥500</td></tr>
       <tr><td>🍜 餐饮</td><td>7天一家三口</td><td>丰俭由人</td></tr>
-      <tr><td>💰 <strong>合计（不含机票）</strong></td><td></td><td><strong>≈¥9,000+</strong></td></tr>
+      <tr class="sum"><td>💰 合计（不含机票）</td><td></td><td>≈¥9,000+</td></tr>
     </table>
   </div>
 </div>
 
-<!-- ============ 天气 ============ -->
-<div class="section" id="weather">
-  <div class="section-title"><span class="section-title-icon">🌤️</span> 天气分析与穿衣建议</div>
-  <div class="section-subtitle">8月山东沿海：温暖潮湿，注意防晒和阵雨</div>
-
-  <div class="weather-grid">
-    <div class="weather-item">
-      <div class="w-icon">🌊</div>
-      <div class="w-city">威海</div>
-      <div class="w-temp">24~27°C</div>
-      <div class="w-detail">偶有阵雨 · 水温25°C<br>早晚舒适，午间湿热</div>
-    </div>
-    <div class="weather-item">
-      <div class="w-icon">⛩️</div>
-      <div class="w-city">蓬莱</div>
-      <div class="w-temp">25~28°C</div>
-      <div class="w-detail">偶有阵雨<br>海边风大，体感凉快</div>
-    </div>
-    <div class="weather-item">
-      <div class="w-icon">🏙️</div>
-      <div class="w-city">青岛</div>
-      <div class="w-temp">25~28°C</div>
-      <div class="w-detail">湿热多雨 · 8月最热<br>紫外线强，注意防暑</div>
-    </div>
+<!-- ===== 天气 ===== -->
+<div class="sec" id="weather">
+  <div class="sec-title">🌤️ 天气分析</div>
+  <div class="sec-sub">8月沿海：温暖潮湿·注意防晒·偶有阵雨</div>
+  <div class="w-grid">
+    <div class="w-item"><div class="wi">🌊</div><div class="wn">威海</div><div class="wt">24~27°C</div><div class="wd">水温25°C·偶阵雨</div></div>
+    <div class="w-item"><div class="wi">⛩️</div><div class="wn">蓬莱</div><div class="wt">25~28°C</div><div class="wd">海边风大·偶阵雨</div></div>
+    <div class="w-item"><div class="wi">🏙️</div><div class="wn">青岛</div><div class="wt">25~28°C</div><div class="wd">湿热·紫外线强</div></div>
   </div>
-
-  <div class="card" style="margin-top:12px">
-    <div class="card-title">👔 穿衣建议</div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px">
-      <span style="background:#E3F2FD;padding:6px 14px;border-radius:50px;font-size:0.85rem">👕 T恤/短袖（每天换）</span>
-      <span style="background:#E3F2FD;padding:6px 14px;border-radius:50px;font-size:0.85rem">🩳 短裤/沙滩裤</span>
-      <span style="background:#FFF3E0;padding:6px 14px;border-radius:50px;font-size:0.85rem">🧥 薄外套1件（早晚/空调房）</span>
-      <span style="background:#FFF3E0;padding:6px 14px;border-radius:50px;font-size:0.85rem">👟 运动鞋+拖鞋</span>
-      <span style="background:#FFEBEE;padding:6px 14px;border-radius:50px;font-size:0.85rem">🧢 遮阳帽/墨镜</span>
-      <span style="background:#FFEBEE;padding:6px 14px;border-radius:50px;font-size:0.85rem">🌂 雨伞/雨衣</span>
+  <div class="card" style="margin-top:8px;padding:12px">
+    <div style="display:flex;flex-wrap:wrap;gap:6px">
+      <span style="background:#E3F2FD;padding:4px 10px;border-radius:50px;font-size:0.75rem">👕 T恤短袖×8</span>
+      <span style="background:#E3F2FD;padding:4px 10px;border-radius:50px;font-size:0.75rem">🩳 短裤×4</span>
+      <span style="background:#FFF3E0;padding:4px 10px;border-radius:50px;font-size:0.75rem">🧥 薄外套×2</span>
+      <span style="background:#FFF3E0;padding:4px 10px;border-radius:50px;font-size:0.75rem">👟 运动鞋+拖鞋</span>
+      <span style="background:#FFEBEE;padding:4px 10px;border-radius:50px;font-size:0.75rem">🧢 帽+墨镜+防晒</span>
+      <span style="background:#FFEBEE;padding:4px 10px;border-radius:50px;font-size:0.75rem">🌂 雨伞</span>
     </div>
   </div>
 </div>
 
-<!-- ============ 美食 ============ -->
-<div class="section" id="food">
-  <div class="section-title"><span class="section-title-icon">🍜</span> 美食指南</div>
-  <div class="section-subtitle">一家三口不吃辣 · 鲁菜清淡鲜美 · 海鲜丰富</div>
-
-  <div class="food-grid">
-    <div class="food-card">
-      <h4>🥟 鲅鱼水饺</h4>
-      <p>胶东招牌！鲜嫩无刺，皮薄馅足，儿子也能吃</p>
-      <span class="food-tag">威海·必吃</span>
-    </div>
-    <div class="food-card">
-      <h4>🦐 清蒸海鲜</h4>
-      <p>白灼/清蒸做法，原汁原味，不辣不油，全家适合</p>
-      <span class="food-tag">威海·青岛</span>
-    </div>
-    <div class="food-card">
-      <h4>🍲 海肠捞饭</h4>
-      <p>威海特色，鲜香入味，儿子会喜欢</p>
-      <span class="food-tag">威海·特色</span>
-    </div>
-    <div class="food-card">
-      <h4>🥘 蓬莱小面</h4>
-      <p>蓬莱特色早餐，汤鲜面滑</p>
-      <span class="food-tag">蓬莱·早餐</span>
-    </div>
-    <div class="food-card">
-      <h4>🦪 辣炒蛤蜊</h4>
-      <p>青岛啤酒搭档，可以让店家做不辣版</p>
-      <span class="food-tag">青岛·经典</span>
-    </div>
-    <div class="food-card">
-      <h4>🍺 青岛原浆啤酒</h4>
-      <p>爸爸的快乐～塑料袋装啤酒体验一下</p>
-      <span class="food-tag">青岛·限定</span>
-    </div>
+<!-- ===== 美食 ===== -->
+<div class="sec" id="food">
+  <div class="sec-title">🍜 美食指南</div>
+  <div class="sec-sub">一家三口不吃辣 · 鲁菜清淡鲜美</div>
+  <div class="f-grid">
+    <div class="f-card"><h4>🥟 鲅鱼水饺</h4><p>胶东招牌，鲜嫩无刺，儿子也能吃</p><span class="ftag">威海必吃</span></div>
+    <div class="f-card"><h4>🦐 清蒸海鲜</h4><p>白灼/清蒸，原汁原味不辣</p><span class="ftag">威海·青岛</span></div>
+    <div class="f-card"><h4>🍲 海肠捞饭</h4><p>威海特色，鲜香入味</p><span class="ftag">威海特色</span></div>
+    <div class="f-card"><h4>🥘 蓬莱小面</h4><p>蓬莱早餐，汤鲜面滑</p><span class="ftag">蓬莱早餐</span></div>
+    <div class="f-card"><h4>🦪 辣炒蛤蜊</h4><p>经典青岛味，可做不辣版</p><span class="ftag">青岛经典</span></div>
+    <div class="f-card"><h4>🍺 原浆啤酒</h4><p>爸爸的快乐！塑料袋装体验</p><span class="ftag">青岛限定</span></div>
   </div>
-
-  <div class="card" style="margin-top:12px">
-    <div class="card-title">📍 推荐美食片区</div>
-    <ul style="padding-left:20px;font-size:0.9rem;line-height:2">
-      <li>🥇 <strong>威海·韩乐坊</strong> — 韩式小吃+海鲜烧烤一条街</li>
-      <li>🥇 <strong>威海·威高广场</strong> — 连锁餐厅+本地菜，选择多</li>
-      <li>🥇 <strong>蓬莱·宝龙广场</strong> — 漫亭楼下，海鲜大排档</li>
-      <li>🥇 <strong>青岛·台东夜市</strong> — D7晚上，小吃天堂</li>
-      <li>🥇 <strong>青岛·云霄路美食街</strong> — 本地人推荐，海鲜新鲜不宰客</li>
-      <li>🥇 <strong>青岛·万象城</strong> — 美豪丽致楼下，吹着空调吃</li>
+  <div class="card" style="margin-top:8px;padding:14px">
+    <div class="card-title" style="font-size:0.9rem">📍 推荐美食片区</div>
+    <ul style="padding-left:16px;font-size:0.82rem;line-height:1.9">
+      <li>🥇 威海·韩乐坊 — 韩式小吃+海鲜烧烤</li>
+      <li>🥇 蓬莱·宝龙广场 — 漫亭楼下有海鲜</li>
+      <li>🥇 青岛·台东夜市 — D7晚餐小吃天堂</li>
+      <li>🥇 青岛·云霄路 — 本地人推荐不宰客</li>
+      <li>🥇 青岛·万象城 — 美豪丽致楼下吹空调吃</li>
     </ul>
   </div>
 </div>
 
-<!-- ============ 行李清单 ============ -->
-<div class="section" id="luggage">
-  <div class="section-title"><span class="section-title-icon">🎒</span> 行李清单</div>
-  <div class="section-subtitle">一家三口·8天7晚·自驾（后备箱510L，28寸箱子够用）</div>
-
-  <div class="luggage-grid">
-    <div class="luggage-cat">
-      <h4>📄 证件类</h4>
-      <ul>
-        <li>身份证（3张）</li>
-        <li>驾驶证+租车凭证</li>
-        <li>酒店预订单（电子版）</li>
-        <li>机票行程单</li>
-        <li>银行卡/手机支付</li>
-      </ul>
-    </div>
-    <div class="luggage-cat">
-      <h4>👕 衣物类</h4>
-      <ul>
-        <li>T恤×8件（每天换）</li>
-        <li>短裤×4条</li>
-        <li>薄外套×2件</li>
-        <li>内衣裤+袜子×8套</li>
-        <li>泳衣（爸爸+儿子）</li>
-        <li>运动鞋+拖鞋</li>
-        <li>遮阳帽+墨镜</li>
-      </ul>
-    </div>
-    <div class="luggage-cat">
-      <h4>💊 药品类</h4>
-      <ul>
-        <li>防晒霜SPF50+</li>
-        <li>驱蚊液/蚊虫叮咬</li>
-        <li>创可贴+碘伏棉签</li>
-        <li>肠胃药（以防海鲜不适）</li>
-        <li>退烧药+感冒药</li>
-        <li>晕车药</li>
-      </ul>
-    </div>
-    <div class="luggage-cat">
-      <h4>📱 电子类</h4>
-      <ul>
-        <li>手机+充电器×3</li>
-        <li>充电宝（≤100Wh）</li>
-        <li>车载手机支架</li>
-        <li>车载充电器</li>
-        <li>耳机/平板（儿子路上用）</li>
-        <li>相机（选带）</li>
-      </ul>
-    </div>
-    <div class="luggage-cat">
-      <h4>🧴 个护类</h4>
-      <ul>
-        <li>牙刷/牙膏/洗面奶</li>
-        <li>洗发水/沐浴露</li>
-        <li>毛巾/湿巾/纸巾</li>
-        <li>剃须刀（爸爸）</li>
-        <li>护肤品/晒后修复</li>
-        <li>卫生巾（妈妈备用）</li>
-      </ul>
-    </div>
-    <div class="luggage-cat">
-      <h4>🏖️ 沙滩类</h4>
-      <ul>
-        <li>玩沙工具（儿子）</li>
-        <li>沙滩垫/野餐垫</li>
-        <li>防水手机袋</li>
-        <li>大号防水袋（装湿衣服）</li>
-        <li>水壶/矿泉水</li>
-        <li>零食（路上吃）</li>
-      </ul>
-    </div>
+<!-- ===== 行李清单 ===== -->
+<div class="sec" id="pack">
+  <div class="sec-title">🎒 行李清单</div>
+  <div class="sec-sub">一家三口 · 8天 · 自驾（后备箱510L）</div>
+  <div class="l-grid">
+    <div class="l-cat"><h4>📄 证件</h4><ul><li class="must">身份证×3</li><li class="must">驾驶证+租车凭证</li><li>酒店预订单</li><li>机票行程单</li><li>银行卡/手机支付</li></ul></div>
+    <div class="l-cat"><h4>👕 衣物</h4><ul><li class="must">T恤×8</li><li class="must">短裤×4</li><li>薄外套×2</li><li>内衣袜子×8</li><li>泳衣（爸+儿）</li><li>运动鞋+拖鞋</li><li class="must">遮阳帽+墨镜</li></ul></div>
+    <div class="l-cat"><h4>💊 药品</h4><ul><li class="must">防晒霜SPF50+</li><li class="must">驱蚊液</li><li>创可贴+碘伏</li><li>肠胃药</li><li>退烧/感冒药</li><li>晕车药</li></ul></div>
+    <div class="l-cat"><h4>📱 电子</h4><ul><li class="must">手机+充电器</li><li class="must">充电宝≤100Wh</li><li>车载手机支架</li><li>车载充电器</li><li>耳机/平板（儿子）</li><li>相机（选）</li></ul></div>
+    <div class="l-cat"><h4>🧴 个护</h4><ul><li>牙刷/牙膏/洗面奶</li><li>洗发水/沐浴露</li><li>毛巾/湿巾</li><li>剃须刀</li><li>护肤品/晒后修复</li></ul></div>
+    <div class="l-cat"><h4>🏖️ 沙滩</h4><ul><li>玩沙工具（儿子）</li><li>沙滩垫</li><li>防水手机袋</li><li>防水袋（装湿衣）</li><li class="must">水壶+零食</li></ul></div>
   </div>
-
-  <div class="card" style="margin-top:12px;background:#FFF8E1">
-    <div style="font-size:0.9rem">
-      ⚠️ <strong>重要提醒：</strong>
-      充电宝必须≤100Wh（20000mAh以内），须随身携带不可托运。
-      自驾优势：后备箱空间大，可以多带水和零食。
-    </div>
+  <div class="alert-bar alert-green" style="margin-top:8px">
+    <div class="alert-title">⚠️ 充电宝必须≤100Wh（20000mAh以内），随身携带不可托运</div>
   </div>
 </div>
 
-<!-- ============ 安全提示 ============ -->
-<div class="section" id="safety">
-  <div class="section-title"><span class="section-title-icon">⚠️</span> 健康与安全提示</div>
-  <div class="section-subtitle">带着家人出行，安全第一</div>
-
-  <div class="tips-grid">
-    <div class="tip-card tip-warning">
-      <div class="tip-icon">🌞</div>
-      <div class="tip-text">
-        <strong>防暑防晒</strong>
-        11:00-15:00 日照最强时段要避开户外。防晒霜每2小时补涂，儿子戴好帽子。
-        海水反射紫外线更强，阴天也要防晒！
-      </div>
-    </div>
-    <div class="tip-card tip-info">
-      <div class="tip-icon">🌊</div>
-      <div class="tip-text">
-        <strong>海边安全</strong>
-        儿子不下水游泳，只在沙滩玩沙。金沙滩浪较大，注意红色警戒线。
-        礁石区湿滑，不要去攀爬。
-      </div>
-    </div>
-    <div class="tip-card tip-safe">
-      <div class="tip-icon">🚗</div>
-      <div class="tip-text">
-        <strong>自驾贴士</strong>
-        威海→蓬莱S302省道风景好但弯道多，注意车速。
-        青岛老城区单行道多、停车贵，酒店车位确认好。
-        胶州湾隧道收费（约¥10/次）。
-      </div>
-    </div>
-    <div class="tip-card tip-warning">
-      <div class="tip-icon">🦟</div>
-      <div class="tip-text">
-        <strong>蚊虫防护</strong>
-        傍晚海边蚊虫多，驱蚊液必备。带止痒药。
-        那香海/金沙滩傍晚蚊虫尤其多。
-      </div>
-    </div>
-    <div class="tip-card tip-info">
-      <div class="tip-icon">🍽️</div>
-      <div class="tip-text">
-        <strong>饮食安全</strong>
-        海鲜选新鲜活鲜，不吃不新鲜的。一家三口不吃辣。
-        避免景区旁边网红大排档，溢价严重。
-        带儿子吃饭选有儿童餐椅的店。
-      </div>
-    </div>
-    <div class="tip-card tip-safe">
-      <div class="tip-icon">🌧️</div>
-      <div class="tip-text">
-        <strong>天气应变</strong>
-        8月山东多阵雨，随身带伞。遇到暴雨在室内等。
-        蓬莱阁/成山头等景点出发前确认开放情况。
-        青岛海底世界/极地海洋世界等室内项目不受天气影响。
-      </div>
-    </div>
+<!-- ===== 安全提示 ===== -->
+<div class="sec" id="safe">
+  <div class="sec-title">⚠️ 安全贴士</div>
+  <div class="sec-sub">出门在外，安全第一</div>
+  <div class="t-grid">
+    <div class="t-card tw"><div class="ticon">🌞</div><div><strong>防暑防晒</strong>11:00-15:00避开户外·防晒每2h补涂·儿子戴好帽子·阴天也要防晒</div></div>
+    <div class="t-card ti"><div class="ticon">🌊</div><div><strong>海边安全</strong>儿子不下水只沙滩·金沙滩注意警戒线·礁石区湿滑勿攀爬</div></div>
+    <div class="t-card ts"><div class="ticon">🚗</div><div><strong>自驾注意</strong>威海→蓬莱S302弯道多·青岛单行道多停车贵·隧道费约¥10</div></div>
+    <div class="t-card tw"><div class="ticon">🦟</div><div><strong>蚊虫</strong>傍晚海边蚊虫多·驱蚊液必备·那香海/金沙滩尤其注意</div></div>
+    <div class="t-card ti"><div class="ticon">🍽️</div><div><strong>饮食安全</strong>海鲜选活鲜·不吃辣莫信"微辣"·避景区网红大排档</div></div>
+    <div class="t-card ts"><div class="ticon">🌧️</div><div><strong>天气应变</strong>8月多阵雨随身带伞·室内景点不受天气影响</div></div>
   </div>
-
-  <div class="card" style="margin-top:16px;background:#E3F2FD">
-    <div class="card-title">📞 应急信息</div>
-    <div style="display:flex;flex-wrap:wrap;gap:24px;font-size:0.9rem">
+  <div class="card" style="margin-top:8px;padding:14px;background:#E3F2FD">
+    <div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.82rem">
       <div><strong>🚑 急救</strong> 120</div>
       <div><strong>🚓 报警</strong> 110</div>
-      <div><strong>🚗 一嗨租车</strong> 400-888-6608</div>
-      <div><strong>🏥 威海市立医院</strong> 0631-5208800</div>
-      <div><strong>🏥 青岛大学附属医院</strong> 0532-82911888</div>
+      <div><strong>🚗 一嗨</strong> 400-888-6608</div>
+      <div><strong>🏥 威海市立</strong> 0631-5208800</div>
+      <div><strong>🏥 青大附院</strong> 0532-82911888</div>
     </div>
   </div>
 </div>
 
-<!-- ============ 行程速览下载区 ============ -->
-<div class="section" style="padding-bottom:20px">
-  <div class="card" style="background:linear-gradient(135deg,var(--deep-blue),#2D6A9F);color:#fff;text-align:center;padding:30px">
-    <div style="font-size:2rem;margin-bottom:8px">🚗🏖️🐬</div>
-    <div style="font-size:1.2rem;font-weight:700;margin-bottom:8px">威海→青岛 · 家庭自驾之旅</div>
-    <div style="font-size:0.9rem;opacity:0.9">2026.8.1 — 8.8 · 一家三口 · 全程约900km</div>
-    <div style="margin-top:16px;font-size:0.85rem;opacity:0.7">
-      ✈️ 9C6391 浦东→威海 08:25-10:20 &nbsp;|&nbsp; CZ6225 青岛→浦东 17:10-18:40
-    </div>
-  </div>
-</div>
-
-</div><!-- /.container -->
-
+<!-- Footer -->
 <div class="footer">
-  <div class="emoji">🏖️ 祝旅途愉快！🏖️</div>
-  <div style="margin:10px 0">爸爸+妈妈+三年级儿子 · 威海→青岛8天7晚</div>
-  <div class="links">
-    <a href="#">📅 行程</a>
-    <a href="#">🏨 住宿</a>
-    <a href="#">💰 预算</a>
-    <a href="#">🎒 清单</a>
-    <a href="#">⚠️ 安全</a>
-  </div>
-  <div style="margin-top:16px;font-size:0.8rem">Generated by Hermes Agent · 2026-07-25</div>
+  <span class="big">🏖️ 祝旅途愉快！🏖️</span>
+  爸爸+妈妈+三年级儿子 · 威海→青岛8天7晚<br>
+  <span style="font-size:0.7rem">Powered by Hermes Agent · 2026-07-25</span>
 </div>
 
+</div><!-- /.wrap -->
 </body>
 </html>
