@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>鹈鹕骑自行车 Pelican Ride</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #0f1b2d;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .card {
+    width: min(900px, 100%);
+    background: #16263f;
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.45);
+  }
+  h1 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  p.sub { font-size: 13px; color: #9fb3cc; margin-bottom: 12px; }
+  .stage {
+    border-radius: 14px;
+    overflow: hidden;
+    background: linear-gradient(#7ec8f7 0%, #bfe7ff 55%, #e8f9e8 55%, #cde9b5 100%);
+  }
+  svg { display: block; width: 100%; height: auto; }
+  .controls {
+    display: flex; gap: 12px; align-items: center;
+    margin-top: 12px; flex-wrap: wrap;
+  }
+  .controls label { font-size: 13px; color: #9fb3cc; }
+  input[type=range] { accent-color: #ff8c42; width: 180px; }
+  button {
+    border: 0; border-radius: 999px; padding: 8px 18px;
+    background: #ff8c42; color: #fff; font-size: 14px; cursor: pointer;
+  }
+  button.ghost { background: #2b3f5e; }
+  button:hover { filter: brightness(1.1); }
+  .speedVal { font-size: 13px; color: #ffd8b5; min-width: 60px; }
+
+  /* SVG animations */
+  .wheel-spin { transform-origin: center; transform-box: fill-box; animation: spin 1.1s linear infinite; }
+  .crank-spin { transform-origin: 0 0; animation: spin 1.1s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .bob { animation: bob 0.55s ease-in-out infinite alternate; }
+  @keyframes bob { from { transform: translateY(0); } to { transform: translateY(-6px); } }
+  .wing-flap { transform-origin: 20% 20%; transform-box: fill-box; animation: flap 0.55s ease-in-out infinite alternate; }
+  @keyframes flap { from { transform: rotate(-6deg); } to { transform: rotate(14deg); } }
+  .cloud-a { animation: drift 26s linear infinite; }
+  .cloud-b { animation: drift 38s linear infinite; }
+  @keyframes drift { from { transform: translateX(-160px); } to { transform: translateX(900px); } }
+  .ground-dash { animation: dash 0.6s linear infinite; }
+  @keyframes dash { to { stroke-dashoffset: -28; } }
+  .scarf-wave { animation: wave 0.5s ease-in-out infinite alternate; transform-origin: left center; transform-box: fill-box; }
+  @keyframes wave { from { transform: rotate(-4deg) skewY(-2deg); } to { transform: rotate(5deg) skewY(3deg); } }
+  .pouch-wobble { transform-origin: top center; transform-box: fill-box; animation: wobble 0.55s ease-in-out infinite alternate; }
+  @keyframes wobble { from { transform: scaleY(1); } to { transform: scaleY(1.06); } }
+  .paused * { animation-play-state: paused !important; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>鹈鹕骑自行车 2D 动画</h1>
+  <p class="sub">纯 SVG 手绘 + CSS 动画：车轮转 / 脚踏踩 / 翅膀扇 / 围巾飘 / 云朵漂</p>
+  <div class="stage">
+  <svg id="scene" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="鹈鹕骑自行车">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#6dbdf2"/>
+        <stop offset="1" stop-color="#c9ecff"/>
+      </linearGradient>
+    </defs>
+
+    <!-- sky -->
+    <rect x="0" y="0" width="800" height="290" fill="url(#sky)"/>
+    <circle cx="660" cy="70" r="38" fill="#FFD93D"/>
+    <circle cx="660" cy="70" r="52" fill="#FFD93D" opacity="0.25"/>
+
+    <!-- clouds -->
+    <g class="cloud-a" opacity="0.95">
+      <ellipse cx="120" cy="70" rx="42" ry="20" fill="#fff"/>
+      <ellipse cx="155" cy="60" rx="32" ry="18" fill="#fff"/>
+      <ellipse cx="90" cy="62" rx="24" ry="14" fill="#fff"/>
+    </g>
+    <g class="cloud-b" opacity="0.9">
+      <ellipse cx="300" cy="120" rx="36" ry="16" fill="#fff"/>
+      <ellipse cx="330" cy="112" rx="26" ry="14" fill="#fff"/>
+    </g>
+
+    <!-- distant hills -->
+    <ellipse cx="150" cy="300" rx="220" ry="60" fill="#a8d8a8"/>
+    <ellipse cx="620" cy="305" rx="260" ry="65" fill="#93cc93"/>
+
+    <!-- ground -->
+    <rect x="0" y="290" width="800" height="160" fill="#7fbf6a"/>
+    <rect x="0" y="330" width="800" height="70" fill="#5b5b66"/>
+    <rect x="0" y="330" width="800" height="8" fill="#6f6f7a"/>
+    <line class="ground-dash" x1="0" y1="370" x2="800" y2="370" stroke="#fff" stroke-width="6" stroke-dasharray="18 10" opacity="0.9"/>
+
+    <!-- trees scrolling hint -->
+    <g opacity="0.9">
+      <rect x="60" y="250" width="10" height="50" fill="#7a4a2b"/>
+      <circle cx="65" cy="238" r="26" fill="#2e8b57"/>
+      <rect x="720" y="248" width="10" height="52" fill="#7a4a2b"/>
+      <circle cx="725" cy="236" r="28" fill="#2e8b57"/>
+    </g>
+
+    <!-- BIKE + PELICAN -->
+    <g class="bob">
+      <!-- rear wheel -->
+      <g transform="translate(300,360)">
+        <circle r="52" fill="none" stroke="#222" stroke-width="10"/>
+        <circle r="44" fill="none" stroke="#ddd" stroke-width="3"/>
+        <g class="wheel-spin">
+          <line x1="-40" y1="0" x2="40" y2="0" stroke="#999" stroke-width="4"/>
+          <line x1="0" y1="-40" x2="0" y2="40" stroke="#999" stroke-width="4"/>
+          <line x1="-28" y1="-28" x2="28" y2="28" stroke="#bbb" stroke-width="3"/>
+          <line x1="-28" y1="28" x2="28" y2="-28" stroke="#bbb" stroke-width="3"/>
+        </g>
+        <circle r="7" fill="#444"/>
+      </g>
+      <!-- front wheel -->
+      <g transform="translate(500,360)">
+        <circle r="52" fill="none" stroke="#222" stroke-width="10"/>
+        <circle r="44" fill="none" stroke="#ddd" stroke-width="3"/>
+        <g class="wheel-spin">
+          <line x1="-40" y1="0" x2="40" y2="0" stroke="#999" stroke-width="4"/>
+          <line x1="0" y1="-40" x2="0" y2="40" stroke="#999" stroke-width="4"/>
+          <line x1="-28" y1="-28" x2="28" y2="28" stroke="#bbb" stroke-width="3"/>
+          <line x1="-28" y1="28" x2="28" y2="-28" stroke="#bbb" stroke-width="3"/>
+        </g>
+        <circle r="7" fill="#444"/>
+      </g>
+
+      <!-- frame -->
+      <g stroke="#e94f37" stroke-width="9" stroke-linecap="round" fill="none">
+        <line x1="300" y1="360" x2="395" y2="360"/>
+        <line x1="395" y1="360" x2="360" y2="285"/>
+        <line x1="360" y1="285" x2="445" y2="285"/>
+        <line x1="445" y1="285" x2="500" y2="360"/>
+        <line x1="395" y1="360" x2="445" y2="285"/>
+        <line x1="300" y1="360" x2="360" y2="285"/>
+        <line x1="445" y1="285" x2="465" y2="250"/>
+        <line x1="485" y1="290" x2="500" y2="360"/>
+      </g>
+      <!-- handlebar + seat -->
+      <line x1="465" y1="250" x2="490" y2="250" stroke="#222" stroke-width="8" stroke-linecap="round"/>
+      <line x1="345" y1="278" x2="375" y2="278" stroke="#222" stroke-width="8" stroke-linecap="round"/>
+
+      <!-- crank + pedals -->
+      <g transform="translate(395,360)">
+        <g class="crank-spin" id="crank">
+          <line x1="0" y1="0" x2="0" y2="-28" stroke="#222" stroke-width="7" stroke-linecap="round"/>
+          <line x1="0" y1="0" x2="0" y2="28" stroke="#222" stroke-width="7" stroke-linecap="round"/>
+          <rect x="-14" y="-38" width="28" height="10" rx="4" fill="#222"/>
+          <rect x="-14" y="28" width="28" height="10" rx="4" fill="#222"/>
+        </g>
+        <circle r="10" fill="#555"/>
+      </g>
+
+      <!-- pelican legs (follow pedals roughly) -->
+      <g stroke="#f5a623" stroke-width="9" stroke-linecap="round" fill="none">
+        <path id="leg1" d="M 380 270 Q 390 310 395 334"/>
+        <path id="leg2" d="M 410 270 Q 400 315 395 386"/>
+      </g>
+
+      <!-- pelican body -->
+      <ellipse cx="410" cy="225" rx="75" ry="52" fill="#fdfdfd" stroke="#d9dee6" stroke-width="3"/>
+      <!-- tail -->
+      <path d="M 340 220 L 300 205 L 305 225 L 298 238 L 338 240 Z" fill="#e8edf3" stroke="#c9d1dc" stroke-width="2"/>
+
+      <!-- wing -->
+      <g class="wing-flap">
+        <ellipse cx="405" cy="225" rx="48" ry="30" fill="#eef2f7" stroke="#c9d1dc" stroke-width="3"/>
+        <path d="M 370 230 Q 400 250 440 232" stroke="#b9c4d2" stroke-width="3" fill="none"/>
+        <path d="M 375 240 Q 402 258 435 242" stroke="#b9c4d2" stroke-width="3" fill="none"/>
+      </g>
+
+      <!-- neck + head -->
+      <path d="M 460 210 C 475 170 480 140 470 115" stroke="#fdfdfd" stroke-width="30" stroke-linecap="round" fill="none"/>
+      <path d="M 460 210 C 475 170 480 140 470 115" stroke="#d9dee6" stroke-width="30" stroke-linecap="round" fill="none" opacity="0.0"/>
+      <ellipse cx="468" cy="100" rx="30" ry="26" fill="#fdfdfd" stroke="#d9dee6" stroke-width="3"/>
+      <!-- eye -->
+      <circle cx="476" cy="94" r="6" fill="#222"/>
+      <circle cx="478" cy="92" r="2" fill="#fff"/>
+      <!-- happy blush -->
+      <circle cx="462" cy="106" r="5" fill="#ffb3ab" opacity="0.8"/>
+
+      <!-- big beak + pouch -->
+      <path d="M 488 92 L 590 112 L 488 122 Z" fill="#f5a623" stroke="#d97f0b" stroke-width="3" stroke-linejoin="round"/>
+      <path class="pouch-wobble" d="M 490 120 Q 540 168 585 114 Q 540 130 490 120 Z" fill="#ffcf7d" stroke="#d97f0b" stroke-width="2.5"/>
+
+      <!-- scarf -->
+      <path d="M 452 125 Q 430 135 418 150" stroke="#e94f37" stroke-width="12" stroke-linecap="round" fill="none"/>
+      <g class="scarf-wave">
+        <path d="M 420 148 L 360 155 L 362 172 L 422 165 Z" fill="#e94f37"/>
+        <path d="M 360 155 L 335 150 L 338 168 L 362 172 Z" fill="#c73e2a"/>
+      </g>
+
+      <!-- wing holding handlebar -->
+      <path d="M 440 220 Q 465 240 475 252" stroke="#e8edf3" stroke-width="18" stroke-linecap="round" fill="none"/>
+      <circle cx="477" cy="252" r="7" fill="#f5a623"/>
+    </g>
+
+    <!-- speed lines -->
+    <g stroke="#fff" stroke-width="4" stroke-linecap="round" opacity="0.7">
+      <line x1="180" y1="300" x2="240" y2="300"/>
+      <line x1="150" y1="330" x2="230" y2="330"/>
+      <line x1="190" y1="250" x2="240" y2="250"/>
+    </g>
+  </svg>
+  </div>
+
+  <div class="controls">
+    <label>速度</label>
+    <input id="speed" type="range" min="0.2" max="2.5" step="0.1" value="1">
+    <span class="speedVal" id="speedVal">1.0x</span>
+    <button id="toggle">暂停</button>
+    <button id="ring" class="ghost">按铃叮叮</button>
+  </div>
+</div>
+
+<script>
+const svg = document.getElementById('scene');
+const speedInput = document.getElementById('speed');
+const speedVal = document.getElementById('speedVal');
+const toggleBtn = document.getElementById('toggle');
+let speed = 1, playing = true;
+
+function setSpeed(v){
+  speed = parseFloat(v);
+  speedVal.textContent = speed.toFixed(1) + 'x';
+  const dur = (1.1 / speed).toFixed(3) + 's';
+  document.querySelectorAll('.wheel-spin, .crank-spin').forEach(el => {
+    el.style.animationDuration = dur;
+  });
+  document.querySelectorAll('.bob, .wing-flap, .scarf-wave, .pouch-wobble').forEach(el => {
+    el.style.animationDuration = (0.55 / speed).toFixed(3) + 's';
+  });
+  document.querySelector('.ground-dash').style.animationDuration = (0.6 / speed).toFixed(3) + 's';
+}
+speedInput.addEventListener('input', e => setSpeed(e.target.value));
+
+toggleBtn.addEventListener('click', () => {
+  playing = !playing;
+  svg.classList.toggle('paused', !playing);
+  toggleBtn.textContent = playing ? '暂停' : '继续';
+});
+
+document.getElementById('ring').addEventListener('click', () => {
+  toggleBtn.textContent = '叮叮～';
+  setTimeout(() => { toggleBtn.textContent = playing ? '暂停' : '继续'; }, 700);
+});
+
+// legs follow crank for a more believable pedal
+const leg1 = document.getElementById('leg1');
+const leg2 = document.getElementById('leg2');
+let a = 0;
+function tick(){
+  if (playing) {
+    a += 0.12 * speed;
+    const r = 27;
+    const cx = 395, cy = 360;
+    const y1 = cy - r * Math.cos(a);
+    const y2 = cy + r * Math.cos(a);
+    leg1.setAttribute('d', `M 380 270 Q 390 310 395 ${y1.toFixed(1)}`);
+    leg2.setAttribute('d', `M 410 270 Q 400 315 395 ${y2.toFixed(1)}`);
+  }
+  requestAnimationFrame(tick);
+}
+tick();
+setSpeed(1);
+</script>
+</body>
+</html>
